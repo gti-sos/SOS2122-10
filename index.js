@@ -101,13 +101,14 @@ var energy_consumptions = [
         percentages_access_elecetricity: 99.6,
         non_renewable_energy_cosumptions: 2.569,
         renewable_energy_consumptions: 42.43
-    },{
+    }
+    ,{
         country: "croatia",
         year: 2015,
         percentages_access_elecetricity: 100,
         non_renewable_energy_cosumptions: 3.714,
         renewable_energy_consumptions: 33.62
-    },
+    }
     ,{
         country: "nicaragua",
         year: 2003,
