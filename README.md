@@ -8,6 +8,6 @@
 - **Repository**: [gti-sos/SOS2122-10](https://github.com/gti-sos/SOS2122-10)
 - **URL**: [http://sos2122-10.herokuapp.com](http://sos2122-10.herokuapp.com)
 -  **APIs**:
-    - [https://sos2021-10.herokuapp.com/api/v1/my-awesome-resource-1/docs](https://sos2021-10.herokuapp.com/api/v1/my-awesome-resource-1/docs) (developed by [Alejandro Molinos Eligio](https://github.com/AlejandroMolinosEligio))
-    - [https://sos2021-10.herokuapp.com/api/v1/my-awesome-resource-2/docs](https://sos2021-10.herokuapp.com/api/v1/my-awesome-resource-2/docs) (developed by [Gabriel López Bellido](https://github.com/gabriellb99))
-    - [https://sos2021-10.herokuapp.com/api/v1/my-awesome-resource-3/docs](https://sos2021-10.herokuapp.com/api/v1/my-awesome-resource-3/docs) (developed by [Germán Blanco Pérez Victoria](https://github.com/germanblanco12))
+    - [https://sos2021-10.herokuapp.com/api/v1/population-levels](https://sos2021-10.herokuapp.com/api/v1/population-levels) (developed by [Alejandro Molinos Eligio](https://github.com/AlejandroMolinosEligio))
+    - [https://sos2021-10.herokuapp.com/api/v1/energy-consumptions](https://sos2021-10.herokuapp.com/api/v1/energy-consumptions) (developed by [Gabriel López Bellido](https://github.com/gabriellb99))
+    - [https://sos2021-10.herokuapp.com/api/v1/internet-population](https://sos2021-10.herokuapp.com/api/v1/internet-population) (developed by [Germán Blanco Pérez Victoria](https://github.com/germanblanco12))
