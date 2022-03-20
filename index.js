@@ -121,7 +121,7 @@ var energy_consumptions = [
 
 //API Germán Blanco Pérez-Victoria
 
-var internert_population = [
+var internet_population = [
     {
         country: "spain",
         year: 2014,
