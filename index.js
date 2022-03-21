@@ -550,6 +550,8 @@ app.post(BASE_API_URL_ENERGY_CONSUMPTIONS,(req, res)=>{
     API para internet-population
 */
 
+//GETs
+
 // GET global y GET por año
 
 app.get(BASE_API_URL_INTERNET_POPULATION,(req, res)=>{
@@ -637,10 +639,102 @@ app.get(BASE_API_URL_INTERNET_POPULATION+"/:country/:year",(req, res)=>{
     }
 })
 
-// POST
+//POSTs
+
+// POST para lista de recursos
 
 app.post(BASE_API_URL_INTERNET_POPULATION,(req, res)=>{
-    internet_population.push(req.body);
-    res.sendStatus(201,"CREATED");
+    
+    if(comprobar_body(req)){
+        res.sendStatus(400,"BAD REQUEST - Parametros incorrectos");
+    }else{
+        var filteredList = internet_population.filter((reg)=>
+        {
+            return(req.body.country == reg.country && req.body.year == reg.year)
+        })
+    
+        if(filteredList.length != 0){
+            res.sendStatus(409,"CONFLICT");
+        }else{
+            internet_population.push(req.body);
+            res.sendStatus(201,"CREATED");
+        }
+    }
+
 })
+
+// POST para recurso concreto
+
+app.post(BASE_API_URL_INTERNET_POPULATION+"/:country",(req, res)=>{
+    res.sendStatus(405,"METHOD NOT ALLOWED");
+})
+
+
+// PUTs
+
+// PUT de una lista de recursos
+
+app.put(BASE_API_URL_INTERNET_POPULATION,(req, res)=>{
+    res.sendStatus(405,"METHOD NOT ALLOWED");
+})
+
+// PUT de un recurso especifico
+
+app.put(BASE_API_URL_INTERNET_POPULATION+"/:country/:year",(req, res)=>{
+    
+    if(comprobar_body(req)){
+        res.sendStatus(400,"BAD REQUEST - Parametros incorrectos");
+    }else{
+        var country = req.params.country;
+        var year = req.params.year;
+        var body = req.body;  
+        var index = internet_population.findIndex((reg) =>{
+            return (reg.country == country && reg.year == year)
+        })
+        if(index == null){
+            res.sendStatus(404,"NOT FOUND");
+        }else if(country != body.country || year != body.year){
+            res.sendStatus(400,"BAD REQUEST");
+        }else{
+            var  update_internet_population = {...body};
+            internet_population[index] = update_internet_population;
+        
+            res.sendStatus(200,"UPDATED");
+        }
+    }
+
+})
+
+// DELETEs
+
+// DELETE de una lista de recursos
+
+app.delete(BASE_API_URL_INTERNET_POPULATION,(req, res)=>{
+    internet_population = [];
+    res.sendStatus(200,"DELETED");
+})
+
+// DELETE de un recurso especifico
+
+app.delete(BASE_API_URL_INTERNET_POPULATION+"/:country/:year",(req, res)=>{
+    var country = req.params.country;
+    var year = req.params.year;
+    internet_population = internet_population.filter((reg)=>{
+ 
+        // Con la primera parte comprobamos si es un país distinto al seleccionado
+        // y con la segunda en caso de ser el mismo país se comprueba si es el mismo año
+        return (reg.country!=country || (reg.country == country && reg.year != year))
+    })
+    res.sendStatus(200,"DELETED");
+})
+
+// Método auxiliares
+
+function comprobar_body(req){
+    return (req.body.country == null |
+             req.body.year == null | 
+             req.body.death_rate == null | 
+             req.body.life_expectancy_birth == null | 
+             req.body.birth_rates == null);
+}
 
