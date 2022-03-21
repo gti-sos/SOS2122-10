@@ -550,6 +550,60 @@ app.post(BASE_API_URL_ENERGY_CONSUMPTIONS,(req, res)=>{
     API para internet-population
 */
 
+// Cargar datos iniciales
+
+app.get(BASE_API_URL_INTERNET_POPULATION+"/loadInitialData",(req, res)=>{
+
+    if(internet_population.length==0){
+        internet_population = [
+            {
+                country: "spain",
+                year: 2014,
+                population_growth: -0.299,
+                internet_users: 76.19,
+                urban_population: 79.366
+            },
+            {
+                country: "spain",
+                year: 2010,
+                population_growth: 0.460,
+                internet_users: 65.80,
+                urban_population: 78.446
+            },
+            {
+                country: "spain",
+                year: 2008,
+                population_growth: 1.595,
+                internet_users: 59.60,
+                urban_population: 77.976
+            },
+            {
+                country: "germany",
+                year: 2014,
+                population_growth: 0.417,
+                internet_users: 86.19,
+                urban_population: 77.190
+            },
+            {
+                country: "germany",
+                year: 2010,
+                population_growth: -0.153,
+                internet_users: 82.00,
+                urban_population: 76.966
+            }
+        ]
+    }
+    res.sendStatus(200, "OK.")
+    
+})
+
+// Documentos
+
+app.get(BASE_API_URL_INTERNET_POPULATION+"/docs",(req,res)=>
+{
+    res.redirect("https://documenter.getpostman.com/view/20091922/UVsQrixc")
+})
+
 //GETs
 
 // GET global y GET por año
