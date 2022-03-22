@@ -601,7 +601,7 @@ app.get(BASE_API_URL_INTERNET_POPULATION+"/loadInitialData",(req, res)=>{
 
 app.get(BASE_API_URL_INTERNET_POPULATION+"/docs",(req,res)=>
 {
-    res.redirect("https://documenter.getpostman.com/view/20091922/UVsQrixc")
+    res.redirect("https://documenter.getpostman.com/view/19899210/UVsSLi1g")
 })
 
 //GETs
@@ -787,8 +787,8 @@ app.delete(BASE_API_URL_INTERNET_POPULATION+"/:country/:year",(req, res)=>{
 function comprobar_body(req){
     return (req.body.country == null |
              req.body.year == null | 
-             req.body.death_rate == null | 
-             req.body.life_expectancy_birth == null | 
-             req.body.birth_rates == null);
+             req.body.population_growth == null | 
+             req.body.internet_users == null | 
+             req.body.urban_population == null);
 }
 
