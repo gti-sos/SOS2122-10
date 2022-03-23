@@ -6,8 +6,9 @@ const app = express();
 const port = process.env.PORT || 8081;
 
 const population_levels_API = require("./API population-levels.js");
+const energy_consumptions_API = require("./energy-consumptions.js");
 
-const BASE_API_URL_ENERGY_CONSUMPTIONS = "/api/v1/energy-consumptions";
+
 const BASE_API_URL_INTERNET_POPULATION = "/api/v1/internet-population";
 
 app.use(bodyParser.json());
@@ -16,61 +17,8 @@ app.use(bodyParser.json());
 // SERVER APIs
 
 population_levels_API.register(app);
+energy_consumptions_API.register(app);
 
-
-//API Gabriel López Bellido
-
-var energy_consumptions = [
-    {
-        country: "belgium",
-        year: 2014,
-        percentages_access_elecetricity: 100,
-        non_renewable_energy_cosumptions: 7.709,
-        renewable_energy_consumptions: 9.12
-    },
-    {
-        country: "italy",
-        year: 2005,
-        percentages_access_elecetricity: 100,
-        non_renewable_energy_cosumptions: 7.709,
-        renewable_energy_consumptions: 6.7
-    },
-    {
-        country: "brazil",
-        year: 2014,
-        percentages_access_elecetricity: 99.7,
-        non_renewable_energy_cosumptions: 2.620,
-        renewable_energy_consumptions: 41.83
-    },
-    {
-        country: "belgium",
-        year: 2013,
-        percentages_access_elecetricity: 100,
-        non_renewable_energy_cosumptions: 7.990,
-        renewable_energy_consumptions: 8.09
-    },
-    {
-        country: "brazil",
-        year: 2013,
-        percentages_access_elecetricity: 99.6,
-        non_renewable_energy_cosumptions: 2.569,
-        renewable_energy_consumptions: 42.43
-    }
-    ,{
-        country: "croatia",
-        year: 2015,
-        percentages_access_elecetricity: 100,
-        non_renewable_energy_cosumptions: 3.714,
-        renewable_energy_consumptions: 33.62
-    }
-    ,{
-        country: "nicaragua",
-        year: 2003,
-        percentages_access_elecetricity: 74.5,
-        non_renewable_energy_cosumptions: 367,
-        renewable_energy_consumptions: 51.74
-    }
-]
 
 //API Germán Blanco Pérez-Victoria
 
@@ -137,104 +85,6 @@ app.get("/cool",(req,res)=>{
 app.listen(port, () => {
     console.log(`Servidor listo ${port}`)
 });
-
-/* 
-    API para Energy-Consumptions
-*/
-
-// GET global y GET por año
-
-app.get(BASE_API_URL_ENERGY_CONSUMPTIONS,(req, res)=>{
-
-    var year = req.query.year;
-    var from = req.query.from;
-    var to = req.query.to;
-    if(year != null){
-        // Apartado para búsqueda por año
-        var filteredList = energy_consumptions.filter((reg)=>
-        {
-            return (reg.year == year);
-        });
-        if (filteredList==0){
-            res.sendStatus(404, "NO EXISTE");
-        }else{
-            res.send(JSON.stringify(filteredList,null,2));
-        }
-    }else if(from != null && to != null){
-        // Apartado para from y to
-        var filteredList = energy_consumptions.filter((reg)=>
-        {
-            return (reg.year >= from && reg.year <=to);
-        });
-        if (filteredList==0){
-            res.sendStatus(404, "NO EXISTE");
-        }else{
-            res.send(JSON.stringify(filteredList,null,2));
-        }
-
-    }else{
-        res.send(JSON.stringify(energy_consumptions,null,2));
-    }
-})
-
-// GET por país
-
-app.get(BASE_API_URL_ENERGY_CONSUMPTIONS+"/:country",(req, res)=>{
-
-    var country =req.params.country
-    var filteredList = energy_consumptions.filter((reg)=>
-    {
-        return (reg.country == country);
-    });
-
-    var from = req.query.from;
-    var to = req.query.to;
-
-    if(from != null && to != null){
-        // Apartado para from y to
-        filteredList = filteredList.filter((reg)=>
-        {
-            return (reg.year >= from && reg.year <=to);
-        });
-        if (filteredList==0){
-            res.sendStatus(404, "NO EXISTE");
-        }else{
-            res.send(JSON.stringify(filteredList,null,2));
-        }
-
-    }else{
-        if (filteredList==0){
-            res.sendStatus(404, "NO EXISTE");
-        }else{
-            res.send(JSON.stringify(filteredList,null,2));
-        }
-    }
-
-})
-
-// GET por país y año
-
-app.get(BASE_API_URL_ENERGY_CONSUMPTIONS+"/:country/:year",(req, res)=>{
-
-    var country =req.params.country
-    var year = req.params.year
-    var filteredList = energy_consumptions.filter((reg)=>
-    {
-        return (reg.country == country && reg.year == year);
-    });
-    if (filteredList==0){
-        res.sendStatus(404, "NO EXISTE");
-    }else{
-        res.send(JSON.stringify(filteredList,null,2));
-    }
-})
-
-// POST
-
-app.post(BASE_API_URL_ENERGY_CONSUMPTIONS,(req, res)=>{
-    energy_consumptions.push(req.body);
-    res.sendStatus(201,"CREATED");
-})
 
 /* 
     API para internet-population
