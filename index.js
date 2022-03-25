@@ -5,9 +5,9 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 8081;
 
-const population_levels_API = require("./API population-levels.js");
-const energy_consumptions_API = require("./energy-consumptions.js");
-const internet_population_API = require("./internet-population.js");
+const population_levels_API = require("./src/back/API population-levels.js");
+const energy_consumptions_API = require("./src/back/energy-consumptions.js");
+const internet_population_API = require("./src/back/internet-population.js");
 
 
 const BASE_API_URL_INTERNET_POPULATION = "/api/v1/internet-population";
