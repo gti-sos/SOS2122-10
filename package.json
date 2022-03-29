@@ -65,7 +65,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-population-levels": "npx newman run ./test/backend_API_population-levels -e ./test/env/Variables_Population-levels.json"
   },
   "repository": {
     "type": "git",
