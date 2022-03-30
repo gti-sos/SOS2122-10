@@ -13,8 +13,7 @@ const Datastore = require('nedb');
 //BASE DE DATOS
 
 db_population_levels = new Datastore();
-
-const BASE_API_URL_INTERNET_POPULATION = "/api/v1/internet-population";
+db_internet_population = new Datastore();
 
 app.use(bodyParser.json());
 
@@ -23,7 +22,7 @@ app.use(bodyParser.json());
 
 population_levels_API.register(app,db_population_levels);
 energy_consumptions_API.register(app);
-internet_population_API.register(app);
+internet_population_API.register(app, db_internet_population);
 
 app.use("/", express.static('public'));
 
