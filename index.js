@@ -8,7 +8,11 @@ const port = process.env.PORT || 8081;
 const population_levels_API = require("./src/back/API population-levels.js");
 const energy_consumptions_API = require("./src/back/energy-consumptions.js");
 const internet_population_API = require("./src/back/internet-population.js");
+const Datastore = require('nedb');
 
+//BASE DE DATOS
+
+db_population_levels = new Datastore();
 
 const BASE_API_URL_INTERNET_POPULATION = "/api/v1/internet-population";
 
@@ -17,7 +21,7 @@ app.use(bodyParser.json());
 
 // SERVER APIs
 
-population_levels_API.register(app);
+population_levels_API.register(app,db_population_levels);
 energy_consumptions_API.register(app);
 internet_population_API.register(app);
 

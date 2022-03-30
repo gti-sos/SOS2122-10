@@ -52,7 +52,7 @@
 							"    pm.expect(Array.isArray(jsonData)).to.eql(true);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Responsse has contact\", function () {\r",
+							"pm.test(\"Responsse has at least 1 element\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.length).to.be.at.least(1);\r",
 							"});"
@@ -115,6 +115,29 @@
 		},
 		{
 			"name": "population-levels GET por País y año",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Responsse is an Array\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(Array.isArray(jsonData)).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Responsse has contact\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.be.at.least(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -140,6 +163,23 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Responsse is an Array\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(Array.isArray(jsonData)).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Responsse has contact\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.be.at.least(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if year==2016\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    for(var i = 0; i<jsonData.length;i++){\r",
+							"        pm.expect(jsonData[i].year).to.eql(2016);\r",
+							"    };\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -173,6 +213,9 @@
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -209,6 +252,9 @@
 						"exec": [
 							"pm.test(\"Status code is 405\", function () {\r",
 							"    pm.response.to.have.status(405);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -234,6 +280,42 @@
 					],
 					"path": [
 						"spain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "population-levels PUT de una lista de recursos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"spain\",\r\n\"year\":2015,\r\n\"death_rate\": 10,\r\n\"life_expectancy_birth\": 20,\r\n\"birth_rates\": 15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}{{API POPULATION}}",
+					"host": [
+						"{{HOST}}{{API POPULATION}}"
 					]
 				}
 			},
@@ -274,42 +356,6 @@
 					"path": [
 						"spain",
 						"2015"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "population-levels PUT de una lista de recursos",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 405\", function () {\r",
-							"    pm.response.to.have.status(405);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\"country\": \"spain\",\r\n\"year\":2015,\r\n\"death_rate\": 10,\r\n\"life_expectancy_birth\": 20,\r\n\"birth_rates\": 15\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{HOST}}{{API POPULATION}}",
-					"host": [
-						"{{HOST}}{{API POPULATION}}"
 					]
 				}
 			},
@@ -364,6 +410,9 @@
 						"exec": [
 							"pm.test(\"Status code is 409\", function () {\r",
 							"    pm.response.to.have.status(409);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -400,6 +449,10 @@
 						"exec": [
 							"pm.test(\"Status code is 400\", function () {\r",
 							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -437,6 +490,7 @@
 							"pm.test(\"Status code is 404\", function () {\r",
 							"    pm.response.to.have.status(404);\r",
 							"});\r",
+							"\r",
 							""
 						],
 						"type": "text/javascript"
