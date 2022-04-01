@@ -77,6 +77,8 @@ module.exports.register = (app,db) =>{
                 }
                 res.sendStatus(200, "OK.")
                 return;
+            }else{
+                res.sendStatus(200, "Ya inicializados")
             }
         });
         
@@ -193,7 +195,7 @@ module.exports.register = (app,db) =>{
                 return;
             }
 
-            filteredList = population_levels.filter((reg)=>
+            filteredList = filteredList.filter((reg)=>
             {
                 return (reg.country == country);
             });
@@ -224,6 +226,9 @@ module.exports.register = (app,db) =>{
             if(req.query.limit != undefined || req.query.offset != undefined){
                 filteredList = paginacion(req,filteredList);
             }
+            filteredList.forEach((element)=>{
+                delete element._id;
+            });
             res.send(JSON.stringify(filteredList,null,2));
         })
 
@@ -357,7 +362,7 @@ module.exports.register = (app,db) =>{
 
             //ACTUALIZAMOS VALOR
                 
-            db.update({country: countryR, year: yearR }, {$set: body}, {},function(err, updatedDb) {
+            db.update({$and:[{country: String(countryR)}, {year: parseInt(yearR)}]}, {$set: body}, {},function(err, numUpdated) {
                 if (err) {
                     res.sendStatus(500, "ERROR EN CLIENTE");
                 }else{
