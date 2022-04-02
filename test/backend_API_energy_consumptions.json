@@ -489,13 +489,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{HOST}}{{API_ENERGY}}/spain/2003",
+					"raw": "{{HOST}}{{API_ENERGY}}/brazil/2014",
 					"host": [
 						"{{HOST}}{{API_ENERGY}}"
 					],
 					"path": [
-						"spain",
-						"2003"
+						"brazil",
+						"2014"
 					]
 				}
 			},
