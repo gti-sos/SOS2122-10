@@ -314,8 +314,8 @@ module.exports.register = (app, db) => {
             res.sendStatus(400, "BAD REQUEST - Parametros incorrectos");
             return;
         }
-        var country = req.params.country;
-        var year = req.params.year;
+        var countryR = req.params.country;
+        var yearR = req.params.year;
         var body = req.body;
 
         db.find({}, function (err, filteredList) {
@@ -327,7 +327,7 @@ module.exports.register = (app, db) => {
             //COMPROBAMOS SI EXISTE EL ELEMENTO
 
             filteredList = filteredList.filter((reg) => {
-                return (reg.country == country && reg.year == year);
+                return (reg.country == countryR && reg.year == yearR);
             });
             if (filteredList == 0) {
                 res.sendStatus(404, "NO EXISTE");
@@ -336,7 +336,7 @@ module.exports.register = (app, db) => {
 
             //COMPROBAMOS SI LOS CAMPOS ACTUALIZADOS SON IGUALES
 
-            if (country != body.country || year != body.year) {
+            if (countryR != body.country || yearR != body.year) {
                 res.sendStatus(400, "BAD REQUEST");
                 return;
             }
