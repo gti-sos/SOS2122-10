@@ -165,7 +165,7 @@ module.exports.register = (app,db) =>{
     
     app.get(BASE_API_URL_INTERNET_POPULATION+"/:country",(req, res)=>{
     
-        var year = req.query.year;
+        var country =req.params.country;
         var from = req.query.from;
         var to = req.query.to;
 
@@ -185,13 +185,18 @@ module.exports.register = (app,db) =>{
             return;
         }
 
-        db.find({},function(err, filteredList){
-
+        db.find({}, function(err,filteredList){
+            
             if(err){
                 res.sendStatus(500, "ERROR EN CLIENTE");
                 return;
             }
 
+            filteredList = filteredList.filter((reg)=>
+            {
+                return (reg.country == country);
+            });
+        
             // Apartado para from y to
             var from = req.query.from;
             var to = req.query.to;
