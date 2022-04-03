@@ -173,7 +173,7 @@ module.exports.register = (app,db) =>{
 
         for(var i = 0; i<Object.keys(req.query).length;i++){
             var element = Object.keys(req.query)[i];
-            if(element != "year" && element != "from" && element != "to" && element != "limit" && element != "offset"){
+            if(element != "from" && element != "to"){
                 res.sendStatus(400, "BAD REQUEST");
                 return;
             }
@@ -192,36 +192,29 @@ module.exports.register = (app,db) =>{
                 return;
             }
 
-            // Apartado para búsqueda por año
-            
-            if(year != null){
-                var filteredList = filteredList.filter((reg)=>
-                {
-                    return (reg.year == year);
-                });
-                if (filteredList==0){
-                    res.sendStatus(404, "NO EXISTE");
-                    return;
-                }
-            }
-    
             // Apartado para from y to
-            
-            if(from != null && to != null){
+            var from = req.query.from;
+            var to = req.query.to;
+    
+            //Comprobamos si from es mas pequeño o igual a to
+            if(from>to){
+                res.sendStatus(400, "BAD REQUEST");
+                return;
+            }
+        
+            if(from != null && to != null && from<=to){
                 filteredList = filteredList.filter((reg)=>
                 {
-                    return (reg.year >= from && reg.year <=to);
-                });
-    
-                if (filteredList==0){
-                    res.sendStatus(404, "NO EXISTE");
-                    return;
-                }    
-
+                   return (reg.year >= from && reg.year <=to);
+                }); 
                 
             }
-            // RESULTADO
-    
+            //COMPROBAMOS SI EXISTE
+            if (filteredList==0){
+                res.sendStatus(404, "NO EXISTE");
+                return;
+            }
+            //RESULTADO
             if(req.query.limit != undefined || req.query.offset != undefined){
                 filteredList = paginacion(req,filteredList);
             }
@@ -230,6 +223,7 @@ module.exports.register = (app,db) =>{
             });
             res.send(JSON.stringify(filteredList,null,2));
         })
+
     })
     
     // GET por país y año
