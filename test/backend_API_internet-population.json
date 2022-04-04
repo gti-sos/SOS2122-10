@@ -123,14 +123,9 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Responsse is an Array\", function () {\r",
+							"pm.test(\"Responsse is an object\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(Array.isArray(jsonData)).to.eql(true);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Responsse has contact\", function () {\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.length).to.be.at.least(1);\r",
+							"    pm.expect(typeof jsonData == 'object').to.eql(true);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -309,19 +304,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{HOST}}{{INTERNET}}?offset=2&limit=3",
+					"raw": "{{HOST}}{{INTERNET}}/belgium",
 					"host": [
 						"{{HOST}}{{INTERNET}}"
 					],
-					"query": [
-						{
-							"key": "offset",
-							"value": "2"
-						},
-						{
-							"key": "limit",
-							"value": "3"
-						}
+					"path": [
+						"belgium"
 					]
 				}
 			},
