@@ -10,49 +10,49 @@ var population_levels = [
         year: 2019,
         death_rate: 8,
         life_expectancy_birth: 77,
-        birth_rates: 17
+        birth_rate: 17
     },
     {
         country: "spain",
         year: 2015,
         death_rate: 9,
         life_expectancy_birth: 57,
-        birth_rates: 12
+        birth_rate: 12
     },
     {
         country: "spain",
         year: 2016,
         death_rate: 7,
         life_expectancy_birth: 62,
-        birth_rates: 13
+        birth_rate: 13
     },
     {
         country: "canada",
         year: 2016,
         death_rate: 7,
         life_expectancy_birth: 82,
-        birth_rates: 11
+        birth_rate: 11
     },
     {
         country: "brazil",
         year: 2016,
         death_rate: 6,
         life_expectancy_birth: 75,
-        birth_rates: 14
+        birth_rate: 14
     },
     {
         country: "belgium",
         year: 2019,
         death_rate: 10,
         life_expectancy_birth: 82,
-        birth_rates: 10
+        birth_rate: 10
     },
     {
         country: "australia",
         year: 2019,
         death_rate: 7,
         life_expectancy_birth: 82,
-        birth_rates: 12
+        birth_rate: 12
     }
 ]
 
@@ -105,7 +105,7 @@ module.exports.register = (app,db) =>{
 
         for(var i = 0; i<Object.keys(req.query).length;i++){
             var element = Object.keys(req.query)[i];
-            if(element != "year" && element != "from" && element != "to" && element != "limit" && element != "offset"){
+            if(element != "year" && element != "from" && element != "to" && element != "limit" && element != "offset" && element != "fields"){
                 res.sendStatus(400, "BAD REQUEST");
                 return;
             }
@@ -160,6 +160,22 @@ module.exports.register = (app,db) =>{
             filteredList.forEach((element)=>{
                 delete element._id;
             });
+
+            //Comprobamos fields
+            if(req.query.fields!=null){
+                //Comprobamos si los campos son correctos
+                var listaFields = req.query.fields.split(",");
+                for(var i = 0; i<listaFields.length;i++){
+                    var element = listaFields[i];
+                    if(element != "country" && element != "year" && element != "death_rate" && element != "life_expectancy_birth" && element != "birth_rate"){
+                        res.sendStatus(400, "BAD REQUEST");
+                        return;
+                    }
+                }
+                //Escogemos los fields correspondientes
+                filteredList = comprobar_fields(req,filteredList);
+            }
+
             res.send(JSON.stringify(filteredList,null,2));
         })
     })
@@ -176,7 +192,7 @@ module.exports.register = (app,db) =>{
 
         for(var i = 0; i<Object.keys(req.query).length;i++){
             var element = Object.keys(req.query)[i];
-            if(element != "from" && element != "to"){
+            if(element != "year" && element != "from" && element != "to" && element != "limit" && element != "offset" && element != "fields"){
                 res.sendStatus(400, "BAD REQUEST");
                 return;
             }
@@ -229,6 +245,22 @@ module.exports.register = (app,db) =>{
             filteredList.forEach((element)=>{
                 delete element._id;
             });
+
+            //Comprobamos fields
+            if(req.query.fields!=null){
+                //Comprobamos si los campos son correctos
+                var listaFields = req.query.fields.split(",");
+                for(var i = 0; i<listaFields.length;i++){
+                    var element = listaFields[i];
+                    if(element != "country" && element != "year" && element != "death_rate" && element != "life_expectancy_birth" && element != "birth_rate"){
+                        res.sendStatus(400, "BAD REQUEST");
+                        return;
+                    }
+                }
+                //Escogemos los fields correspondientes
+                filteredList = comprobar_fields(req,filteredList);
+            }
+
             res.send(JSON.stringify(filteredList,null,2));
         })
 
@@ -267,6 +299,22 @@ module.exports.register = (app,db) =>{
             filteredList.forEach((element)=>{
                 delete element._id;
             });
+
+            //Comprobamos fields
+            if(req.query.fields!=null){
+                //Comprobamos si los campos son correctos
+                var listaFields = req.query.fields.split(",");
+                for(var i = 0; i<listaFields.length;i++){
+                    var element = listaFields[i];
+                    if(element != "country" && element != "year" && element != "death_rate" && element != "life_expectancy_birth" && element != "birth_rate"){
+                        res.sendStatus(400, "BAD REQUEST");
+                        return;
+                    }
+                }
+                //Escogemos los fields correspondientes
+                filteredList = comprobar_fields(req,filteredList);
+            }
+
             res.send(JSON.stringify(filteredList[0],null,2));
         });
 
@@ -426,7 +474,7 @@ module.exports.register = (app,db) =>{
                  req.body.year == null | 
                  req.body.death_rate == null | 
                  req.body.life_expectancy_birth == null | 
-                 req.body.birth_rates == null);
+                 req.body.birth_rate == null);
     }
 
     function paginacion(req, lista){
@@ -442,6 +490,74 @@ module.exports.register = (app,db) =>{
 
         res = lista.slice(offset,parseInt(limit)+parseInt(offset));
         return res;
+
+    }
+
+    function comprobar_fields(req, lista){
+        var fields = req.query.fields;
+
+        var contieneCountry = false;
+        var contieneYear = false;
+        var contiene_Death_rate = false;
+        var contiene_Life = false;
+        var contiene_Birth = false;
+        fields = fields.split(",");
+
+        for(var i = 0; i<fields.length;i++){
+            var element = fields[i];
+            if(element=='country'){
+                contieneCountry=true;
+            }
+            if(element=='year'){
+                contieneYear=true;
+            }
+            if(element=='death_rate'){
+                contiene_Death_rate=true;
+            }
+            if(element=='life_expectancy_birth'){
+                contiene_Life=true;
+            }
+            if(element=='birth_rate'){
+                contiene_Birth=true;
+            }
+        }
+
+        //Country
+        if(!contieneCountry){
+            lista.forEach((element)=>{
+                delete element.country;
+            })
+        }
+
+        //Year
+        if(!contieneYear){
+            lista.forEach((element)=>{
+                delete element.year;
+            })
+        }
+
+        //Death rate
+        if(!contiene_Death_rate){
+            lista.forEach((element)=>{
+                delete element.death_rate;
+            })
+        }
+
+        //Life expectancy birth
+        if(!contiene_Life){
+            lista.forEach((element)=>{
+                delete element.life_expectancy_birth;
+            })
+        }
+
+        //Birth rates
+        if(!contiene_Birth){
+            lista.forEach((element)=>{
+                delete element.birth_rate;
+            })
+        }
+
+        return lista;
 
     }
 }
