@@ -427,6 +427,42 @@
 			"response": []
 		},
 		{
+			"name": "POST FALLO menos campos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"city\": \"spain\",\r\n\"year\": 2015,\r\n\"population_growth\": 0.299,\r\n\"internet_users\": 76.19\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}{{INTERNET}}",
+					"host": [
+						"{{HOST}}{{INTERNET}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "POST fallo mismo año y pais",
 			"event": [
 				{
