@@ -690,6 +690,37 @@
 				}
 			},
 			"response": []
+		},{
+			"name": "population-levels GET Cargar datos iniciales FIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}{{API POPULATION}}/loadInitialData",
+					"host": [
+						"{{HOST}}{{API POPULATION}}"
+					],
+					"path": [
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
 		}
+		
 	]
 }
