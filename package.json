@@ -56,6 +56,8 @@
     "statuses": "^1.5.0",
     "stream-spigot": "^3.0.6",
     "string_decoder": "^1.0.3",
+    "svelte-spa-router": "^3.2.0",
+    "sveltestrap": "^5.9.0",
     "toidentifier": "^1.0.1",
     "type-is": "^1.6.18",
     "unpipe": "^1.0.0",
@@ -69,11 +71,23 @@
     "test-population-levels": "npx newman run ./test/backend_API_population-levels.json -e ./test/env/Variables_Population-levels.json",
     "test-energy-consumptions": "npx newman run ./test/backend_API_energy_consumptions.json -e ./test/env/Variables_energy_consumptions.json",
     "test-internet-population": "npx newman run ./test/backend_API_internet-population.json -e ./test/env/Variables_Internet_Populations.json",
-    "test": "npm run test-population-levels && npm run test-energy-consumptions && npm run test-internet-population"
+    "test": "npm run test-population-levels && npm run test-energy-consumptions && npm run test-internet-population",
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gti-sos/SOS2122-10.git"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.47.0"
   },
   "author": "",
   "license": "ISC",
