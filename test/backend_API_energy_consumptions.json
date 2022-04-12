@@ -123,7 +123,7 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Responsse is an Array\", function () {\r",
+							"pm.test(\"Response is an Object\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(typeof jsonData == \"object\").to.eql(true);\r",
 							"});"
