@@ -9,49 +9,49 @@ var energy_consumptions = [
         country: "belgium",
         year: 2014,
         percentages_access_elecetricity: 100,
-        non_renewable_energy_cosumptions: 7.709,
+        non_renewable_energy_consumptions: 7.709,
         renewable_energy_consumptions: 9.12
     },
     {
         country: "italy",
         year: 2005,
         percentages_access_elecetricity: 100,
-        non_renewable_energy_cosumptions: 7.709,
+        non_renewable_energy_consumptions: 7.709,
         renewable_energy_consumptions: 6.7
     },
     {
         country: "brazil",
         year: 2014,
         percentages_access_elecetricity: 99.7,
-        non_renewable_energy_cosumptions: 2.620,
+        non_renewable_energy_consumptions: 2.620,
         renewable_energy_consumptions: 41.83
     },
     {
         country: "belgium",
         year: 2013,
         percentages_access_elecetricity: 100,
-        non_renewable_energy_cosumptions: 7.990,
+        non_renewable_energy_consumptions: 7.990,
         renewable_energy_consumptions: 8.09
     },
     {
         country: "brazil",
         year: 2013,
         percentages_access_elecetricity: 99.6,
-        non_renewable_energy_cosumptions: 2.569,
+        non_renewable_energy_consumptions: 2.569,
         renewable_energy_consumptions: 42.43
     }
     , {
         country: "croatia",
         year: 2015,
         percentages_access_elecetricity: 100,
-        non_renewable_energy_cosumptions: 3.714,
+        non_renewable_energy_consumptions: 3.714,
         renewable_energy_consumptions: 33.62
     }
     , {
         country: "nicaragua",
         year: 2003,
         percentages_access_elecetricity: 74.5,
-        non_renewable_energy_cosumptions: 367,
+        non_renewable_energy_consumptions: 367,
         renewable_energy_consumptions: 51.74
     }
 ]
@@ -75,7 +75,7 @@ module.exports.register = (app, db) => {
                 for (var i = 0; i < energy_consumptions.length; i++) {
                     db.insert(energy_consumptions[i]);
                 }
-                res.sendStatus(200, "OK.")
+                res.sendStatus(200, "OK.");
                 return;
             }else{
             res.sendStatus(200, "Ya inicializados")
@@ -155,6 +155,21 @@ module.exports.register = (app, db) => {
             filteredList.forEach((element) => {
                 delete element._id;
             });
+
+            //Comprobamos fields
+            if(req.query.fields!=null){
+                //Comprobamos si los campos son correctos
+                var listaFields = req.query.fields.split(",");
+                for(var i = 0; i<listaFields.length;i++){
+                    var element = listaFields[i];
+                    if(element != "country" && element != "year" && element != "percentages_access_elecetricity"  && element != "non_renewable_energy_consumptions" && element != "renewable_energy_consumptions"){
+                        res.sendStatus(400, "BAD REQUEST");
+                        return;
+                    }
+                }
+                //Escogemos los fields correspondientes
+                filteredList = comprobar_fields(req,filteredList);
+            }
             res.send(JSON.stringify(filteredList, null, 2));
         })
     })
@@ -224,6 +239,20 @@ module.exports.register = (app, db) => {
             filteredList.forEach((element) => {
                 delete element._id;
             });
+            //Comprobamos fields
+            if(req.query.fields!=null){
+                //Comprobamos si los campos son correctos
+                var listaFields = req.query.fields.split(",");
+                for(var i = 0; i<listaFields.length;i++){
+                    var element = listaFields[i];
+                    if(element != "country" && element != "year" && element != "percentages_access_elecetricity"  && element != "non_renewable_energy_consumptions" && element != "renewable_energy_consumptions"){
+                        res.sendStatus(400, "BAD REQUEST");
+                        return;
+                    }
+                }
+                //Escogemos los fields correspondientes
+                filteredList = comprobar_fields(req,filteredList);
+            }
             res.send(JSON.stringify(filteredList, null, 2));
         })
 
@@ -261,6 +290,20 @@ module.exports.register = (app, db) => {
             filteredList.forEach((element) => {
                 delete element._id;
             });
+            //Comprobamos fields
+            if(req.query.fields!=null){
+                //Comprobamos si los campos son correctos
+                var listaFields = req.query.fields.split(",");
+                for(var i = 0; i<listaFields.length;i++){
+                    var element = listaFields[i];
+                    if(element != "country" && element != "year" && element != "percentages_access_elecetricity"  && element != "non_renewable_energy_consumptions" && element != "renewable_energy_consumptions"){
+                        res.sendStatus(400, "BAD REQUEST");
+                        return;
+                    }
+                }
+                //Escogemos los fields correspondientes
+                filteredList = comprobar_fields(req,filteredList);
+            }
             res.send(JSON.stringify(filteredList[0], null, 2));
         });
     })
@@ -402,7 +445,7 @@ module.exports.register = (app, db) => {
         return (req.body.country == null |
             req.body.year == null |
             req.body.percentages_access_elecetricity == null |
-            req.body.non_renewable_energy_cosumptions == null |
+            req.body.non_renewable_energy_consumptions == null |
             req.body.renewable_energy_consumptions == null);
     }
 
@@ -419,6 +462,74 @@ module.exports.register = (app, db) => {
 
         res = lista.slice(offset,parseInt(limit)+parseInt(offset));
         return res;
+
+    }
+
+    function comprobar_fields(req, lista){
+        var fields = req.query.fields;
+
+        var contieneCountry = false;
+        var contieneYear = false;
+        var contiene_Electricity = false;
+        var contiene_Renewable = false;
+        var contiene_Non_Renewable = false;
+        fields = fields.split(",");
+
+        for(var i = 0; i<fields.length;i++){
+            var element = fields[i];
+            if(element=='country'){
+                contieneCountry=true;
+            }
+            if(element=='year'){
+                contieneYear=true;
+            }
+            if(element=='percentages_access_elecetricity'){
+                contiene_Electricity=true;
+            }
+            if(element=='non_renewable_energy_consumptions'){
+                contiene_Non_Renewable=true;
+            }
+            if(element=='renewable_energy_consumptions'){
+                contiene_Renewable=true;
+            }
+        }
+
+        //Country
+        if(!contieneCountry){
+            lista.forEach((element)=>{
+                delete element.country;
+            })
+        }
+
+        //Year
+        if(!contieneYear){
+            lista.forEach((element)=>{
+                delete element.year;
+            })
+        }
+
+        //Electricity
+        if(!contiene_Electricity){
+            lista.forEach((element)=>{
+                delete element.percentages_access_elecetricity;
+            })
+        }
+
+        //Now Renewable consumptions
+        if(!contiene_Non_Renewable){
+            lista.forEach((element)=>{
+                delete element.non_renewable_energy_consumptions;
+            })
+        }
+
+        //Renewable consumptions
+        if(!contiene_Renewable){
+            lista.forEach((element)=>{
+                delete element.renewable_energy_consumptions;
+            })
+        }
+
+        return lista;
 
     }
 }
