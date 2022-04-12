@@ -45,7 +45,9 @@
         <li><a href="https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs">[https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs]</a>(developed by <a href="https://github.com/gabriellb99">
             [Gabriel López Bellido]
         </a>)</li>
-        <li><a href="https://sos2122-10.herokuapp.com/api/v1/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v1/internet-population/docs]</a>(developed by <a href="https://github.com/germanblanco12">
+        <li><a href="https://sos2122-10.herokuapp.com/api/v1/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v1/internet-population/docs]</a>
+            <a href="https://sos2122-10.herokuapp.com/#/internet-population">[https://sos2122-10.herokuapp.com/#/internet-population]</a>
+            (developed by <a href="https://github.com/germanblanco12">
             [Germán Blanco Pérez Victoria]
         </a>)</li>
     </ul>
