@@ -8,6 +8,9 @@
 	import ListInternetPopulation from "./internet-population/ListInternetPopulation.svelte";
 	import EditInternetPopulationEntry from "./internet-population/EditEntryInternetPopulation.svelte";
 
+	import ListPopulationEnergyConsumptions from "./energy-consumptions/ListPopulationEnergyConsumptions.svelte";
+	import EditEntryEnergyConsumptions from "./energy-consumptions/EditEntryEnergyConsumptions.svelte";
+
 
 	const routes = {
 
@@ -17,7 +20,10 @@
 		"/population-levels/:country/:year" : EditPopulationEntry,
 
 		"/internet-population" : ListInternetPopulation,
-		"/internet-population/:country/:year" : EditInternetPopulationEntry
+		"/internet-population/:country/:year" : EditInternetPopulationEntry,
+
+		"/energy-consumptions" : ListPopulationEnergyConsumptions,
+		"/penergy-consumptions/:country/:year" : EditEntryEnergyConsumptions
 
 	};
 
