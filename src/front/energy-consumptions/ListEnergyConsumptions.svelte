@@ -36,8 +36,12 @@
 					"Content-Type": "application/json"
 				}
 			}).then(function (res){
-				getEntries();
-				window.alert("Entrada introducida con éxito");
+				if(res.status == 201){
+					getEntries();
+					window.alert("Entrada introducida con éxito");
+				}else{
+					Errores(res.status);
+				}
 			}); 
     }
 
@@ -72,6 +76,28 @@
 				getEntries();
 				window.alert("Entradas cargadas con éxito");
 			});
+    }
+
+	async function Errores(code){
+        
+        let msg;
+        if(code == 404){
+            msg = "La entrada seleccionada no existe"
+        }
+        if(code == 400){
+            msg = "La petición no está correctamente formulada"
+        }
+        if(code == 409){
+            msg = "El dato introducido ya existe"
+        }
+        if(code == 401){
+            msg = "No autorizado"
+        }
+        if(code == 405){
+            msg = "Método no permitido"
+        }
+        window.alert(msg)
+            return;
     }
 
 	
