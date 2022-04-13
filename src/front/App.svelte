@@ -8,7 +8,7 @@
 	import ListInternetPopulation from "./internet-population/ListInternetPopulation.svelte";
 	import EditInternetPopulationEntry from "./internet-population/EditEntryInternetPopulation.svelte";
 
-	import ListPopulationEnergyConsumptions from "./energy-consumptions/ListPopulationEnergyConsumptions.svelte";
+	import ListEnergyConsumptions from "./energy-consumptions/ListEnergyConsumptions.svelte";
 	import EditEntryEnergyConsumptions from "./energy-consumptions/EditEntryEnergyConsumptions.svelte";
 
 
@@ -22,7 +22,7 @@
 		"/internet-population" : ListInternetPopulation,
 		"/internet-population/:country/:year" : EditInternetPopulationEntry,
 
-		"/energy-consumptions" : ListPopulationEnergyConsumptions,
+		"/energy-consumptions" : ListEnergyConsumptions,
 		"/penergy-consumptions/:country/:year" : EditEntryEnergyConsumptions
 
 	};
