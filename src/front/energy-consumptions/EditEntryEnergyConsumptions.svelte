@@ -48,7 +48,12 @@
 				headers: {
 					"Content-Type": "application/json"
 				}
-			}); 
+			}).then(function (res){
+				window.alert("Actualizado con éxito");
+                window.location.href = `/#/energy-consumptions`; 
+			});
+            
+            
     }
 
     async function Errores(code){
