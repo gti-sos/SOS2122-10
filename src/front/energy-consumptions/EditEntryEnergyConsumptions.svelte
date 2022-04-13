@@ -28,7 +28,7 @@
             updateNonRenewable = entry.non_renewable_energy_consumptions;
             updateRenewable = entry.renewable_energy_consumptions;
         }else{
-            Errores(res.status, entry.country, entry.year);
+            Errores(res.status, params.country, params.year);
             pop();
         }
     }
