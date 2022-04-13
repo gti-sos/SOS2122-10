@@ -80,7 +80,7 @@
 
 <main>
    
-    <h1>Lista Consumo de Energía Renovable y no Renovable</h1>
+    <h1>Consumo de Energía Renovable y no Renovable</h1>
 
 {#await entries}
 loading

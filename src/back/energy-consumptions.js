@@ -413,10 +413,10 @@ module.exports.register = (app, db) => {
     // DELETE de un recurso especifico
 
     app.delete(BASE_API_URL_ENERGY_CONSUMPTIONS+"/:country/:year",(req, res)=>{
-        var country = req.params.country;
-        var year = req.params.year;
+        var countryR = req.params.country;
+        var yearR = req.params.year;
 
-        db.find({country: country, year: parseInt(year)}, {}, (err, filteredList)=>{
+        db.find({country: countryR, year: parseInt(yearR)}, {}, (err, filteredList)=>{
             if (err){
                 res.sendStatus(500,"ERROR EN CLIENTE");
                 return;
@@ -425,7 +425,7 @@ module.exports.register = (app, db) => {
                 res.sendStatus(404,"NOT FOUND");
                 return;
             }
-            db.remove({country: country, year: year}, {}, (err, numRemoved)=>{
+            db.remove({country: countryR, year: parseInt(yearR)}, {}, (err, numRemoved)=>{
                 if (err){
                     res.sendStatus(500,"ERROR EN CLIENTE");
                     return;
