@@ -28,7 +28,7 @@
             updateNonRenewable = entry.non_renewable_energy_consumptions;
             updateRenewable = entry.renewable_energy_consumptions;
         }else{
-            Errores(res.status);
+            Errores(res.status, entry.country, entry.year);
             pop();
         }
     }
@@ -56,11 +56,11 @@
             
     }
 
-    async function Errores(code){
+    async function Errores(code, country, year){
         
         let msg;
         if(code == 404){
-            msg = "La entrada seleccionada no existe"
+            msg = "No existe un dato con el pais " + country + " en el año " + year
         }
         if(code == 400){
             msg = "La petición no está correctamente formulada"
