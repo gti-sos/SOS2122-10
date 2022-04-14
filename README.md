@@ -14,4 +14,5 @@
     - [https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs](https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs) 
       [https://sos2122-10.herokuapp.com/#/energy-consumptions](https://sos2122-10.herokuapp.com/#/energy-consumptions)
      (developed by [Gabriel López Bellido](https://github.com/gabriellb99))
-    - [https://sos2122-10.herokuapp.com/api/v1/internet-population/docs](https://sos2122-10.herokuapp.com/api/v1/internet-population/docs) (developed by [Germán Blanco Pérez Victoria](https://github.com/germanblanco12))
+    - [https://sos2122-10.herokuapp.com/api/v1/internet-population/docs](https://sos2122-10.herokuapp.com/api/v1/internet-population/docs),
+    [https://sos2122-10.herokuapp.com/#/internet-population](https://sos2122-10.herokuapp.com/#/internet-population) (developed by [Germán Blanco Pérez Victoria](https://github.com/germanblanco12))

@@ -28,7 +28,7 @@
             updatedLifeExp = entry.life_expectancy_birth;
             updatedBirthRate = entry.birth_rate;
         }else{
-            Errores(res.status);
+            Errores(res.status,params.country+"/"+params.year);
             pop();
         }
     }
@@ -51,11 +51,11 @@
 			}); 
     }
 
-    async function Errores(code){
+    async function Errores(code,entrada){
         
         let msg;
         if(code == 404){
-            msg = "La entrada seleccionada no existe"
+            msg = "La entrada "+entrada+" no existe"
         }
         if(code == 400){
             msg = "La petición no está correctamente formulada"
