@@ -40,9 +40,16 @@ var energy_consumptions = [
         non_renewable_energy_consumptions: 2.569,
         renewable_energy_consumptions: 42.43
     }
+    ,{
+        country: "serbia",
+        year: 2013,
+        percentages_access_elecetricity: 99.92,
+        non_renewable_energy_consumptions: 4444.22,
+        renewable_energy_consumptions: 20.19
+    }
     , {
         country: "croatia",
-        year: 2015,
+        year: 2014,
         percentages_access_elecetricity: 100,
         non_renewable_energy_consumptions: 3.714,
         renewable_energy_consumptions: 33.62
@@ -53,6 +60,98 @@ var energy_consumptions = [
         percentages_access_elecetricity: 74.5,
         non_renewable_energy_consumptions: 367,
         renewable_energy_consumptions: 51.74
+    }
+    , {
+        country: "nicaragua",
+        year: 2010,
+        percentages_access_elecetricity: 74.5,
+        non_renewable_energy_consumptions: 367,
+        renewable_energy_consumptions: 51.74
+    }
+    , {
+        country: "nicaragua",
+        year: 2007,
+        percentages_access_elecetricity: 76.56,
+        non_renewable_energy_consumptions: 477.41,
+        renewable_energy_consumptions: 54.56
+    }
+    , {
+        country: "czech republic",
+        year: 2011,
+        percentages_access_elecetricity: 100,
+        non_renewable_energy_consumptions: 6298.73,
+        renewable_energy_consumptions: 12.16	
+
+    }
+    , {
+        country: "japan",
+        year: 2013,
+        percentages_access_elecetricity: 100,
+        non_renewable_energy_consumptions: 7988.58,
+        renewable_energy_consumptions: 5.16
+    }
+    , {
+        country: "ecuador",
+        year: 2009,
+        percentages_access_elecetricity: 96.47,
+        non_renewable_energy_consumptions: 1104.95,
+        renewable_energy_consumptions: 12.87
+    }
+    , {
+        country: "nigeria",
+        year: 2012,
+        percentages_access_elecetricity: 53.15,
+        non_renewable_energy_consumptions: 156.80,
+        renewable_energy_consumptions: 84.60
+    }
+    , {
+        country: "sudan",
+        year: 2012,
+        percentages_access_elecetricity: 41.60,
+        non_renewable_energy_consumptions: 211.14,
+        renewable_energy_consumptions: 63.76
+    }
+    , {
+        country: "bahrain",
+        year: 2013,
+        percentages_access_elecetricity: 100,
+        non_renewable_energy_consumptions: 18693.12,
+        renewable_energy_consumptions: 0
+    }
+    , {
+        country: "uruaguay",
+        year: 2010,
+        percentages_access_elecetricity: 99.30,
+        non_renewable_energy_consumptions: 2815.79,
+        renewable_energy_consumptions: 53.23
+    }
+    , {
+        country: "romania",
+        year: 2010,
+        percentages_access_elecetricity: 100,
+        non_renewable_energy_consumptions: 2550.86,
+        renewable_energy_consumptions: 24.10
+    }
+    , {
+        country: "greece",
+        year: 2012,
+        percentages_access_elecetricity: 100,
+        non_renewable_energy_consumptions: 5534.90,
+        renewable_energy_consumptions: 14.17
+    }
+    , {
+        country: "peru",
+        year: 2011,
+        percentages_access_elecetricity: 89.71,
+        non_renewable_energy_consumptions: 1262.70,
+        renewable_energy_consumptions: 30.63
+    }
+    , {
+        country: "ecuador",
+        year: 2008,
+        percentages_access_elecetricity: 97.21,
+        non_renewable_energy_consumptions: 1077.41,
+        renewable_energy_consumptions: 15.32
     }
 ]
 

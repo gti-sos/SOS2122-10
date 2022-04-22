@@ -133,9 +133,9 @@
         if(code == 400){
             msg = "La fecha inicio no puede ser menor a la fecha fin"
         }
-		if(code == 404){
-            msg = "El rango de fechas seleccionadas no tiene registros"
-        }
+		if(code = 404){
+			msg = "No hay datos para hacer la búsqueda."
+		}
         window.alert(msg)
             return;
     }
