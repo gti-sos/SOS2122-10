@@ -41,7 +41,6 @@
 		if (to != null) {
 			cadena = cadena + `to=${to}&&`
 		}
-		console.log(cadena);
         const res = await fetch(cadena); 
         if(res.ok){
 			let cadenaPag = cadena.split(`limit=${limit}&&offset=${offset*10}`);
@@ -66,8 +65,9 @@
 				headers: {
 					"Content-Type": "application/json"
 				}
-			}).then(function (res){
-				newEntry = {
+			}); 
+		if (res.ok) {
+			newEntry = {
 					country: "",
 					year: "",
 					death_rate: "",
@@ -76,7 +76,9 @@
 				}
 				getEntries();
 				window.alert("Entrada introducida con éxito");
-			}); 
+		}else{
+			Errores(res.status);
+		}
     }
 
 	//Función para borrar una entrada
@@ -136,6 +138,9 @@
 		if(code = 404){
 			msg = "No hay datos para hacer la búsqueda."
 		}
+		if(code == 409){
+            msg = "El dato "+newEntry.country+"/"+newEntry.year+" ya existe"
+        }
         window.alert(msg)
             return;
     }
