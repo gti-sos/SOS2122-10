@@ -20,10 +20,10 @@
         </li>
     </ul>
     <p style="font-weight: bold;">
-        - Project description: </p>Nuestro trabajo consiste:
-        Alejandro Molinos Eligio: Estudio de la población en la actualidad(population-levels),
-        Gabriel López Bellido: Estudios sobre el consumo de electricidad(energy-consumptions),
-        Germán Blanco Pérez Victoria: La relación entre usuarios en internet y la población urbana(internet-population).
+        - Project description: </p>
+        <p>Alejandro Molinos Eligio: Estudio de la población en la actualidad(population-levels),<br>
+        Gabriel López Bellido: Estudios sobre el consumo de electricidad(energy-consumptions),<br>
+        Germán Blanco Pérez Victoria: La relación entre usuarios en internet y la población urbana(internet-population).<br></p>
     
     <p style="font-weight: bold;">
         - Repository: 
@@ -40,21 +40,21 @@
         -  Enlaces a API's:
     </p>
     <ul>
-        <li><a href="https://sos2122-10.herokuapp.com/api/v1/population-levels/docs">[https://sos2122-10.herokuapp.com/api/v1/population-levels/docs]</a>
-            <a href="https://sos2122-10.herokuapp.com/#/population-levels">[https://sos2122-10.herokuapp.com/#/population-levels]</a>
-            <a href="https://sos2122-10.herokuapp.com/api/v1/population-levels">[https://sos2122-10.herokuapp.com/api/v1/population-levels]</a>
+        <li><a href="https://sos2122-10.herokuapp.com/api/v1/population-levels/docs">[https://sos2122-10.herokuapp.com/api/v1/population-levels/docs]</a><br>
+            <a href="https://sos2122-10.herokuapp.com/#/population-levels">[https://sos2122-10.herokuapp.com/#/population-levels]</a><br>
+            <a href="https://sos2122-10.herokuapp.com/api/v1/population-levels">[https://sos2122-10.herokuapp.com/api/v1/population-levels]</a><br>
             (developed by <a href="https://github.com/AlejandroMolinosEligio">
             [Alejandro Molinos Eligio]
         </a>)</li>
-        <li><a href="https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs">[https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs]</a>
-            <a href="https://sos2122-10.herokuapp.com/#/energy-consumptions">[https://sos2122-10.herokuapp.com/#/energy-consumptions]</a>
-            <a href="https://sos2122-10.herokuapp.com/api/v1/energy-consumptions">[https://sos2122-10.herokuapp.com/api/v1/energy-consumptions]</a>
+        <li><a href="https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs">[https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs]</a><br>
+            <a href="https://sos2122-10.herokuapp.com/#/energy-consumptions">[https://sos2122-10.herokuapp.com/#/energy-consumptions]</a><br>
+            <a href="https://sos2122-10.herokuapp.com/api/v1/energy-consumptions">[https://sos2122-10.herokuapp.com/api/v1/energy-consumptions]</a><br>
             (developed by <a href="https://github.com/gabriellb99">
             [Gabriel López Bellido]
         </a>)</li>
-        <li><a href="https://sos2122-10.herokuapp.com/api/v1/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v1/internet-population/docs]</a>
-            <a href="https://sos2122-10.herokuapp.com/#/internet-population">[https://sos2122-10.herokuapp.com/#/internet-population]</a>
-            <a href="https://sos2122-10.herokuapp.com/api/v1/internet-population">[https://sos2122-10.herokuapp.com/api/v1/internet-population]</a>
+        <li><a href="https://sos2122-10.herokuapp.com/api/v1/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v1/internet-population/docs]</a><br>
+            <a href="https://sos2122-10.herokuapp.com/#/internet-population">[https://sos2122-10.herokuapp.com/#/internet-population]</a><br>
+            <a href="https://sos2122-10.herokuapp.com/api/v1/internet-population">[https://sos2122-10.herokuapp.com/api/v1/internet-population]</a><br>
             (developed by <a href="https://github.com/germanblanco12">
             [Germán Blanco Pérez Victoria]
         </a>)</li>
