@@ -17,7 +17,7 @@
 
 	//Límite máximo de páginas
 
-	let maxPages = 99;
+	let maxPages = 0;
 
 	let newEntry = {
 		country: "",
@@ -40,9 +40,11 @@
 		if (to != null) {
 			cadena = cadena + `to=${to}&&`
 		}
+		console.log(cadena);
         const res = await fetch(cadena); 
         if(res.ok){
-			maxPagesFunction();
+			let cadenaPag = cadena.split(`limit=${limit}&&offset=${offset*10}`);
+			maxPagesFunction(cadenaPag[0]+cadenaPag[1]);
             const data = await res.json();
             entries = data;
             console.log("Received entries: "+entries.length);
@@ -115,14 +117,18 @@
         if(code == 400){
             msg = "La fecha inicio no puede ser menor a la fecha fin"
         }
+		if(code == 404){
+            msg = "El rango de fechas seleccionadas no tiene registros"
+        }
         window.alert(msg)
             return;
     }
 	
 	//Función auxiliar para obtener el número máximo de páginas que se pueden ver
 
-	async function maxPagesFunction(){
-        const res = await fetch("/api/v1/population-levels",
+	async function maxPagesFunction(cadena){
+		let num;
+        const res = await fetch(cadena,
 			{
 				method: "GET"
 			});
@@ -150,16 +156,29 @@ loading
 			<tr>
 				<th>Fecha inicio</th>
 				<th>Fecha fin</th>
-				<th>Página</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="number" min="0" bind:value="{from}"></td>
-				<td><input type="number" min="0" bind:value="{to}"></td>
-				<td><input type="number" min="0" max="{maxPages}" bind:value="{offset}"></td>
-				<td><Button outline color="primary" on:click="{getEntries}">
+				<td><input type="number" min="2000" bind:value="{from}"></td>
+				<td><input type="number" min="2000" bind:value="{to}"></td>
+				<td align="center"><Button outline color="dark" on:click="{()=>{
+					if (from == null || to == null) {
+						window.alert('Los campos fecha inicio y fecha fin no pueden estar vacíos')
+					}else{
+						getEntries();
+					}
+				}}">
 					Buscar
+					</Button>
+				</td>
+				<td align="center"><Button outline color="info" on:click="{()=>{
+					from = null;
+					to = null;
+					getEntries();
+					
+				}}">
+					Limpiar Búsqueda
 					</Button>
 				</td>
 			</tr>
@@ -206,16 +225,26 @@ loading
 					</td>
 				</tr>
 			{/each}
-			<tr>
-				<td><Button outline color="success" on:click={LoadEntries}>
-					Cargar datos
-				</Button></td>
-				<td><Button outline color="danger" on:click={BorrarEntries}>
-					Borrar todo
-				</Button></td>
-			</tr>
 		</tbody>
 	</Table>
+	<div align="center">
+		{#each Array(maxPages+1) as _,page}
+		
+			<Button outline color="secondary" on:click={()=>{
+				offset = page;
+				getEntries();
+			}}>{page} </Button>&nbsp
+	
+		{/each}
+		</div>
+	<div align="center">
+		<Button outline color="success" on:click={LoadEntries}>
+			Cargar datos
+		</Button>&nbsp
+		<Button outline color="danger" on:click={BorrarEntries}>
+			Borrar todo
+		</Button>
+	</div>
 	<br>
 	<br>
 {/await}
