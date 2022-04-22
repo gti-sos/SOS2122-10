@@ -18,6 +18,7 @@
 	//Límite máximo de páginas
 
 	let maxPages = 0;
+	let numEntries;
 
 	let newEntry = {
 		country: "",
@@ -47,6 +48,7 @@
 			maxPagesFunction(cadenaPag[0]+cadenaPag[1]);
             const data = await res.json();
             entries = data;
+			numEntries = entries.length;
             console.log("Received entries: "+entries.length);
         }else{
 			Errores(res.status);
@@ -65,6 +67,13 @@
 					"Content-Type": "application/json"
 				}
 			}).then(function (res){
+				newEntry = {
+					country: "",
+					year: "",
+					death_rate: "",
+					life_expectancy_birth: "",
+					birth_rate: ""
+				}
 				getEntries();
 				window.alert("Entrada introducida con éxito");
 			}); 
@@ -78,6 +87,10 @@
 			{
 				method: "DELETE"
 			}).then(function (res){
+				if(numEntries==1){
+					from = null;
+					to = null;
+				}
 				getEntries();
 				window.alert("Entrada eliminada con éxito");
 			});
@@ -91,9 +104,12 @@
 			{
 				method: "DELETE"
 			}).then(function (res){
+				from = null;
+				to = null;
 				getEntries();
 				window.alert("Entradas elimidas con éxito");
 			});
+		
     }
 
 	//Función para cargar las entradas
