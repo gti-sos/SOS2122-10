@@ -42,6 +42,7 @@
 		}
         const res = await fetch(cadena); 
         if(res.ok){
+			maxPagesFunction();
             const data = await res.json();
             entries = data;
             console.log("Received entries: "+entries.length);
@@ -102,7 +103,6 @@
 				method: "GET"
 			}).then(function (res){
 				getEntries();
-				maxPagesFunction();
 				window.alert("Entradas cargadas con éxito");
 			});
     }
@@ -179,10 +179,10 @@ loading
 		<tbody>
 			<tr>
 				<td><input bind:value="{newEntry.country}"></td>
-				<td><input bind:value="{newEntry.year}"></td>
-				<td><input bind:value="{newEntry.death_rate}"></td>
-                <td><input bind:value="{newEntry.life_expectancy_birth}"></td>
-                <td><input bind:value="{newEntry.birth_rate}"></td>
+				<td><input type="number" bind:value="{newEntry.year}"></td>
+				<td><input type="number" bind:value="{newEntry.death_rate}"></td>
+                <td><input type="number" bind:value="{newEntry.life_expectancy_birth}"></td>
+                <td><input type="number" bind:value="{newEntry.birth_rate}"></td>
 				<td><Button outline color="primary" on:click="{insertEntry}">
 					Añadir
 					</Button>

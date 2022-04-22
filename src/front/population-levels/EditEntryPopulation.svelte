@@ -48,7 +48,9 @@
 				headers: {
 					"Content-Type": "application/json"
 				}
-			}); 
+			}).then(function(){
+                pop();
+            }); 
     }
 
     async function Errores(code,entrada){
@@ -99,7 +101,7 @@
                     <td><input bind:value="{updatedDeathRate}"></td>
                     <td><input bind:value="{updatedLifeExp}"></td>
                     <td><input bind:value="{updatedBirthRate}"></td>
-                    <td><Button outline color="primary" on:click="{EditEntry}">
+                    <td><Button outline color="success" on:click="{EditEntry}">
                         Editar
                         </Button>
                     </td>
