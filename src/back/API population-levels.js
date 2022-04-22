@@ -8,51 +8,174 @@ var population_levels = [
     {
         country: "argentina",
         year: 2019,
-        death_rate: 8,
-        life_expectancy_birth: 77,
-        birth_rate: 17
+        death_rate: 8.14,
+        life_expectancy_birth: 77.33,
+        birth_rate: 17.23
+    },
+    {
+        country: "albania",
+        year: 2020,
+        death_rate: 8.56,
+        life_expectancy_birth: 79.10,
+        birth_rate: 31.76
+    },
+    {
+        country: "bangladesh",
+        year: 2020,
+        death_rate: 6.10,
+        life_expectancy_birth: 73.24,
+        birth_rate: 18.33
+    },
+    {
+        country: "bangladesh",
+        year: 2011,
+        death_rate: 6.32,
+        life_expectancy_birth: 70.43,
+        birth_rate: 20.89
+    },
+    {
+        country: "bangladesh",
+        year: 2015,
+        death_rate: 6.45,
+        life_expectancy_birth: 71.23,
+        birth_rate: 10.88
+    },
+    {
+        country: "barbados",
+        year: 2020,
+        death_rate: 9.78,
+        life_expectancy_birth: 80.67,
+        birth_rate: 11.23
+    },
+    {
+        country: "barbados",
+        year: 2014,
+        death_rate: 8.03,
+        life_expectancy_birth: 78.35,
+        birth_rate: 11.11
+    },
+    {
+        country: "barbados",
+        year: 2015,
+        death_rate: 8.43,
+        life_expectancy_birth: 78.15,
+        birth_rate: 10.78
+    },{
+        country: "china",
+        year: 2018,
+        death_rate: 7.87,
+        life_expectancy_birth: 77.56,
+        birth_rate: 11.32
+    },
+    {
+        country: "china",
+        year: 2012,
+        death_rate: 8.66,
+        life_expectancy_birth: 75.89,
+        birth_rate: 12.78
+    },
+    {
+        country: "china",
+        year: 2013,
+        death_rate: 7.76,
+        life_expectancy_birth: 75.33,
+        birth_rate: 12.45
+    },{
+        country: "chile",
+        year: 2018,
+        death_rate: 6.16,
+        life_expectancy_birth: 80.04,
+        birth_rate: 12.43
+    },
+    {
+        country: "chile",
+        year: 2012,
+        death_rate: 5.73,
+        life_expectancy_birth: 79.18,
+        birth_rate: 14.26
+    },
+    {
+        country: "chile",
+        year: 2013,
+        death_rate: 5.79,
+        life_expectancy_birth: 79.35,
+        birth_rate: 14.00
+    },{
+        country: "gabon",
+        year: 2018,
+        death_rate: 6.83,
+        life_expectancy_birth: 66.19,
+        birth_rate: 31.61
+    },
+    {
+        country: "gabon",
+        year: 2020,
+        death_rate: 6.60,
+        life_expectancy_birth: 66.69,
+        birth_rate: 30.26
+    },
+    {
+        country: "gabon",
+        year: 2016,
+        death_rate: 7.20,
+        life_expectancy_birth: 65.42,
+        birth_rate: 32.60
     },
     {
         country: "spain",
         year: 2015,
-        death_rate: 9,
-        life_expectancy_birth: 57,
-        birth_rate: 12
+        death_rate: 9.77,
+        life_expectancy_birth: 57.67,
+        birth_rate: 12.65
     },
     {
         country: "spain",
         year: 2016,
-        death_rate: 7,
-        life_expectancy_birth: 62,
-        birth_rate: 13
+        death_rate: 7.34,
+        life_expectancy_birth: 62.24,
+        birth_rate: 13.13
     },
     {
         country: "canada",
         year: 2016,
-        death_rate: 7,
-        life_expectancy_birth: 82,
-        birth_rate: 11
+        death_rate: 7.22,
+        life_expectancy_birth: 82.34,
+        birth_rate: 11.98
     },
     {
         country: "brazil",
         year: 2016,
-        death_rate: 6,
-        life_expectancy_birth: 75,
-        birth_rate: 14
+        death_rate: 6.89,
+        life_expectancy_birth: 75.67,
+        birth_rate: 14.56
     },
     {
         country: "belgium",
         year: 2019,
-        death_rate: 10,
-        life_expectancy_birth: 82,
-        birth_rate: 10
+        death_rate: 10.34,
+        life_expectancy_birth: 82.34,
+        birth_rate: 10.45
     },
     {
         country: "australia",
         year: 2019,
-        death_rate: 7,
-        life_expectancy_birth: 82,
-        birth_rate: 12
+        death_rate: 7.32,
+        life_expectancy_birth: 82.88,
+        birth_rate: 12.78
+    },
+    {
+        country: "australia",
+        year: 2019,
+        death_rate: 7.79,
+        life_expectancy_birth: 82.32,
+        birth_rate: 12.56
+    },
+    {
+        country: "australia",
+        year: 2015,
+        death_rate: 6.56,
+        life_expectancy_birth: 83.12,
+        birth_rate: 12.23
     }
 ]
 
