@@ -33,7 +33,7 @@
 		if (to != null) {
 			cadena = cadena + `to=${to}&&`
 		}
-        const res = await fetch("/api/v1/internet-population"); 
+        const res = await fetch(cadena); 
         if(res.ok){
 			let cadenaPag = cadena.split(`limit=${limit}&&offset=${offset*10}`);
 			maxPagesFunction(cadenaPag[0]+cadenaPag[1]);
@@ -142,8 +142,6 @@
 				}
         }
 	}
-
-	
 
 </script>
 
