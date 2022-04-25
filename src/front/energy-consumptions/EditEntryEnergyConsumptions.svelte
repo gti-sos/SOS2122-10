@@ -6,6 +6,7 @@
     import Button from 'sveltestrap/src/Button.svelte';
     import Table from 'sveltestrap/src/Table.svelte';
     import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
+    
 
     let entry = {};
 
@@ -15,6 +16,7 @@
     let updateNonRenewable;
     let updateRenewable;
     let errorC = null;
+
 
     onMount(getEntries);
 
@@ -52,7 +54,7 @@
 				}
 			}).then(function (res){
 				//window.alert("Actualizado con éxito");
-                
+                errorC = 200.1;
                 window.location.href = `/#/energy-consumptions`; 
 			});
             
@@ -63,21 +65,26 @@
         
         let msg;
         if(code == 404){
+            errorC = 404;
             msg = "No existe un dato con el pais " + country + " en el año " + year
         }
         if(code == 400){
+            errorC = 400;
             msg = "La petición no está correctamente formulada"
         }
         if(code == 409){
+            errorC = 409;
             msg = "El dato introducido ya existe"
         }
         if(code == 401){
+            errorC = 401;
             msg = "No autorizado"
         }
         if(code == 405){
+            errorC = 405;
             msg = "Método no permitido"
         }
-        window.alert(msg)
+        //window.alert(msg)
             return;
     }
 
@@ -88,6 +95,36 @@
     {#await entry}
     loading
         {:then entry}
+        {#if errorC === 200.1}
+        <UncontrolledAlert  color="success" >
+            Actualizado con éxito.
+        </UncontrolledAlert>
+    {/if}
+    {#if errorC === 404}
+        <UncontrolledAlert  color="success" >
+            No existe un dato con el pais " + ${params.country} + " en el año " + ${params.year}
+        </UncontrolledAlert>
+    {/if}
+    {#if errorC === 400}
+        <UncontrolledAlert  color="success" >
+            La petición no está correctamente formulada.
+        </UncontrolledAlert>
+    {/if}
+    {#if errorC === 409}
+    <UncontrolledAlert  color="success" >
+        El dato introducido ya existe.
+    </UncontrolledAlert>
+    {/if}
+    {#if errorC === 401}
+        <UncontrolledAlert  color="success" >
+            No autorizado.
+        </UncontrolledAlert>
+    {/if}
+    {#if errorC === 405}
+        <UncontrolledAlert  color="success" >
+            Método no permitido.
+        </UncontrolledAlert>
+    {/if}
         
     
         <Table bordered>
@@ -107,7 +144,8 @@
                     <td><input bind:value="{updatedElectricity}"></td>
                     <td><input bind:value="{updateNonRenewable}"></td>
                     <td><input bind:value="{updateRenewable}"></td>
-                    <td><Button outline color="primary" on:click="{EditEntry}">
+                    <td><Button outline color="primary" on:click="{
+						EditEntry}">
                         Editar
                         </Button>
                     </td>

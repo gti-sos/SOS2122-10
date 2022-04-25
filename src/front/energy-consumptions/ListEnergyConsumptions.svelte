@@ -4,6 +4,7 @@
 	import Table from 'sveltestrap/src/Table.svelte';
 	import Button from 'sveltestrap/src/Button.svelte';
 	import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
+	//import { page } from '$app/stores';
 
     let entries = [];
 
@@ -13,6 +14,8 @@
 	let limit = 10;
 	let maxPages = 0;
 	let errorC = null;
+	/*const isErrorC= $page.url.searchParams.has(errorC);
+    console.log(isErrorC);*/
 
 	let newEntry = {
 		country: "",
@@ -184,6 +187,11 @@ loading
 	{#if errorC === 200.4}
         <UncontrolledAlert  color="success" >
 			Datos cargados con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.5}
+        <UncontrolledAlert  color="success" >
+			Dato actualizado con existo.
         </UncontrolledAlert>
     {/if}
 	{#if errorC === 400}
