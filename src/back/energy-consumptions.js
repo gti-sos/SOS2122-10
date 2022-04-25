@@ -1,6 +1,6 @@
 const bodyParser = require("body-parser");
 
-const BASE_API_URL_ENERGY_CONSUMPTIONS = "/api/v1/energy-consumptions";
+const BASE_API_URL_ENERGY_CONSUMPTIONS = "/api/v2/energy-consumptions";
 
 //API Gabriel López Bellido
 

@@ -3,6 +3,7 @@
     import { onMount } from 'svelte';
 	import Table from 'sveltestrap/src/Table.svelte';
 	import Button from 'sveltestrap/src/Button.svelte';
+	import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
 
 	//Aquí se guardan todas las entradas de nuestra api
 
@@ -14,6 +15,7 @@
 	let to = null;
 	let offset = 0;
 	let limit = 10;
+	let errorC = null;
 
 	//Límite máximo de páginas
 
@@ -75,7 +77,8 @@
 					birth_rate: ""
 				}
 				getEntries();
-				window.alert("Entrada introducida con éxito");
+				//window.alert("Entrada introducida con éxito");
+				errorC = 200.1;
 			}); 
     }
 
@@ -92,7 +95,8 @@
 					to = null;
 				}
 				getEntries();
-				window.alert("Entrada eliminada con éxito");
+				//window.alert("Entrada eliminada con éxito");
+				errorC = 200.2;
 			});
     }
 
@@ -107,7 +111,8 @@
 				from = null;
 				to = null;
 				getEntries();
-				window.alert("Entradas elimidas con éxito");
+				//window.alert("Entradas elimidas con éxito");
+				errorC = 200.3;
 			});
 		
     }
@@ -121,7 +126,8 @@
 				method: "GET"
 			}).then(function (res){
 				getEntries();
-				window.alert("Entradas cargadas con éxito");
+				//window.alert("Entradas cargadas con éxito");
+				errorC = 200.4;
 			});
     }
 
@@ -131,12 +137,14 @@
         
         let msg;
         if(code == 400){
+			errorC = 400;
             msg = "La fecha inicio no puede ser menor a la fecha fin"
         }
 		if(code = 404){
+			errorC = 404;
 			msg = "No hay datos para hacer la búsqueda."
 		}
-        window.alert(msg)
+        //window.alert(msg)
             return;
     }
 	
@@ -166,6 +174,37 @@
 {#await entries}
 loading
 	{:then entries}
+
+	{#if errorC === 200.1}
+        <UncontrolledAlert  color="success" >
+            Entrada insertada con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.2}
+        <UncontrolledAlert  color="success" >
+			Entrada eliminada con éxito.    
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.3}
+        <UncontrolledAlert  color="success" >
+			Entradas eliminadas con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.4}
+        <UncontrolledAlert  color="success" >
+			Datos cargados con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 400}
+        <UncontrolledAlert  color="negative" >
+			La fecha inicio no puede ser menor a la fecha fin
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 404}
+        <UncontrolledAlert  color="negative" >
+			No hay datos para hacer la búsqueda.
+        </UncontrolledAlert>
+    {/if}
 	
 	<Table bordered>
 		<thead>

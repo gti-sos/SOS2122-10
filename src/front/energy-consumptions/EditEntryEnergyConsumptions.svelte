@@ -5,6 +5,7 @@
     import { onMount } from 'svelte';
     import Button from 'sveltestrap/src/Button.svelte';
     import Table from 'sveltestrap/src/Table.svelte';
+    import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
 
     let entry = {};
 
@@ -13,12 +14,13 @@
     let updatedElectricity;
     let updateNonRenewable;
     let updateRenewable;
+    let errorC = null;
 
     onMount(getEntries);
 
     async function getEntries(){
         console.log("Fetching entries....");
-        const res = await fetch("/api/v1/energy-consumptions/"+params.country+"/"+params.year); 
+        const res = await fetch("/api/v2/energy-consumptions/"+params.country+"/"+params.year); 
         if(res.ok){
             const data = await res.json();
             entry = data;
@@ -35,7 +37,7 @@
 
     async function EditEntry(){
         console.log("Updating entry...."+updatedCountry);
-        const res = await fetch("/api/v1/energy-consumptions/"+params.country+"/"+params.year,
+        const res = await fetch("/api/v2/energy-consumptions/"+params.country+"/"+params.year,
 			{
 				method: "PUT",
 				body: JSON.stringify({
@@ -49,7 +51,8 @@
 					"Content-Type": "application/json"
 				}
 			}).then(function (res){
-				window.alert("Actualizado con éxito");
+				//window.alert("Actualizado con éxito");
+                
                 window.location.href = `/#/energy-consumptions`; 
 			});
             

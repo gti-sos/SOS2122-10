@@ -3,6 +3,7 @@
     import { onMount } from 'svelte';
 	import Table from 'sveltestrap/src/Table.svelte';
 	import Button from 'sveltestrap/src/Button.svelte';
+	import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
 
     let entries = [];
 
@@ -11,6 +12,7 @@
 	let offset = 0;
 	let limit = 10;
 	let maxPages = 0;
+	let errorC = null;
 
 	let newEntry = {
 		country: "",
@@ -24,7 +26,7 @@
 
     async function getEntries(){
         console.log("Fetching entries....");
-		let cadena = `/api/v1/energy-consumptions?`;
+		let cadena = `/api/v2/energy-consumptions?`;
 		if (from === null) {
 			from = 0;
 			cadena = cadena + `from=${from}&&`
@@ -69,7 +71,7 @@
 
 	async function insertEntry(){
         console.log("Inserting entry...."+JSON.stringify(newEntry));
-        const res = await fetch("/api/v1/energy-consumptions",
+        const res = await fetch("/api/v2/energy-consumptions",
 			{
 				method: "POST",
 				body: JSON.stringify(newEntry),
@@ -78,35 +80,38 @@
 				}
 			}).then(function (res){
 					getEntries();
-					window.alert("Entrada introducida con éxito");
+					//window.alert("Entrada introducida con éxito");
+					errorC = 200.1;
 			}); 
     }
 
 	async function BorrarEntry(countryDelete, yearDelete){
         console.log("Deleting entry....");
-        const res = await fetch("/api/v1/energy-consumptions/"+countryDelete+"/"+yearDelete,
+        const res = await fetch("/api/v2/energy-consumptions/"+countryDelete+"/"+yearDelete,
 			{
 				method: "DELETE"
 			}).then(function (res){
 				getEntries();
-				window.alert("Entrada eliminada con éxito");
+				//window.alert("Entrada eliminada con éxito");
+				errorC = 200.2;
 			});
     }
 
 	async function BorrarEntries(){
         console.log("Deleting entries....");
-        const res = await fetch("/api/v1/energy-consumptions/",
+        const res = await fetch("/api/v2/energy-consumptions/",
 			{
 				method: "DELETE"
 			}).then(function (res){
 				getEntriesD();
-				window.alert("Entradas elimidas con éxito");
+				//window.alert("Entradas elimidas con éxito");
+				errorC = 200.3;
 			});
     }
 
 	async function getEntriesD(){
         console.log("Fetching entries....");
-        const res = await fetch("/api/v1/energy-consumptions"); 
+        const res = await fetch("/api/v2/energy-consumptions"); 
         if(res.ok){
             const data = await res.json();
             entries = data;
@@ -117,26 +122,28 @@
 
 	async function LoadEntries(){
         console.log("Loading entries....");
-        const res = await fetch("/api/v1/energy-consumptions/loadInitialData",
+        const res = await fetch("/api/v2/energy-consumptions/loadInitialData",
 			{
 				method: "GET"
 			}).then(function (res){
 				getEntries();
-				window.alert("Entradas cargadas con éxito");
+				//window.alert("Entradas cargadas con éxito");
+				errorC = 200.4;
 			});
     }
 
 	async function Errores(code){
         
         let msg;
-
         if(code == 400){
-            msg = "Fecha Fin no puede ser menor que Fecha Inicio"
+			errorC = 400;
+            msg = "La fecha inicio no puede ser menor a la fecha fin"
         }
 		if(code = 404){
+			errorC = 404;
 			msg = "No hay datos para hacer la búsqueda."
 		}
-        window.alert(msg)
+        //window.alert(msg)
             return;
     }
 
@@ -158,6 +165,38 @@
 {#await entries}
 loading
 	{:then entries}
+
+	{#if errorC === 200.1}
+        <UncontrolledAlert  color="success" >
+            Entrada insertada con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.2}
+        <UncontrolledAlert  color="success" >
+			Entrada eliminada con éxito.    
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.3}
+        <UncontrolledAlert  color="success" >
+			Entradas eliminadas con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.4}
+        <UncontrolledAlert  color="success" >
+			Datos cargados con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 400}
+        <UncontrolledAlert  color="negative" >
+			La fecha inicio no puede ser menor a la fecha fin
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 404}
+        <UncontrolledAlert  color="negative" >
+			No hay datos para hacer la búsqueda.
+        </UncontrolledAlert>
+    {/if}
+	
 
 	<Table bordered>
 		<thead>
@@ -217,7 +256,9 @@ loading
 					}}>
 						Editar
 					</Button>
-					<td><Button outline color="danger" on:click={BorrarEntry(entry.country,entry.year)}>
+					<td><Button outline color="danger" on:click={function (){
+						errorC = null;
+						BorrarEntry(entry.country,entry.year)}}>
 						Borrar
 					</Button>
 					</td>
