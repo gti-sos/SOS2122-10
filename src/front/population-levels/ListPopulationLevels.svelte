@@ -3,7 +3,6 @@
     import { onMount } from 'svelte';
 	import Table from 'sveltestrap/src/Table.svelte';
 	import Button from 'sveltestrap/src/Button.svelte';
-	import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
 
 	//Aquí se guardan todas las entradas de nuestra api
 
@@ -15,7 +14,6 @@
 	let to = null;
 	let offset = 0;
 	let limit = 10;
-	let errorC = null;
 
 	//Límite máximo de páginas
 
@@ -36,13 +34,14 @@
 
     async function getEntries(){
         console.log("Fetching entries....");
-		let cadena = `/api/v2/population-levels?limit=${limit}&&offset=${offset*10}&&`;
+		let cadena = `/api/v1/population-levels?limit=${limit}&&offset=${offset*10}&&`;
 		if (from != null) {
 			cadena = cadena + `from=${from}&&`
 		}
 		if (to != null) {
 			cadena = cadena + `to=${to}&&`
 		}
+		console.log(cadena);
         const res = await fetch(cadena); 
         if(res.ok){
 			let cadenaPag = cadena.split(`limit=${limit}&&offset=${offset*10}`);
@@ -60,16 +59,15 @@
 
 	async function insertEntry(){
         console.log("Inserting entry...."+JSON.stringify(newEntry));
-        const res = await fetch("/api/v2/population-levels",
+        const res = await fetch("/api/v1/population-levels",
 			{
 				method: "POST",
 				body: JSON.stringify(newEntry),
 				headers: {
 					"Content-Type": "application/json"
 				}
-			}); 
-		if (res.ok) {
-			newEntry = {
+			}).then(function (res){
+				newEntry = {
 					country: "",
 					year: "",
 					death_rate: "",
@@ -77,23 +75,15 @@
 					birth_rate: ""
 				}
 				getEntries();
-<<<<<<< HEAD
-				//window.alert("Entrada introducida con éxito");
-				errorC = 200.1;
-			}); 
-=======
 				window.alert("Entrada introducida con éxito");
-		}else{
-			Errores(res.status);
-		}
->>>>>>> db925035b561c3a043e3e66d6ad610742e9daff6
+			}); 
     }
 
 	//Función para borrar una entrada
 
 	async function BorrarEntry(countryDelete, yearDelete){
         console.log("Deleting entry....");
-        const res = await fetch("/api/v2/population-levels/"+countryDelete+"/"+yearDelete,
+        const res = await fetch("/api/v1/population-levels/"+countryDelete+"/"+yearDelete,
 			{
 				method: "DELETE"
 			}).then(function (res){
@@ -102,8 +92,7 @@
 					to = null;
 				}
 				getEntries();
-				//window.alert("Entrada eliminada con éxito");
-				errorC = 200.2;
+				window.alert("Entrada eliminada con éxito");
 			});
     }
 
@@ -111,15 +100,14 @@
 
 	async function BorrarEntries(){
         console.log("Deleting entries....");
-        const res = await fetch("/api/v2/population-levels/",
+        const res = await fetch("/api/v1/population-levels/",
 			{
 				method: "DELETE"
 			}).then(function (res){
 				from = null;
 				to = null;
 				getEntries();
-				//window.alert("Entradas elimidas con éxito");
-				errorC = 200.3;
+				window.alert("Entradas elimidas con éxito");
 			});
 		
     }
@@ -128,13 +116,12 @@
 
 	async function LoadEntries(){
         console.log("Loading entries....");
-        const res = await fetch("/api/v2/population-levels/loadInitialData",
+        const res = await fetch("/api/v1/population-levels/loadInitialData",
 			{
 				method: "GET"
 			}).then(function (res){
 				getEntries();
-				//window.alert("Entradas cargadas con éxito");
-				errorC = 200.4;
+				window.alert("Entradas cargadas con éxito");
 			});
     }
 
@@ -144,21 +131,12 @@
         
         let msg;
         if(code == 400){
-			errorC = 400;
             msg = "La fecha inicio no puede ser menor a la fecha fin"
         }
 		if(code = 404){
-			errorC = 404;
 			msg = "No hay datos para hacer la búsqueda."
 		}
-<<<<<<< HEAD
-        //window.alert(msg)
-=======
-		if(code == 409){
-            msg = "El dato "+newEntry.country+"/"+newEntry.year+" ya existe"
-        }
         window.alert(msg)
->>>>>>> db925035b561c3a043e3e66d6ad610742e9daff6
             return;
     }
 	
@@ -188,37 +166,6 @@
 {#await entries}
 loading
 	{:then entries}
-
-	{#if errorC === 200.1}
-        <UncontrolledAlert  color="success" >
-            Entrada insertada con éxito.
-        </UncontrolledAlert>
-    {/if}
-	{#if errorC === 200.2}
-        <UncontrolledAlert  color="success" >
-			Entrada eliminada con éxito.    
-        </UncontrolledAlert>
-    {/if}
-	{#if errorC === 200.3}
-        <UncontrolledAlert  color="success" >
-			Entradas eliminadas con éxito.
-        </UncontrolledAlert>
-    {/if}
-	{#if errorC === 200.4}
-        <UncontrolledAlert  color="success" >
-			Datos cargados con éxito.
-        </UncontrolledAlert>
-    {/if}
-	{#if errorC === 400}
-        <UncontrolledAlert  color="negative" >
-			La fecha inicio no puede ser menor a la fecha fin
-        </UncontrolledAlert>
-    {/if}
-	{#if errorC === 404}
-        <UncontrolledAlert  color="negative" >
-			No hay datos para hacer la búsqueda.
-        </UncontrolledAlert>
-    {/if}
 	
 	<Table bordered>
 		<thead>
@@ -267,10 +214,10 @@ loading
 		<tbody>
 			<tr>
 				<td><input bind:value="{newEntry.country}"></td>
-				<td><input type="number" min="0" bind:value="{newEntry.year}"></td>
-				<td><input type="number" min="0" bind:value="{newEntry.death_rate}"></td>
-                <td><input type="number" min="0" bind:value="{newEntry.life_expectancy_birth}"></td>
-                <td><input type="number" min="0" bind:value="{newEntry.birth_rate}"></td>
+				<td><input type="number" bind:value="{newEntry.year}"></td>
+				<td><input type="number" bind:value="{newEntry.death_rate}"></td>
+                <td><input type="number" bind:value="{newEntry.life_expectancy_birth}"></td>
+                <td><input type="number" bind:value="{newEntry.birth_rate}"></td>
 				<td><Button outline color="primary" on:click="{insertEntry}">
 					Añadir
 					</Button>
