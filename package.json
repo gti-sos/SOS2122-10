@@ -70,7 +70,7 @@
     "start": "node index.js",
     "test-population-levels": "npx newman run ./test/backend_API_population-levels.json -e ./test/env/Variables_Population-levels.json",
     "test-energy-consumptions": "npx newman run ./test/backend_API_energy_consumptions.json -e ./test/env/Variables_energy_consumptions.json",
-    "test-internet-population": "npx newman run ./test/backend_API_internet-population.json -e ./test/env/Variables_Internet_Populations.json",
+    "test-internet-population": "npx newman run ./test/backend_API_internet-population.json -e ./test/env/Variables_internet-population.json",
     "test": "npm run test-population-levels && npm run test-energy-consumptions && npm run test-internet-population",
     "build": "rollup -c",
     "dev": "rollup -c -w"

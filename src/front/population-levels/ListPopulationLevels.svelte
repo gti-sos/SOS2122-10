@@ -36,14 +36,13 @@
 
     async function getEntries(){
         console.log("Fetching entries....");
-		let cadena = `/api/v1/population-levels?limit=${limit}&&offset=${offset*10}&&`;
+		let cadena = `/api/v2/population-levels?limit=${limit}&&offset=${offset*10}&&`;
 		if (from != null) {
 			cadena = cadena + `from=${from}&&`
 		}
 		if (to != null) {
 			cadena = cadena + `to=${to}&&`
 		}
-		console.log(cadena);
         const res = await fetch(cadena); 
         if(res.ok){
 			let cadenaPag = cadena.split(`limit=${limit}&&offset=${offset*10}`);
@@ -61,15 +60,16 @@
 
 	async function insertEntry(){
         console.log("Inserting entry...."+JSON.stringify(newEntry));
-        const res = await fetch("/api/v1/population-levels",
+        const res = await fetch("/api/v2/population-levels",
 			{
 				method: "POST",
 				body: JSON.stringify(newEntry),
 				headers: {
 					"Content-Type": "application/json"
 				}
-			}).then(function (res){
-				newEntry = {
+			}); 
+		if (res.ok) {
+			newEntry = {
 					country: "",
 					year: "",
 					death_rate: "",
@@ -77,16 +77,23 @@
 					birth_rate: ""
 				}
 				getEntries();
+<<<<<<< HEAD
 				//window.alert("Entrada introducida con éxito");
 				errorC = 200.1;
 			}); 
+=======
+				window.alert("Entrada introducida con éxito");
+		}else{
+			Errores(res.status);
+		}
+>>>>>>> db925035b561c3a043e3e66d6ad610742e9daff6
     }
 
 	//Función para borrar una entrada
 
 	async function BorrarEntry(countryDelete, yearDelete){
         console.log("Deleting entry....");
-        const res = await fetch("/api/v1/population-levels/"+countryDelete+"/"+yearDelete,
+        const res = await fetch("/api/v2/population-levels/"+countryDelete+"/"+yearDelete,
 			{
 				method: "DELETE"
 			}).then(function (res){
@@ -104,7 +111,7 @@
 
 	async function BorrarEntries(){
         console.log("Deleting entries....");
-        const res = await fetch("/api/v1/population-levels/",
+        const res = await fetch("/api/v2/population-levels/",
 			{
 				method: "DELETE"
 			}).then(function (res){
@@ -121,7 +128,7 @@
 
 	async function LoadEntries(){
         console.log("Loading entries....");
-        const res = await fetch("/api/v1/population-levels/loadInitialData",
+        const res = await fetch("/api/v2/population-levels/loadInitialData",
 			{
 				method: "GET"
 			}).then(function (res){
@@ -144,7 +151,14 @@
 			errorC = 404;
 			msg = "No hay datos para hacer la búsqueda."
 		}
+<<<<<<< HEAD
         //window.alert(msg)
+=======
+		if(code == 409){
+            msg = "El dato "+newEntry.country+"/"+newEntry.year+" ya existe"
+        }
+        window.alert(msg)
+>>>>>>> db925035b561c3a043e3e66d6ad610742e9daff6
             return;
     }
 	
@@ -253,10 +267,10 @@ loading
 		<tbody>
 			<tr>
 				<td><input bind:value="{newEntry.country}"></td>
-				<td><input type="number" bind:value="{newEntry.year}"></td>
-				<td><input type="number" bind:value="{newEntry.death_rate}"></td>
-                <td><input type="number" bind:value="{newEntry.life_expectancy_birth}"></td>
-                <td><input type="number" bind:value="{newEntry.birth_rate}"></td>
+				<td><input type="number" min="0" bind:value="{newEntry.year}"></td>
+				<td><input type="number" min="0" bind:value="{newEntry.death_rate}"></td>
+                <td><input type="number" min="0" bind:value="{newEntry.life_expectancy_birth}"></td>
+                <td><input type="number" min="0" bind:value="{newEntry.birth_rate}"></td>
 				<td><Button outline color="primary" on:click="{insertEntry}">
 					Añadir
 					</Button>

@@ -1,11 +1,25 @@
 const bodyParser = require("body-parser");
 
-const BASE_API_URL_INTERNET_POPULATION = "/api/v1/internet-population";
+const BASE_API_URL_INTERNET_POPULATION = "/api/v2/internet-population";
 
 //API Germán Blanco Pérez-Victoria
 
 
 var internet_population = [
+    {
+        country: "spain",
+        year: 2008,
+        population_growth: 1.595,
+        internet_users: 59.6,
+        urban_population: 77.976
+    },
+    {
+        country: "spain",
+        year: 2010,
+        population_growth: 0.460,
+        internet_users: 65.8,
+        urban_population: 78.446
+    },
     {
         country: "spain",
         year: 2014,
@@ -14,18 +28,18 @@ var internet_population = [
         urban_population: 79.366
     },
     {
-        country: "spain",
-        year: 2010,
-        population_growth: 0.460,
-        internet_users: 65.80,
-        urban_population: 78.446
+        country: "germany",
+        year: 2008,
+        population_growth: -0.19,
+        internet_users: 78,
+        urban_population: 76.575
     },
     {
-        country: "spain",
-        year: 2008,
-        population_growth: 1.595,
-        internet_users: 59.60,
-        urban_population: 77.976
+        country: "germany",
+        year: 2010,
+        population_growth: -0.153,
+        internet_users: 82,
+        urban_population: 76.966
     },
     {
         country: "germany",
@@ -33,13 +47,6 @@ var internet_population = [
         population_growth: 0.417,
         internet_users: 86.19,
         urban_population: 77.190
-    },
-    {
-        country: "germany",
-        year: 2010,
-        population_growth: -0.153,
-        internet_users: 82.00,
-        urban_population: 76.966
     },
     {
         country: "united kingdom",
@@ -50,17 +57,143 @@ var internet_population = [
     },
     {
         country: "united kingdom",
+        year: 2010,
+        population_growth: 0.784,
+        internet_users: 85,
+        urban_population: 81.302
+    },
+    {
+        country: "united kingdom",
         year: 2014,
         population_growth: 0.736,
         internet_users: 91.61,
         urban_population: 82.365
+    },
+    {
+        country: "argentina",
+        year: 2008,
+        population_growth: 0.993,
+        internet_users: 28.113,
+        urban_population: 90.53
+    },
+    {
+        country: "argentina",
+        year: 2010,
+        population_growth: 0.752,
+        internet_users: 45,
+        urban_population: 90.849
+    },
+    {
+        country: "argentina",
+        year: 2014,
+        population_growth: 1.099,
+        internet_users: 64.7,
+        urban_population: 91.377
+    },
+    {
+        country: "norway",
+        year: 2008,
+        population_growth: 1.246,
+        internet_users: 90.57,
+        urban_population: 78.526
+    },
+    {
+        country: "norway",
+        year: 2010,
+        population_growth: 1.246,
+        internet_users: 93.39,
+        urban_population: 79.102
+    },
+    {
+        country: "norway",
+        year: 2014,
+        population_growth: 1.128,
+        internet_users: 96.3,
+        urban_population: 80.692
+    },
+    {
+        country: "australia",
+        year: 2008,
+        population_growth: 2.004,
+        internet_users: 71.67,
+        urban_population: 84.493
+    },
+    {
+        country: "australia",
+        year: 2010,
+        population_growth: 1.555,
+        internet_users: 76,
+        urban_population: 85.182
+    },
+    {
+        country: "australia",
+        year: 2014,
+        population_growth: 1.492,
+        internet_users: 84,
+        urban_population: 85.602
+    },
+    {
+        country: "morocco",
+        year: 2008,
+        population_growth: 1.19,
+        internet_users: 33.1,
+        urban_population: 56.886
+    },
+    {
+        country: "morocco",
+        year: 2010,
+        population_growth: 1.289,
+        internet_users: 52,
+        urban_population: 58.018
+    },
+    {
+        country: "morocco",
+        year: 2014,
+        population_growth: 1.404,
+        internet_users: 56.8,
+        urban_population: 60.256
+    },
+    {
+        country: "japan",
+        year: 2008,
+        population_growth: 0.048,
+        internet_users: 75.4,
+        urban_population: 89.103
+    },
+    {
+        country: "japan",
+        year: 2010,
+        population_growth: 0.018,
+        internet_users: 78.21,
+        urban_population: 90.812
+    },
+    {
+        country: "japan",
+        year: 2014,
+        population_growth: -0.133,
+        internet_users: 89.107,
+        urban_population: 91.304
+    },
+    {
+        country: "united states",
+        year: 2010,
+        population_growth: 0.83,
+        internet_users: 71.69,
+        urban_population: 80.772
+    },
+    {
+        country: "united states",
+        year: 2014,
+        population_growth: 0.733,
+        internet_users: 73,
+        urban_population: 81.483
     }
 ]
     
-/* 
-    API para internet-population
-*/
 module.exports.register = (app,db) =>{
+    /* 
+        API para internet-population
+    */
     
     // Cargar datos iniciales
     
@@ -78,7 +211,10 @@ module.exports.register = (app,db) =>{
                 }
                 res.sendStatus(200, "OK.")
                 return;
+            }else{
+                res.sendStatus(200, "Ya inicializados")
             }
+            
         });
         
     })
@@ -157,6 +293,22 @@ module.exports.register = (app,db) =>{
             filteredList.forEach((element)=>{
                 delete element._id;
             });
+
+            //Comprobamos fields
+            if(req.query.fields!=null){
+                //Comprobamos si los campos son correctos
+                var listaFields = req.query.fields.split(",");
+                for(var i = 0; i<listaFields.length;i++){
+                    var element = listaFields[i];
+                    if(element != "country" && element != "year" && element != "death_rate" && element != "life_expectancy_birth" && element != "birth_rate"){
+                        res.sendStatus(400, "BAD REQUEST");
+                        return;
+                    }
+                }
+                //Escogemos los fields correspondientes
+                filteredList = comprobar_fields(req,filteredList);
+            }
+
             res.send(JSON.stringify(filteredList,null,2));
         })
     })
@@ -226,6 +378,22 @@ module.exports.register = (app,db) =>{
             filteredList.forEach((element)=>{
                 delete element._id;
             });
+
+            //Comprobamos fields
+            if(req.query.fields!=null){
+                //Comprobamos si los campos son correctos
+                var listaFields = req.query.fields.split(",");
+                for(var i = 0; i<listaFields.length;i++){
+                    var element = listaFields[i];
+                    if(element != "country" && element != "year" && element != "death_rate" && element != "life_expectancy_birth" && element != "birth_rate"){
+                        res.sendStatus(400, "BAD REQUEST");
+                        return;
+                    }
+                }
+                //Escogemos los fields correspondientes
+                filteredList = comprobar_fields(req,filteredList);
+            }
+
             res.send(JSON.stringify(filteredList,null,2));
         })
 
@@ -264,6 +432,22 @@ module.exports.register = (app,db) =>{
             filteredList.forEach((element)=>{
                 delete element._id;
             });
+
+            //Comprobamos fields
+            if(req.query.fields!=null){
+                //Comprobamos si los campos son correctos
+                var listaFields = req.query.fields.split(",");
+                for(var i = 0; i<listaFields.length;i++){
+                    var element = listaFields[i];
+                    if(element != "country" && element != "year" && element != "death_rate" && element != "life_expectancy_birth" && element != "birth_rate"){
+                        res.sendStatus(400, "BAD REQUEST");
+                        return;
+                    }
+                }
+                //Escogemos los fields correspondientes
+                filteredList = comprobar_fields(req,filteredList);
+            }
+
             res.send(JSON.stringify(filteredList[0],null,2));
         });
     })
@@ -433,6 +617,74 @@ module.exports.register = (app,db) =>{
 
         res = lista.slice(offset,parseInt(limit)+parseInt(offset));
         return res;
+
+    }
+
+    function comprobar_fields(req, lista){
+        var fields = req.query.fields;
+
+        var contieneCountry = false;
+        var contieneYear = false;
+        var contiene_growth = false;
+        var contiene_internet = false;
+        var contiene_urban = false;
+        fields = fields.split(",");
+
+        for(var i = 0; i<fields.length;i++){
+            var element = fields[i];
+            if(element=='country'){
+                contieneCountry=true;
+            }
+            if(element=='year'){
+                contieneYear=true;
+            }
+            if(element=='population_growth'){
+                contiene_growth=true;
+            }
+            if(element=='internet_users'){
+                contiene_internet=true;
+            }
+            if(element=='urban_population'){
+                contiene_urban=true;
+            }
+        }
+
+        //Country
+        if(!contieneCountry){
+            lista.forEach((element)=>{
+                delete element.country;
+            })
+        }
+
+        //Year
+        if(!contieneYear){
+            lista.forEach((element)=>{
+                delete element.year;
+            })
+        }
+
+        //Population growth
+        if(!contiene_growth){
+            lista.forEach((element)=>{
+                delete element.population_growth;
+            })
+        }
+
+        //Life expectancy birth
+        if(!contiene_internet){
+            lista.forEach((element)=>{
+                delete element.internet_population;
+            })
+        }
+
+        //Birth rates
+        if(!contiene_urban){
+            lista.forEach((element)=>{
+                delete element.urban_population;
+            })
+        }
+
+        return lista;
 
     }
 }

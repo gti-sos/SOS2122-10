@@ -10,12 +10,12 @@
 		},
 		{
 			"key": "INTERNET",
-			"value": "/api/v1/internet-population",
+			"value": "/api/v2/internet-population",
 			"type": "default",
 			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2022-04-03T23:43:58.531Z",
-	"_postman_exported_using": "Postman/9.15.6"
+	"_postman_exported_at": "2022-04-25T07:02:31.389Z",
+	"_postman_exported_using": "Postman/9.15.10"
 }

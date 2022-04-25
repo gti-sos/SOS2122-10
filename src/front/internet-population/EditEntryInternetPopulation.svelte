@@ -18,7 +18,7 @@
 
     async function getEntries(){
         console.log("Fetching entries....");
-        const res = await fetch("/api/v1/internet-population/"+params.country+"/"+params.year); 
+        const res = await fetch("/api/v2/internet-population/"+params.country+"/"+params.year); 
         if(res.ok){
             const data = await res.json();
             entry = data;
@@ -35,7 +35,7 @@
 
     async function EditEntry(){
         console.log("Updating entry...."+updatedCountry);
-        const res = await fetch("/api/v1/internet-population/"+params.country+"/"+params.year,
+        const res = await fetch("/api/v2/internet-population/"+params.country+"/"+params.year,
 			{
 				method: "PUT",
 				body: JSON.stringify({
@@ -51,11 +51,11 @@
 			}); 
     }
 
-    async function Errores(code){
+    async function Errores(code, entrada){
         
         let msg;
         if(code == 404){
-            msg = "La entrada seleccionada no existe"
+            msg = "La entrada" +entrada+ "no existe"
         }
         if(code == 400){
             msg = "La petición no está correctamente formulada"
