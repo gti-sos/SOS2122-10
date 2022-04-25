@@ -1,6 +1,6 @@
 const bodyParser = require("body-parser");
 
-const BASE_API_URL_INTERNET_POPULATION = "/api/v1/internet-population";
+const BASE_API_URL_INTERNET_POPULATION = "/api/v2/internet-population";
 
 //API Germán Blanco Pérez-Victoria
 
