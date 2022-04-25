@@ -5,14 +5,23 @@
     import { onMount } from 'svelte';
     import Button from 'sveltestrap/src/Button.svelte';
     import Table from 'sveltestrap/src/Table.svelte';
+    import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
+
+    //Aquí se almacena la entrada correspondiente
 
     let entry = {};
+
+    //Variables para la modificación
 
     let updatedCountry;
     let updatedYear;
     let updatedDeathRate;
     let updatedLifeExp;
     let updatedBirthRate;
+
+    //Código de error auxiliar
+
+    let errorC;
 
     onMount(getEntries);
 
@@ -28,8 +37,8 @@
             updatedLifeExp = entry.life_expectancy_birth;
             updatedBirthRate = entry.birth_rate;
         }else{
-            Errores(res.status,params.country+"/"+params.year);
-            pop();
+
+            errorC = res.status;
         }
     }
 
@@ -53,27 +62,6 @@
             }); 
     }
 
-    async function Errores(code,entrada){
-        
-        let msg;
-        if(code == 404){
-            msg = "La entrada "+entrada+" no existe"
-        }
-        if(code == 400){
-            msg = "La petición no está correctamente formulada"
-        }
-        if(code == 409){
-            msg = "El dato introducido ya existe"
-        }
-        if(code == 401){
-            msg = "No autorizado"
-        }
-        if(code == 405){
-            msg = "Método no permitido"
-        }
-        window.alert(msg)
-            return;
-    }
 
 </script>
 
@@ -83,6 +71,31 @@
     loading
         {:then entry}
         
+        {#if errorC === 400}
+        <UncontrolledAlert  color="danger" >
+            La petición no está correctamente formulada
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 401}
+        <UncontrolledAlert  color="danger" >
+			No autorizado   
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 404}
+        <UncontrolledAlert  color="danger" >
+			La entrada <b>{params.country}/{params.year}</b> no existe
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 405}
+        <UncontrolledAlert  color="danger" >
+			Método no permitido
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 409}
+        <UncontrolledAlert  color="danger" >
+			El dato introducido ya existe
+        </UncontrolledAlert>
+    {/if}
     
         <Table bordered>
             <thead>

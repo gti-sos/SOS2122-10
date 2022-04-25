@@ -3,6 +3,7 @@
     import { onMount } from 'svelte';
 	import Table from 'sveltestrap/src/Table.svelte';
 	import Button from 'sveltestrap/src/Button.svelte';
+	import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
 
 	//Aquí se guardan todas las entradas de nuestra api
 
@@ -14,6 +15,10 @@
 	let to = null;
 	let offset = 0;
 	let limit = 10;
+
+	//Código de error variables
+
+	let errorC = null;
 
 	//Límite máximo de páginas
 
@@ -34,7 +39,7 @@
 
     async function getEntries(){
         console.log("Fetching entries....");
-		let cadena = `/api/v1/population-levels?limit=${limit}&&offset=${offset*10}&&`;
+		let cadena = `/api/v2/population-levels?limit=${limit}&&offset=${offset*10}&&`;
 		if (from != null) {
 			cadena = cadena + `from=${from}&&`
 		}
@@ -51,7 +56,7 @@
 			numEntries = entries.length;
             console.log("Received entries: "+entries.length);
         }else{
-			Errores(res.status);
+			errorC = res.status;
 		}
     }
 
@@ -59,7 +64,7 @@
 
 	async function insertEntry(){
         console.log("Inserting entry...."+JSON.stringify(newEntry));
-        const res = await fetch("/api/v1/population-levels",
+        const res = await fetch("/api/v2/population-levels",
 			{
 				method: "POST",
 				body: JSON.stringify(newEntry),
@@ -75,7 +80,8 @@
 					birth_rate: ""
 				}
 				getEntries();
-				window.alert("Entrada introducida con éxito");
+				//Código de Entrada introducida con éxito
+				errorC = 200.1;
 			}); 
     }
 
@@ -83,7 +89,7 @@
 
 	async function BorrarEntry(countryDelete, yearDelete){
         console.log("Deleting entry....");
-        const res = await fetch("/api/v1/population-levels/"+countryDelete+"/"+yearDelete,
+        const res = await fetch("/api/v2/population-levels/"+countryDelete+"/"+yearDelete,
 			{
 				method: "DELETE"
 			}).then(function (res){
@@ -92,7 +98,8 @@
 					to = null;
 				}
 				getEntries();
-				window.alert("Entrada eliminada con éxito");
+				//Código de Entrada eliminada con éxito
+				errorC = 200.2;
 			});
     }
 
@@ -100,14 +107,15 @@
 
 	async function BorrarEntries(){
         console.log("Deleting entries....");
-        const res = await fetch("/api/v1/population-levels/",
+        const res = await fetch("/api/v2/population-levels/",
 			{
 				method: "DELETE"
 			}).then(function (res){
 				from = null;
 				to = null;
 				getEntries();
-				window.alert("Entradas elimidas con éxito");
+				//Código de Entradas elimidas con éxito
+				errorC = 200.3;
 			});
 		
     }
@@ -116,28 +124,14 @@
 
 	async function LoadEntries(){
         console.log("Loading entries....");
-        const res = await fetch("/api/v1/population-levels/loadInitialData",
+        const res = await fetch("/api/v2/population-levels/loadInitialData",
 			{
 				method: "GET"
 			}).then(function (res){
 				getEntries();
-				window.alert("Entradas cargadas con éxito");
+				//Código de Entradas cargadas con éxito
+				errorC = 200.4;
 			});
-    }
-
-	//Función auxiliar para imprimir errores
-
-	async function Errores(code){
-        
-        let msg;
-        if(code == 400){
-            msg = "La fecha inicio no puede ser menor a la fecha fin"
-        }
-		if(code = 404){
-			msg = "No hay datos para hacer la búsqueda."
-		}
-        window.alert(msg)
-            return;
     }
 	
 	//Función auxiliar para obtener el número máximo de páginas que se pueden ver
@@ -167,6 +161,37 @@
 loading
 	{:then entries}
 	
+	{#if errorC === 200.1}
+        <UncontrolledAlert  color="success" >
+            Entrada insertada con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.2}
+        <UncontrolledAlert  color="success" >
+			Entrada eliminada con éxito.    
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.3}
+        <UncontrolledAlert  color="success" >
+			Entradas eliminadas con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.4}
+        <UncontrolledAlert  color="success" >
+			Datos cargados con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 400}
+        <UncontrolledAlert  color="negative" >
+			La fecha inicio no puede ser menor a la fecha fin
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 404}
+        <UncontrolledAlert  color="negative" >
+			No hay datos para hacer la búsqueda.
+        </UncontrolledAlert>
+    {/if}
+
 	<Table bordered>
 		<thead>
 			<tr>
