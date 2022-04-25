@@ -34,7 +34,7 @@
 
     async function getEntries(){
         console.log("Fetching entries....");
-		let cadena = `/api/v1/population-levels?limit=${limit}&&offset=${offset*10}&&`;
+		let cadena = `/api/v2/population-levels?limit=${limit}&&offset=${offset*10}&&`;
 		if (from != null) {
 			cadena = cadena + `from=${from}&&`
 		}
@@ -58,7 +58,7 @@
 
 	async function insertEntry(){
         console.log("Inserting entry...."+JSON.stringify(newEntry));
-        const res = await fetch("/api/v1/population-levels",
+        const res = await fetch("/api/v2/population-levels",
 			{
 				method: "POST",
 				body: JSON.stringify(newEntry),
@@ -85,7 +85,7 @@
 
 	async function BorrarEntry(countryDelete, yearDelete){
         console.log("Deleting entry....");
-        const res = await fetch("/api/v1/population-levels/"+countryDelete+"/"+yearDelete,
+        const res = await fetch("/api/v2/population-levels/"+countryDelete+"/"+yearDelete,
 			{
 				method: "DELETE"
 			}).then(function (res){
@@ -102,7 +102,7 @@
 
 	async function BorrarEntries(){
         console.log("Deleting entries....");
-        const res = await fetch("/api/v1/population-levels/",
+        const res = await fetch("/api/v2/population-levels/",
 			{
 				method: "DELETE"
 			}).then(function (res){
@@ -118,7 +118,7 @@
 
 	async function LoadEntries(){
         console.log("Loading entries....");
-        const res = await fetch("/api/v1/population-levels/loadInitialData",
+        const res = await fetch("/api/v2/population-levels/loadInitialData",
 			{
 				method: "GET"
 			}).then(function (res){
