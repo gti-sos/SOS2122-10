@@ -219,10 +219,10 @@ loading
 		<tbody>
 			<tr>
 				<td><input bind:value="{newEntry.country}"></td>
-				<td><input type="number" bind:value="{newEntry.year}"></td>
-				<td><input type="number" bind:value="{newEntry.death_rate}"></td>
-                <td><input type="number" bind:value="{newEntry.life_expectancy_birth}"></td>
-                <td><input type="number" bind:value="{newEntry.birth_rate}"></td>
+				<td><input type="number" min="0" bind:value="{newEntry.year}"></td>
+				<td><input type="number" min="0" bind:value="{newEntry.death_rate}"></td>
+                <td><input type="number" min="0" bind:value="{newEntry.life_expectancy_birth}"></td>
+                <td><input type="number" min="0" bind:value="{newEntry.birth_rate}"></td>
 				<td><Button outline color="primary" on:click="{insertEntry}">
 					Añadir
 					</Button>
