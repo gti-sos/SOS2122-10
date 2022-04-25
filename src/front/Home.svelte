@@ -40,21 +40,21 @@
         -  Enlaces a API's:
     </p>
     <ul>
-        <li><a href="https://sos2122-10.herokuapp.com/api/v1/population-levels/docs">[https://sos2122-10.herokuapp.com/api/v1/population-levels/docs]</a><br>
+        <li><a href="https://sos2122-10.herokuapp.com/api/v2/population-levels/docs">[https://sos2122-10.herokuapp.com/api/v2/population-levels/docs]</a><br>
             <a href="https://sos2122-10.herokuapp.com/#/population-levels">[https://sos2122-10.herokuapp.com/#/population-levels]</a><br>
-            <a href="https://sos2122-10.herokuapp.com/api/v1/population-levels">[https://sos2122-10.herokuapp.com/api/v1/population-levels]</a><br>
+            <a href="https://sos2122-10.herokuapp.com/api/v2/population-levels">[https://sos2122-10.herokuapp.com/api/v2/population-levels]</a><br>
             (developed by <a href="https://github.com/AlejandroMolinosEligio">
             [Alejandro Molinos Eligio]
         </a>)</li>
-        <li><a href="https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs">[https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs]</a><br>
+        <li><a href="https://sos2122-10.herokuapp.com/api/v2/energy-consumptions/docs">[https://sos2122-10.herokuapp.com/api/v2/energy-consumptions/docs]</a><br>
             <a href="https://sos2122-10.herokuapp.com/#/energy-consumptions">[https://sos2122-10.herokuapp.com/#/energy-consumptions]</a><br>
-            <a href="https://sos2122-10.herokuapp.com/api/v1/energy-consumptions">[https://sos2122-10.herokuapp.com/api/v1/energy-consumptions]</a><br>
+            <a href="https://sos2122-10.herokuapp.com/api/v2/energy-consumptions">[https://sos2122-10.herokuapp.com/api/v2/energy-consumptions]</a><br>
             (developed by <a href="https://github.com/gabriellb99">
             [Gabriel López Bellido]
         </a>)</li>
-        <li><a href="https://sos2122-10.herokuapp.com/api/v1/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v1/internet-population/docs]</a><br>
+        <li><a href="https://sos2122-10.herokuapp.com/api/v2/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v2/internet-population/docs]</a><br>
             <a href="https://sos2122-10.herokuapp.com/#/internet-population">[https://sos2122-10.herokuapp.com/#/internet-population]</a><br>
-            <a href="https://sos2122-10.herokuapp.com/api/v1/internet-population">[https://sos2122-10.herokuapp.com/api/v1/internet-population]</a><br>
+            <a href="https://sos2122-10.herokuapp.com/api/v2/internet-population">[https://sos2122-10.herokuapp.com/api/v2/internet-population]</a><br>
             (developed by <a href="https://github.com/germanblanco12">
             [Germán Blanco Pérez Victoria]
         </a>)</li>
