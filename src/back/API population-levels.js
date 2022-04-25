@@ -1,6 +1,7 @@
 const bodyParser = require("body-parser");
 
-const BASE_API_URL_POPULATION_LEVELS = "/api/v1/population-levels";
+const BASE_API_URL_POPULATION_LEVELS = "/api/v2/population-levels";
+const BASE_API_URL_POPULATION_LEVELS_v1 = "/api/v1/population-levels";
 
 //API Alejandro Molinos Eligio
 
@@ -209,7 +210,12 @@ module.exports.register = (app,db) =>{
     
     // Documentos
     
-    app.get(BASE_API_URL_POPULATION_LEVELS+"/docs",(req,res)=>
+    app.get(BASE_API_URL_POPULATION_LEVELS_v1+"/docs",(req,res)=>
+    {
+        res.redirect("https://documenter.getpostman.com/view/20091922/UVsQrixc")
+    })
+
+    app.get(BASE_API_URL_POPULATION_LEVELS_v2+"/docs",(req,res)=>
     {
         res.redirect("https://documenter.getpostman.com/view/20091922/UVsQrixc")
     })
