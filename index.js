@@ -5,7 +5,8 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 8081;
 
-const population_levels_API = require("./src/back/API population-levels.js");
+const population_levels_API = require("./src/back/population-levels/v2/API population-levels.js");
+const population_levels_API_v1 = require("./src/back/population-levels/v1/API population-levels.js");
 const energy_consumptions_API = require("./src/back/energy-consumptions.js");
 const internet_population_API = require("./src/back/internet-population.js");
 const Datastore = require('nedb');
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 // SERVER APIs
 
 population_levels_API.register(app,db_population_levels);
+population_levels_API_v1.register(app,db_population_levels);
 energy_consumptions_API.register(app, db_energy_consumptions);
 internet_population_API.register(app, db_internet_population);
 
