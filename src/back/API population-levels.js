@@ -215,7 +215,7 @@ module.exports.register = (app,db) =>{
         res.redirect("https://documenter.getpostman.com/view/20091922/UVsQrixc")
     })
 
-    app.get(BASE_API_URL_POPULATION_LEVELS_v2+"/docs",(req,res)=>
+    app.get(BASE_API_URL_POPULATION_LEVELS+"/docs",(req,res)=>
     {
         res.redirect("https://documenter.getpostman.com/view/20091922/UVsQrixc")
     })
