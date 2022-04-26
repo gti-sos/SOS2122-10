@@ -83,9 +83,8 @@
 				headers: {
 					"Content-Type": "application/json"
 				}
-			}).then(function (res){
+			}).then(function (){
 					getEntries();
-					//window.alert("Entrada introducida con éxito");
 					errorC = 200.1;
 			}); 
     }
@@ -95,7 +94,7 @@
         const res = await fetch("/api/v2/energy-consumptions/"+countryDelete+"/"+yearDelete,
 			{
 				method: "DELETE"
-			}).then(function (res){
+			}).then(function (){
 				getEntries();
 				errorC = 200.2;
 			});
@@ -106,7 +105,7 @@
         const res = await fetch("/api/v2/energy-consumptions/",
 			{
 				method: "DELETE"
-			}).then(function (res){
+			}).then(function (){
 				getEntriesD();
 				errorC = 200.3;
 			});
@@ -128,22 +127,19 @@
         const res = await fetch("/api/v2/energy-consumptions/loadInitialData",
 			{
 				method: "GET"
-			}).then(function (res){
+			}).then(function (){
 				getEntries();
 				errorC = 200.4;
 			});
     }
 
 	async function Errores(code){
-        
-        let msg;
+    
         if(code == 400){
 			errorC = 400;
-            msg = "La fecha inicio no puede ser menor a la fecha fin"
         }
 		if(code = 404){
 			errorC = 404;
-			msg = "No hay datos para hacer la búsqueda."
 		}
             return;
     }

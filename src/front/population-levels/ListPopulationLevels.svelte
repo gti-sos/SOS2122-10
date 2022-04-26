@@ -193,6 +193,12 @@ loading
 			No hay datos para hacer la búsqueda.
         </UncontrolledAlert>
     {/if}
+	{#if errorC === 1}
+        <UncontrolledAlert  color="danger" >
+			Los campos fecha inicio y fecha fin no pueden estar vacíos.
+        </UncontrolledAlert>
+    {/if}
+
 
 	<Table bordered>
 		<thead>
@@ -207,7 +213,7 @@ loading
 				<td><input type="number" min="2000" bind:value="{to}"></td>
 				<td align="center"><Button outline color="dark" on:click="{()=>{
 					if (from == null || to == null) {
-						window.alert('Los campos fecha inicio y fecha fin no pueden estar vacíos')
+						errorC=1;
 					}else{
 						getEntries();
 					}

@@ -20,6 +20,7 @@
 		"/population-levels/:country/:year" : EditPopulationEntry,
 
 		"/internet-population" : ListInternetPopulation,
+		"/internet-population/:codAct/:country/:year" : ListInternetPopulation,
 		"/internet-population/:country/:year" : EditInternetPopulationEntry,
 
 		"/energy-consumptions" : ListEnergyConsumptions,

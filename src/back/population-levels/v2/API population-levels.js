@@ -1,6 +1,7 @@
 const bodyParser = require("body-parser");
 
 const BASE_API_URL_POPULATION_LEVELS = "/api/v2/population-levels";
+const BASE_API_URL_POPULATION_LEVELS_v1 = "/api/v1/population-levels";
 
 //API Alejandro Molinos Eligio
 
