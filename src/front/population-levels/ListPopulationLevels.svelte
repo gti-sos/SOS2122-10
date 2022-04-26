@@ -98,6 +98,7 @@
 					to = null;
 				}
 				getEntries();
+				offset=0;
 				//Código de Entrada eliminada con éxito
 				errorC = 200.2;
 			});
@@ -114,6 +115,7 @@
 				from = null;
 				to = null;
 				getEntries();
+				offset=0;
 				//Código de Entradas elimidas con éxito
 				errorC = 200.3;
 			});

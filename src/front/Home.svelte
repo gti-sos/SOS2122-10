@@ -4,7 +4,7 @@
     <h2 style="font-weight: bold;">Team</h2>
     <ul>
         <li>
-            -<a href="https://github.com/AlejandroMolinosEligio">
+            - <a href="https://github.com/AlejandroMolinosEligio">
                 [Alejandro Molinos Eligio]
             </a>
         </li>
@@ -34,29 +34,52 @@
     <p style="font-weight: bold;">
         - URL:
     </p>
-    <a href="http://sos2122-10.herokuapp.com">[http://sos2122-10.herokuapp.com]</a>
-    
+    <a href="http://sos2122-10.herokuapp.com/#/info">[http://sos2122-10.herokuapp.com/#/info]</a>
+    <br>
     <p style="font-weight: bold;">
         -  Enlaces a API's:
     </p>
     <ul>
-        <li><a href="https://sos2122-10.herokuapp.com/api/v2/population-levels/docs">[https://sos2122-10.herokuapp.com/api/v2/population-levels/docs]</a><br>
-            <a href="https://sos2122-10.herokuapp.com/#/population-levels">[https://sos2122-10.herokuapp.com/#/population-levels]</a><br>
-            <a href="https://sos2122-10.herokuapp.com/api/v2/population-levels">[https://sos2122-10.herokuapp.com/api/v2/population-levels]</a><br>
+        <li>
+            <ul>
+                <li>Docs:
+                    <ul>
+                        <li>API_V1:<a href="https://sos2122-10.herokuapp.com/api/v1/population-levels/docs">[https://sos2122-10.herokuapp.com/api/v1/population-levels/docs]</a></li>
+                        <li>API_V2:<a href="https://sos2122-10.herokuapp.com/api/v2/population-levels/docs">[https://sos2122-10.herokuapp.com/api/v2/population-levels/docs]</a></li>
+                    </ul>
+                </li>
+                <li>API:
+                    <ul>
+                        <li>API_v1:<a href="https://sos2122-10.herokuapp.com/api/v1/population-levels">[https://sos2122-10.herokuapp.com/api/v1/population-levels]</a></li>
+                        <li>API_v2:<a href="https://sos2122-10.herokuapp.com/api/v2/population-levels">[https://sos2122-10.herokuapp.com/api/v2/population-levels]</a></li>
+                    </ul>
+                </li>
+                <li>Front-end:
+                    <ul>
+                        <li>API_v2:<a href="https://sos2122-10.herokuapp.com/#/population-levels">[https://sos2122-10.herokuapp.com/#/population-levels]</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <br>
             (developed by <a href="https://github.com/AlejandroMolinosEligio">
             [Alejandro Molinos Eligio]
-        </a>)</li>
+            
+        </a></li>
+        <br>
         <li><a href="https://sos2122-10.herokuapp.com/api/v2/energy-consumptions/docs">[https://sos2122-10.herokuapp.com/api/v2/energy-consumptions/docs]</a><br>
             <a href="https://sos2122-10.herokuapp.com/#/energy-consumptions">[https://sos2122-10.herokuapp.com/#/energy-consumptions]</a><br>
             <a href="https://sos2122-10.herokuapp.com/api/v2/energy-consumptions">[https://sos2122-10.herokuapp.com/api/v2/energy-consumptions]</a><br>
             (developed by <a href="https://github.com/gabriellb99">
             [Gabriel López Bellido]
+
         </a>)</li>
+        <br>
         <li><a href="https://sos2122-10.herokuapp.com/api/v2/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v2/internet-population/docs]</a><br>
             <a href="https://sos2122-10.herokuapp.com/#/internet-population">[https://sos2122-10.herokuapp.com/#/internet-population]</a><br>
             <a href="https://sos2122-10.herokuapp.com/api/v2/internet-population">[https://sos2122-10.herokuapp.com/api/v2/internet-population]</a><br>
             (developed by <a href="https://github.com/germanblanco12">
             [Germán Blanco Pérez Victoria]
-        </a>)</li>
+        </a>)
+    <br></li>
     </ul>
 </main>
