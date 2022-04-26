@@ -11,9 +11,15 @@
 - **Repository**: [gti-sos/SOS2122-10](https://github.com/gti-sos/SOS2122-10)
 - **URL**: [http://sos2122-10.herokuapp.com](http://sos2122-10.herokuapp.com)
 -  **Enlaces a API's**:
-    - [https://sos2122-10.herokuapp.com/api/v1/population-levels/docs](https://sos2122-10.herokuapp.com/api/v1/population-levels/docs),
-      [https://sos2122-10.herokuapp.com/#/population-levels](https://sos2122-10.herokuapp.com/#/population-levels)
-      [https://sos2122-10.herokuapp.com/api/v1/population-levels](https://sos2122-10.herokuapp.com/api/v1/population-levels)
+    - - DOCS:
+        - API_v1: [https://sos2122-10.herokuapp.com/api/v1/population-levels/docs](https://sos2122-10.herokuapp.com/api/v1/population-levels/docs)
+        - API_v2: [https://sos2122-10.herokuapp.com/api/v2/population-levels/docs](https://sos2122-10.herokuapp.com/api/v2/population-levels/docs)
+      - API: 
+        - API_v1: [https://sos2122-10.herokuapp.com/api/v1/population-levels](https://sos2122-10.herokuapp.com/api/v1/population-levels)
+        - API_v2: [https://sos2122-10.herokuapp.com/api/v2/population-levels](https://sos2122-10.herokuapp.com/api/v2/population-levels)
+      - Front end:
+        - API_v2: [https://sos2122-10.herokuapp.com/#/population-levels](https://sos2122-10.herokuapp.com/#/population-levels)
+
      (developed by [Alejandro Molinos Eligio](https://github.com/AlejandroMolinosEligio))
 
     - [https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs](https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs),
