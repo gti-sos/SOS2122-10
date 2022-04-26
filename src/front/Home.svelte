@@ -64,15 +64,34 @@
             (developed by <a href="https://github.com/AlejandroMolinosEligio">
             [Alejandro Molinos Eligio]
             
-        </a></li>
-        <br>
-        <li><a href="https://sos2122-10.herokuapp.com/api/v2/energy-consumptions/docs">[https://sos2122-10.herokuapp.com/api/v2/energy-consumptions/docs]</a><br>
-            <a href="https://sos2122-10.herokuapp.com/#/energy-consumptions">[https://sos2122-10.herokuapp.com/#/energy-consumptions]</a><br>
-            <a href="https://sos2122-10.herokuapp.com/api/v2/energy-consumptions">[https://sos2122-10.herokuapp.com/api/v2/energy-consumptions]</a><br>
-            (developed by <a href="https://github.com/gabriellb99">
-            [Gabriel López Bellido]
-
         </a>)</li>
+
+        <br>
+        <li>
+            <ul>
+                <li>DOC:
+                    <ul>
+                        <li>API_V1:<a href="https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs">[https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs]</a></li>
+                        <li>API_V2:<a href="https://sos2122-10.herokuapp.com/api/v2/energy-consumptions/docs">[https://sos2122-10.herokuapp.com/api/v2/energy-consumptions/docs]</a></li>
+                    </ul>
+                </li>
+                <li>API:
+                    <ul>
+                        <li>API_v1:<a href="https://sos2122-10.herokuapp.com/api/v1//energy-consumptions">[https://sos2122-10.herokuapp.com/api/v1//energy-consumptions]</a></li>
+                        <li>API_v2:<a href="https://sos2122-10.herokuapp.com/api/v2//energy-consumptions">[https://sos2122-10.herokuapp.com/api/v2//energy-consumptions]</a></li>
+                    </ul>
+                </li>
+                <li>Front-end:
+                    <ul>
+                        <li>API_v2:<a href="https://sos2122-10.herokuapp.com/#//energy-consumptions">[https://sos2122-10.herokuapp.com/#//energy-consumptions]</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
+            <br>
+            (developed by <a href="https://github.com/gabriellb99">
+            [Gabriel López Bellido]</a>)</li>
+
         <br>
         <li><a href="https://sos2122-10.herokuapp.com/api/v2/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v2/internet-population/docs]</a><br>
             <a href="https://sos2122-10.herokuapp.com/#/internet-population">[https://sos2122-10.herokuapp.com/#/internet-population]</a><br>
