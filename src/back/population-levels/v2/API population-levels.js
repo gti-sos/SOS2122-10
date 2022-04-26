@@ -208,11 +208,6 @@ module.exports.register = (app,db) =>{
     })
     
     // Documentos
-    
-    app.get(BASE_API_URL_POPULATION_LEVELS_v1+"/docs",(req,res)=>
-    {
-        res.redirect("https://documenter.getpostman.com/view/20091922/UVsQrixc")
-    })
 
     app.get(BASE_API_URL_POPULATION_LEVELS+"/docs",(req,res)=>
     {
