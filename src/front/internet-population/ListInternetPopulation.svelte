@@ -1,8 +1,9 @@
 <script>
-
+	export let params = {};
     import { onMount } from 'svelte';
 	import Table from 'sveltestrap/src/Table.svelte';
 	import Button from 'sveltestrap/src/Button.svelte';
+	import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
 
     let entries = [];
 
@@ -13,6 +14,11 @@
 
 	let maxPages = 0;
 	let numEntries;
+
+	let codAct = null;
+	codAct = parseFloat(params.codAct);
+	let errorC = null;
+	console.log(codAct);
 
 	let newEntry = {
 		country: "",
@@ -55,20 +61,10 @@
 				headers: {
 					"Content-Type": "application/json"
 				}
+			}).then(function(){
+					getEntries();
+					errorC = 200.1;
 			});
-		if (res.ok){
-			newEntry = {
-				country: "",
-				year: "",
-				death_rate: "",
-				life_expectancy_birth: "",
-				birth_rate: ""
-			}
-			getEntries();
-			window.alert("Entrada introducida con éxito");
-		}else{
-			Errores(res.status);
-		} 	
     }
 
 	async function BorrarEntry(countryDelete, yearDelete){
@@ -82,7 +78,7 @@
 					to = null;
 				}
 				getEntries();
-				window.alert("Entrada eliminada con éxito");
+				errorC=200.2;
 			});
     }
 
@@ -95,7 +91,7 @@
 				from = null;
 				to = null;
 				getEntries();
-				window.alert("Entradas elimidas con éxito");
+				errorC=200.3;
 			});
     }
 
@@ -106,7 +102,7 @@
 				method: "GET"
 			}).then(function (res){
 				getEntries();
-				window.alert("Entradas cargadas con éxito");
+				errorC=200.4;
 			});
     }
 
@@ -116,15 +112,17 @@
         
         let msg;
         if(code == 400){
+			errorC=400;
             msg = "La fecha inicio no puede ser menor a la fecha fin"
         }
 		if(code = 404){
+			errorC=404;
 			msg = "No hay datos para hacer la búsqueda."
 		}
 		if(code == 409){
+			errorC=409;
             msg = "El dato "+newEntry.country+"/"+newEntry.year+" ya existe"
         }
-        window.alert(msg)
             return;
     }
 
@@ -153,6 +151,47 @@
 loading
 	{:then entries}
 
+	{#if errorC === 200.1}
+        <UncontrolledAlert  color="success" >
+            Entrada insertada con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.2}
+        <UncontrolledAlert  color="success" >
+			Entrada eliminada con éxito.    
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.3}
+        <UncontrolledAlert  color="success" >
+			Entradas eliminadas con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 200.4}
+        <UncontrolledAlert  color="success" >
+			Datos cargados con éxito.
+        </UncontrolledAlert>
+    {/if}
+	{#if codAct === 200.5}
+        <UncontrolledAlert  color="success" >
+			Actualizado con éxito el país {params.country} en el año {params.year}.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 400}
+        <UncontrolledAlert  color="danger" >
+			La fecha inicio no puede ser menor a la fecha fin
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 404}
+        <UncontrolledAlert  color="danger" >
+			No hay datos para hacer la búsqueda.
+        </UncontrolledAlert>
+    {/if}
+	{#if errorC === 1}
+        <UncontrolledAlert  color="danger" >
+			Los campos fecha inicio y fecha fin no pueden estar vacíos.
+        </UncontrolledAlert>
+    {/if}
+
 	<Table bordered>
 		<thead>
 			<tr>
@@ -166,7 +205,7 @@ loading
 				<td><input type="number" min="2000" bind:value="{to}"></td>
 				<td align="center"><Button outline color="dark" on:click="{()=>{
 					if (from == null || to == null) {
-						window.alert('Los campos fecha inicio y fecha fin no pueden estar vacíos')
+						errorC=1;
 					}else{
 						getEntries();
 					}
@@ -217,7 +256,7 @@ loading
                     <td>{entry.internet_users}</td>
                     <td>{entry.urban_population}</td>
 					<td><Button outline color="warning" on:click={function (){
-						window.location.href = `/#/internert-population/${entry.country}/${entry.year}`
+						window.location.href = `/#/internet-population/${entry.country}/${entry.year}`
 					}}>
 						Editar
 					</Button>
