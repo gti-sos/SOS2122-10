@@ -77,13 +77,13 @@
                 </li>
                 <li>API:
                     <ul>
-                        <li>API_v1:<a href="https://sos2122-10.herokuapp.com/api/v1//energy-consumptions">[https://sos2122-10.herokuapp.com/api/v1//energy-consumptions]</a></li>
-                        <li>API_v2:<a href="https://sos2122-10.herokuapp.com/api/v2//energy-consumptions">[https://sos2122-10.herokuapp.com/api/v2//energy-consumptions]</a></li>
+                        <li>API_v1:<a href="https://sos2122-10.herokuapp.com/api/v1/energy-consumptions">[https://sos2122-10.herokuapp.com/api/v1//energy-consumptions]</a></li>
+                        <li>API_v2:<a href="https://sos2122-10.herokuapp.com/api/v2/energy-consumptions">[https://sos2122-10.herokuapp.com/api/v2//energy-consumptions]</a></li>
                     </ul>
                 </li>
                 <li>Front-end:
                     <ul>
-                        <li>API_v2:<a href="https://sos2122-10.herokuapp.com/#//energy-consumptions">[https://sos2122-10.herokuapp.com/#//energy-consumptions]</a></li>
+                        <li>API_v2:<a href="https://sos2122-10.herokuapp.com/#/energy-consumptions">[https://sos2122-10.herokuapp.com/#//energy-consumptions]</a></li>
                     </ul>
                 </li>
                 
