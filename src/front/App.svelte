@@ -23,6 +23,7 @@
 		"/internet-population/:country/:year" : EditInternetPopulationEntry,
 
 		"/energy-consumptions" : ListEnergyConsumptions,
+		"/energy-consumptions/:codAct/:country/:year" : ListEnergyConsumptions,
 		"/energy-consumptions/:country/:year" : EditEntryEnergyConsumptions
 
 	};

@@ -1,10 +1,9 @@
 <script>
-
+	export let params = {};
     import { onMount } from 'svelte';
 	import Table from 'sveltestrap/src/Table.svelte';
 	import Button from 'sveltestrap/src/Button.svelte';
 	import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
-	//import { page } from '$app/stores';
 
     let entries = [];
 
@@ -13,9 +12,12 @@
 	let offset = 0;
 	let limit = 10;
 	let maxPages = 0;
+	let codAct = null;
+	codAct = parseFloat(params.codAct);
 	let errorC = null;
-	/*const isErrorC= $page.url.searchParams.has(errorC);
-    console.log(isErrorC);*/
+	console.log(codAct);
+
+
 
 	let newEntry = {
 		country: "",
@@ -95,7 +97,6 @@
 				method: "DELETE"
 			}).then(function (res){
 				getEntries();
-				//window.alert("Entrada eliminada con éxito");
 				errorC = 200.2;
 			});
     }
@@ -107,7 +108,6 @@
 				method: "DELETE"
 			}).then(function (res){
 				getEntriesD();
-				//window.alert("Entradas elimidas con éxito");
 				errorC = 200.3;
 			});
     }
@@ -130,7 +130,6 @@
 				method: "GET"
 			}).then(function (res){
 				getEntries();
-				//window.alert("Entradas cargadas con éxito");
 				errorC = 200.4;
 			});
     }
@@ -146,7 +145,6 @@
 			errorC = 404;
 			msg = "No hay datos para hacer la búsqueda."
 		}
-        //window.alert(msg)
             return;
     }
 
@@ -189,18 +187,18 @@ loading
 			Datos cargados con éxito.
         </UncontrolledAlert>
     {/if}
-	{#if errorC === 200.5}
+	{#if codAct === 200.5}
         <UncontrolledAlert  color="success" >
-			Dato actualizado con existo.
+			Actualizado con éxito el país {params.country} en el año {params.year}.
         </UncontrolledAlert>
     {/if}
 	{#if errorC === 400}
-        <UncontrolledAlert  color="negative" >
+        <UncontrolledAlert  color="danger" >
 			La fecha inicio no puede ser menor a la fecha fin
         </UncontrolledAlert>
     {/if}
 	{#if errorC === 404}
-        <UncontrolledAlert  color="negative" >
+        <UncontrolledAlert  color="danger" >
 			No hay datos para hacer la búsqueda.
         </UncontrolledAlert>
     {/if}

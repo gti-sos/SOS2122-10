@@ -33,7 +33,7 @@
             updateRenewable = entry.renewable_energy_consumptions;
         }else{
             Errores(res.status, params.country, params.year);
-            pop();
+            
         }
     }
 
@@ -53,12 +53,9 @@
 					"Content-Type": "application/json"
 				}
 			}).then(function (res){
-				//window.alert("Actualizado con éxito");
                 errorC = 200.1;
-                window.location.href = `/#/energy-consumptions`; 
-			});
-            
-            
+                window.location.href = `/#/energy-consumptions/200.5/${params.country}/${params.year}`;
+			});     
     }
 
     async function Errores(code, country, year){
@@ -66,25 +63,19 @@
         let msg;
         if(code == 404){
             errorC = 404;
-            msg = "No existe un dato con el pais " + country + " en el año " + year
         }
         if(code == 400){
             errorC = 400;
-            msg = "La petición no está correctamente formulada"
         }
         if(code == 409){
             errorC = 409;
-            msg = "El dato introducido ya existe"
         }
         if(code == 401){
             errorC = 401;
-            msg = "No autorizado"
         }
         if(code == 405){
             errorC = 405;
-            msg = "Método no permitido"
         }
-        //window.alert(msg)
             return;
     }
 
@@ -97,31 +88,31 @@
         {:then entry}
         {#if errorC === 200.1}
         <UncontrolledAlert  color="success" >
-            Actualizado con éxito.
+            Actualizado con éxito el país {params.country} en el año {params.year}.
         </UncontrolledAlert>
     {/if}
     {#if errorC === 404}
-        <UncontrolledAlert  color="success" >
-            No existe un dato con el pais " + ${params.country} + " en el año " + ${params.year}
+        <UncontrolledAlert  color="danger" >
+            No existe un dato con el país {params.country} en el año {params.year}
         </UncontrolledAlert>
     {/if}
     {#if errorC === 400}
-        <UncontrolledAlert  color="success" >
+        <UncontrolledAlert  color="danger" >
             La petición no está correctamente formulada.
         </UncontrolledAlert>
     {/if}
     {#if errorC === 409}
-    <UncontrolledAlert  color="success" >
+    <UncontrolledAlert  color="danger" >
         El dato introducido ya existe.
     </UncontrolledAlert>
     {/if}
     {#if errorC === 401}
-        <UncontrolledAlert  color="success" >
+        <UncontrolledAlert  color="danger" >
             No autorizado.
         </UncontrolledAlert>
     {/if}
     {#if errorC === 405}
-        <UncontrolledAlert  color="success" >
+        <UncontrolledAlert  color="danger" >
             Método no permitido.
         </UncontrolledAlert>
     {/if}
@@ -145,7 +136,9 @@
                     <td><input bind:value="{updateNonRenewable}"></td>
                     <td><input bind:value="{updateRenewable}"></td>
                     <td><Button outline color="primary" on:click="{
-						EditEntry}">
+                        function(){
+                            errorC = null;
+                            EditEntry()}}">
                         Editar
                         </Button>
                     </td>
@@ -154,6 +147,8 @@
         </Table>
     {/await}
     
-    <Button outline color="secondary" on:click="{pop}">Volver</Button>
+    <Button outline color="secondary" on:click="{function(){
+        window.location.href = `/#/energy-consumptions`
+    }}">Volver</Button>
 
     </main>
