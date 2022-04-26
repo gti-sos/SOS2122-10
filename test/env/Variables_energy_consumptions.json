@@ -10,7 +10,7 @@
 		},
 		{
 			"key": "API_ENERGY",
-			"value": "/api/v1/energy-consumptions",
+			"value": "/api/v2/energy-consumptions",
 			"type": "default",
 			"enabled": true
 		}
