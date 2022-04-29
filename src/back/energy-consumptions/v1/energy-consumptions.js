@@ -185,7 +185,7 @@ module.exports.register = (app, db) => {
     // Documentos
 
     app.get(BASE_API_URL_ENERGY_CONSUMPTIONS + "/docs", (req, res) => {
-        res.redirect("https://documenter.getpostman.com/view/19576654/UVyswasj")
+        res.redirect("https://documenter.getpostman.com/view/19576654/UyrG9tMm")
     })
 
     // GET global y GET por año

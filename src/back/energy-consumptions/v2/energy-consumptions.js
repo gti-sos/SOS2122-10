@@ -64,9 +64,9 @@ var energy_consumptions = [
     , {
         country: "nicaragua",
         year: 2010,
-        percentages_access_elecetricity: 74.5,
-        non_renewable_energy_consumptions: 367,
-        renewable_energy_consumptions: 51.74
+        percentages_access_elecetricity: 78.2,
+        non_renewable_energy_consumptions: 507,
+        renewable_energy_consumptions: 54.44
     }
     , {
         country: "nicaragua",
