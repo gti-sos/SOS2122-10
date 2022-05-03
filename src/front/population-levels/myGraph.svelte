@@ -74,7 +74,9 @@
         
             xAxis: {
                 accessibility: {
-                    rangeDescription: ''
+                    title: {
+                    text: 'Año'
+                }
                 }
             },
         
@@ -85,38 +87,45 @@
             },
         
             plotOptions: {
-                series: {
-                    label: {
-                        connectorAllowed: false
-                    }
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
                 }
             },
         
             series: [{
+                type: 'area',
                 name: 'Tasa de mortalidad',
                 data: deathData
             },
             {
+                type: 'area',
                 name: 'Tasa de natalidad',
                 data: birthData
-            }],
-        
-            responsive: {
-                rules: [{
-                    condition: {
-                        maxWidth: 500
-                    },
-                    chartOptions: {
-                        legend: {
-                            layout: 'horizontal',
-                            align: 'center',
-                            verticalAlign: 'bottom'
-                        }
-                    }
-                }]
-            }
+            }]
         
         });
+
         Highcharts.chart('container2', {
         
             title: {
@@ -131,7 +140,9 @@
         
             xAxis: {
                 accessibility: {
-                    rangeDescription: 'Range: 2010 to 2017'
+                    title: {
+                    text: 'Año'
+                }
                 }
             },
         
@@ -151,6 +162,7 @@
         
             series: [
             {
+                type: 'area',
                 name: 'Life expectancy',
                 data: lifeData
             }],

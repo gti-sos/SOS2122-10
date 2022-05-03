@@ -121,6 +121,11 @@
                 </tr>
             </tbody>
         </Table>
+        <Button outline color="warning" on:click={function (){
+            window.location.href = `/#/population-levels_graph/${params.country}`
+        }}>
+            VER GRÁFICA
+        </Button>
     {/await}
     
     <Button outline color="secondary" on:click="{pop}">Volver</Button>

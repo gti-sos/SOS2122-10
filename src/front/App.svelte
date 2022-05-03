@@ -5,6 +5,7 @@
 	import ListPopulationLevels from "./population-levels/ListPopulationLevels.svelte";
 	import EditPopulationEntry from "./population-levels/EditEntryPopulation.svelte";
 	import GraphPopulationLevels from "./population-levels/myGraph.svelte";
+	
 
 	import ListInternetPopulation from "./internet-population/ListInternetPopulation.svelte";
 	import EditInternetPopulationEntry from "./internet-population/EditEntryInternetPopulation.svelte";
