@@ -4,6 +4,7 @@
 
 	import ListPopulationLevels from "./population-levels/ListPopulationLevels.svelte";
 	import EditPopulationEntry from "./population-levels/EditEntryPopulation.svelte";
+	import GraphPopulationLevels from "./population-levels/myGraph.svelte";
 
 	import ListInternetPopulation from "./internet-population/ListInternetPopulation.svelte";
 	import EditInternetPopulationEntry from "./internet-population/EditEntryInternetPopulation.svelte";
@@ -18,6 +19,7 @@
 
 		"/population-levels" : ListPopulationLevels,
 		"/population-levels/:country/:year" : EditPopulationEntry,
+		"/population-levels_graph/:country": GraphPopulationLevels,
 
 		"/internet-population" : ListInternetPopulation,
 		"/internet-population/:codAct/:country/:year" : ListInternetPopulation,
