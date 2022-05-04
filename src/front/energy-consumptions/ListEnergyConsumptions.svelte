@@ -238,9 +238,9 @@ loading
 			<tr>
 				<td><input bind:value="{newEntry.country}"></td>
 				<td><input type="number" bind:value="{newEntry.year}"></td>
-				<td><input bind:value="{newEntry.percentages_access_elecetricity}"></td>
-                <td><input bind:value="{newEntry.non_renewable_energy_consumptions}"></td>
-                <td><input bind:value="{newEntry.renewable_energy_consumptions}"></td>
+				<td><input type="number" bind:value="{newEntry.percentages_access_elecetricity}"></td>
+                <td><input type="number" bind:value="{newEntry.non_renewable_energy_consumptions}"></td>
+                <td><input type="number" bind:value="{newEntry.renewable_energy_consumptions}"></td>
 				<td><Button outline color="primary" on:click="{insertEntry}">
 					Añadir
 					</Button>

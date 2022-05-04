@@ -124,7 +124,12 @@
         <Button outline color="warning" on:click={function (){
             window.location.href = `/#/population-levels_graph/${params.country}`
         }}>
-            VER GRÁFICA
+            VER GRÁFICA Highcharts
+        </Button>
+        <Button outline color="warning" on:click={function (){
+            window.location.href = `/#/population-levels_graph_billboard/${params.country}`
+        }}>
+            VER GRÁFICA billboard
         </Button>
     {/await}
     

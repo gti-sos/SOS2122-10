@@ -34,7 +34,8 @@
     <p style="font-weight: bold;">
         - URL:
     </p>
-    <a href="http://sos2122-10.herokuapp.com/#/info">[http://sos2122-10.herokuapp.com/#/info]</a>
+    <a href="http://sos2122-10.herokuapp.com/#/info">[http://sos2122-10.herokuapp.com]</a>
+    <a href="http://sos2122-10.herokuapp.com/#/commonGraph/null">[http://sos2122-10.herokuapp.com/#/commonGraph]</a>
     <br>
     <p style="font-weight: bold;">
         -  Enlaces a API's:
