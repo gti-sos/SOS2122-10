@@ -4,8 +4,11 @@
     export let params = {};
     import Button from 'sveltestrap/src/Button.svelte';
     import {pop} from "svelte-spa-router";
+    import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
     
     const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    let errorC = null;
     
     //Pais
     let country = params.country;
@@ -70,7 +73,7 @@
             await delay(1000);
             loadGraph();
         }else{
-            window.alert('El país introducido no tiene registros para alguna de las APIS');
+            errorC = 404;
             birthData = [];
             deathData = [];
             lifeData = [];
@@ -242,6 +245,12 @@
     </svelte:head>
     
     <main>
+
+        {#if errorC === 404}
+        <UncontrolledAlert  color="danger" >
+            El país introducido no tiene registros para alguna de las APIS.
+        </UncontrolledAlert>
+        {/if}
         <br>
         
         <div align="center">
