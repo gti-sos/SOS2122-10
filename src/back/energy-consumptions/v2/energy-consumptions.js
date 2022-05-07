@@ -65,7 +65,7 @@ var energy_consumptions = [
         country: "nicaragua",
         year: 2010,
         percentages_access_elecetricity: 78.2,
-        non_renewable_energy_consumptions: 507,
+        non_renewable_energy_consumptions: 45.56,
         renewable_energy_consumptions: 54.44
     }
     , {
@@ -297,7 +297,7 @@ module.exports.register = (app, db) => {
             return;
         }
 
-        db.find({}, function (err, filteredList) {
+        db.find({}).sort({year: 1}).exec(function(err, filteredList) {
 
             if (err) {
                 res.sendStatus(500, "ERROR EN CLIENTE");

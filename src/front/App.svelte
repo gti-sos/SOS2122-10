@@ -14,6 +14,7 @@
 
 	import ListEnergyConsumptions from "./energy-consumptions/ListEnergyConsumptions.svelte";
 	import EditEntryEnergyConsumptions from "./energy-consumptions/EditEntryEnergyConsumptions.svelte";
+	import GraphData from "./energy-consumptions/GraphData.svelte";
 
 
 	const routes = {
@@ -32,7 +33,9 @@
 
 		"/energy-consumptions" : ListEnergyConsumptions,
 		"/energy-consumptions/:codAct/:country/:year" : ListEnergyConsumptions,
+		"/energy-consumptions/graph/:country" : GraphData,
 		"/energy-consumptions/:country/:year" : EditEntryEnergyConsumptions
+		
 
 	};
 
