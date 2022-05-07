@@ -62,6 +62,9 @@
         
         Highcharts.chart('container', {
         
+            chart: {
+                zoomType: 'x'
+            },
             title: {
                 text: `Tasa de natalidad y mortalidad en ${params.country} por cada 1000 personas`
             },
@@ -73,6 +76,7 @@
             },
         
             xAxis: {
+                type: 'linear',
                 accessibility: {
                     title: {
                     text: 'Año'
@@ -128,6 +132,9 @@
 
         Highcharts.chart('container2', {
         
+            chart: {
+                zoomType: 'x'
+            },
             title: {
                 text: `Esperanza de vida media al nacer en  ${params.country}`
             },
@@ -139,6 +146,7 @@
             },
         
             xAxis: {
+                type: 'linear',
                 accessibility: {
                     title: {
                     text: 'Año'
