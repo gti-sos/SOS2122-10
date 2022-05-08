@@ -11,6 +11,8 @@
 
 	import ListInternetPopulation from "./internet-population/ListInternetPopulation.svelte";
 	import EditInternetPopulationEntry from "./internet-population/EditEntryInternetPopulation.svelte";
+	import GraphNegatives from "./internet-population/GraphNegatives.svelte";
+	import GraphCombined from "./internet-population/GraphCombined.svelte";
 
 	import ListEnergyConsumptions from "./energy-consumptions/ListEnergyConsumptions.svelte";
 	import EditEntryEnergyConsumptions from "./energy-consumptions/EditEntryEnergyConsumptions.svelte";
@@ -30,6 +32,8 @@
 
 		"/internet-population" : ListInternetPopulation,
 		"/internet-population/:codAct/:country/:year" : ListInternetPopulation,
+		"/internet-population/graph/:country" : GraphNegatives,
+		"/internet-population/graphC/:country" : GraphCombined,
 		"/internet-population/:country/:year" : EditInternetPopulationEntry,
 
 		"/energy-consumptions" : ListEnergyConsumptions,

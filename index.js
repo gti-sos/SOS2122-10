@@ -9,7 +9,7 @@ const population_levels_API = require("./src/back/population-levels/v2/API popul
 const population_levels_API_v1 = require("./src/back/population-levels/v1/API population-levels.js");
 const energy_consumptions_API = require("./src/back/energy-consumptions/v2/energy-consumptions.js");
 const energy_consumptions_API_v1 = require("./src/back/energy-consumptions/v1/energy-consumptions.js");
-const internet_population_API = require("./src/back/internet-population.js");
+const internet_population_API = require("./src/back/internet-population/v2/internet-population.js");
 const Datastore = require('nedb');
 
 //BASE DE DATOS

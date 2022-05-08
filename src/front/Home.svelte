@@ -94,12 +94,28 @@
             [Gabriel López Bellido]</a>)</li>
 
         <br>
-        <li><a href="https://sos2122-10.herokuapp.com/api/v2/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v2/internet-population/docs]</a><br>
-            <a href="https://sos2122-10.herokuapp.com/#/internet-population">[https://sos2122-10.herokuapp.com/#/internet-population]</a><br>
-            <a href="https://sos2122-10.herokuapp.com/api/v2/internet-population">[https://sos2122-10.herokuapp.com/api/v2/internet-population]</a><br>
+        <li>
+            <ul>
+                <li>DOC:
+                    <ul>
+                        <li>API_V1:<a href="https://sos2122-10.herokuapp.com/api/v1/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v2/internet-population/docs]</a></li>
+                        <li>API_V2:<a href="https://sos2122-10.herokuapp.com/api/v2/internet-population/docs">[https://sos2122-10.herokuapp.com/api/v2/internet-population/docs]</a></li>
+                    </ul>
+                </li>
+                <li>API:
+                    <ul>
+                        <li>API_V1:<a href="https://sos2122-10.herokuapp.com/api/v1/internet-population">[https://sos2122-10.herokuapp.com/api/v2/internet-population]</a></li>
+                        <li>API_V2:<a href="https://sos2122-10.herokuapp.com/api/v2/internet-population">[https://sos2122-10.herokuapp.com/api/v2/internet-population]</a></li>
+                    </ul>
+                </li>
+                <li>Front-end:
+                    <ul>
+                        <li> <a href="https://sos2122-10.herokuapp.com/#/internet-population">[https://sos2122-10.herokuapp.com/#/internet-population]</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <br>
             (developed by <a href="https://github.com/germanblanco12">
-            [Germán Blanco Pérez Victoria]
-        </a>)
-    <br></li>
+            [Germán Blanco Pérez Victoria]</a>)</li>
     </ul>
 </main>
