@@ -7,8 +7,8 @@
 
 	let entries = [];
 
-	let from = null;
-	let to = null;
+	let from = 0;
+	let to = 2022;
 	let offset = 0;
 	let limit = 10;
 	let maxPages = 0;
@@ -25,44 +25,16 @@
 		renewable_energy_consumptions: "",
 	};
 
-	onMount(getEntries);
-
 	async function getEntries() {
 		console.log("Fetching entries....");
 		let cadena = `/api/v2/energy-consumptions?`;
-		if (from === null) {
-			from = 0;
-			cadena = cadena + `from=${from}&&`;
-			if (to === null) {
-				to = 0;
-				const res = await fetch(`/api/v2/energy-consumptions`);
-				const json = await res.json();
-				for (let i = 0; i < json.length; i++) {
-					if (to < json[i].year) {
-						to = json[i].year;
-					}
-				}
-				cadena = cadena + `to=${to}&&`;
-			} else {
-				cadena = cadena + `to=${to}&&`;
-			}
-		} else {
-			cadena = cadena + `from=${from}&&`;
-			if (to === null) {
-				to = 0;
-				const res = await fetch(`/api/v2/energy-consumptions`);
-				const json = await res.json();
-				for (let i = 0; i < json.length; i++) {
-					if (to < json[i].year) {
-						to = json[i].year;
-					}
-				}
-				cadena = cadena + `to=${to}&&`;
-			} else {
-				cadena = cadena + `to=${to}&&`;
-			}
+		if (from != null) {
+			cadena = cadena + `from=${from}&&`
 		}
-
+		if (to != null) {
+			cadena = cadena + `to=${to}&&`
+		}
+		console.log(cadena);
 		const res = await fetch(cadena);
 		if (res.ok) {
 			let cadena2 = cadena + `limit=${limit}&&offset=${offset * 10}`;
@@ -160,6 +132,8 @@
 			maxPages = maxPages - 1;
 		}
 	}
+
+	onMount(getEntries);
 </script>
 
 <main>
@@ -225,8 +199,8 @@
 							outline
 							color="info"
 							on:click={() => {
-								from = null;
-								to = null;
+								from = 0;
+								to = 2022;
 								getEntries();
 							}}
 						>
