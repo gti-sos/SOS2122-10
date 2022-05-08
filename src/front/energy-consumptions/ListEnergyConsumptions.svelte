@@ -29,10 +29,10 @@
 		console.log("Fetching entries....");
 		let cadena = `/api/v2/energy-consumptions?`;
 		if (from != null) {
-			cadena = cadena + `from=${from}&&`
+			cadena = cadena + `from=${from}&&`;
 		}
 		if (to != null) {
-			cadena = cadena + `to=${to}&&`
+			cadena = cadena + `to=${to}&&`;
 		}
 		console.log(cadena);
 		const res = await fetch(cadena);
@@ -189,7 +189,7 @@
 				<tr>
 					<td><input type="number" bind:value={from} /></td>
 					<td><input type="number" bind:value={to} /></td>
-					<td
+					<td align="center"
 						><Button outline color="primary" on:click={getEntries}
 							>Buscar</Button
 						></td
@@ -243,7 +243,7 @@
 							bind:value={newEntry.renewable_energy_consumptions}
 						/></td
 					>
-					<td
+					<td align="center"
 						><Button outline color="primary" on:click={insertEntry}>
 							Añadir
 						</Button>
@@ -256,7 +256,7 @@
 						<td>{entry.percentages_access_elecetricity}</td>
 						<td>{entry.non_renewable_energy_consumptions}</td>
 						<td>{entry.renewable_energy_consumptions}</td>
-						<td
+						<td align="center"
 							><Button
 								outline
 								color="success"
@@ -264,7 +264,16 @@
 									window.location.href = `/#/energy-consumptions/graph/${entry.country}`;
 								}}
 							>
-								Gráfica
+								Gráfica 1
+							</Button>
+							<Button
+								outline
+								color="success"
+								on:click={function () {
+									window.location.href = `/#/energy-consumptions/higraph/${entry.country}`;
+								}}
+							>
+								Gráfica 2
 							</Button>
 						</td><td
 							><Button

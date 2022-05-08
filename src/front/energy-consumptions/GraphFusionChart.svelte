@@ -54,7 +54,6 @@
                 renewable = [];
             }
             await delay(1000);
-            console.log(categorias);
             dataSource = {
                 chart: {
                     caption: "Consumo de Energía Renovable y no Renovable",
@@ -110,7 +109,7 @@
 
 {#if errorC === 404}
 <UncontrolledAlert  color="danger" >
-    El país introducido no tiene registros para alguna de las APIS.
+    El país introducido no tiene registros.
 </UncontrolledAlert>
 {/if}
 
