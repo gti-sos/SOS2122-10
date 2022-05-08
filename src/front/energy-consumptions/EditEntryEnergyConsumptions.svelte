@@ -132,9 +132,9 @@
                 <tr>
                     <td>{updatedCountry}</td>
                     <td>{updatedYear}</td>
-                    <td><input bind:value="{updatedElectricity}"></td>
-                    <td><input bind:value="{updateNonRenewable}"></td>
-                    <td><input bind:value="{updateRenewable}"></td>
+                    <td><input type="number" bind:value="{updatedElectricity}"></td>
+                    <td><input type="number" bind:value="{updateNonRenewable}"></td>
+                    <td><input type="number" bind:value="{updateRenewable}"></td>
                     <td><Button outline color="primary" on:click="{
                         function(){
                             errorC = null;
