@@ -24,12 +24,13 @@
             const json = await res.json();
             for(let i = 0; i<json.length; i++){
 
-                populationData.push({y: json[i].population_growth, label: json[i].year});
+                populationData.push({ y: json[i].population_growth, label: json[i].year });
 
-                internetData.push({y: json[i].internet_users, label: json[i].year});
+                internetData.push({ y: json[i].internet_users, label: json[i].year });
 
-                urbanData.push({y: json[i].urban_population, label: json[i].year});
+                urbanData.push({ y: json[i].urban_population, label: json[i].year });
             }
+            console.log(internetData);
             console.log(json);
             if(country==null){
                 populationData = [];
@@ -72,18 +73,16 @@ async function loadGraph(){
 		showInLegend: true,
 		name: "internet users",
 		color: "red",
-		dataPoints: [
-			internetData
-		]
+		dataPoints: internetData
+	
 	},
 	{
 		type: "bar",
 		showInLegend: true,
 		name: "urban population",
 		color: "blue",
-		dataPoints: [
+		dataPoints: 
 			urbanData
-		]
 	}]
 });
 chart.render();
@@ -91,7 +90,6 @@ chart.render();
 function toolTipFormatter(e) {
 	var str = "";
 	var total = 0 ;
-	var str3;
 	var str2 ;
 	for (var i = 0; i < e.entries.length; i++){
 		var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "</strong> <br/>" ;
@@ -99,8 +97,7 @@ function toolTipFormatter(e) {
 		str = str.concat(str1);
 	}
 	str2 = "<strong>" + e.entries[0].dataPoint.label + "</strong> <br/>";
-	str3 = "<span style = \"color:Tomato\">Total: </span><strong>" + total + "</strong><br/>";
-	return (str2.concat(str)).concat(str3);
+	return (str2.concat(str));
 }
 
 function toggleDataSeries(e) {
@@ -128,7 +125,7 @@ onMount(getData);
         <div align="center">
             <input type="text" bind:value="{country}">
             <Button outline color="info" on:click="{()=>{
-                window.location.href = `/#/internet-population/higraph/${country}`;
+                window.location.href = `/#/internet-population/graph/${country}`;
                 location.reload();
             }}">
             Buscar
@@ -137,7 +134,7 @@ onMount(getData);
         <br>
         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         <br><br>
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
         <br>
         <Button outline color="dark" on:click="{()=>{
             pop();
