@@ -44,42 +44,50 @@
                 lifeData = [];
             }
             country = null;
-            await delay(1000);
+            await delay(3000);
             loadGraph();
         }else{
             window.alert('El país introducido no tiene registros');
             birthData = [];
             deathData = [];
             lifeData = [];
-            await delay(1000);
+            await delay(3000);
             loadGraph();
         }
     }
     
     async function loadGraph(){
         var chart = bb.generate({
-            bindto: "#chart",
+            bindto: "#bubbleChart",
             data: {
-                type: "line",
+                type: "bubble",
+                labels:true,
                 x: "x",
                 columns: [
                     ejeX,
                     birthData,
                     deathData
                 ]
-            }
+            },
+            bubble: {
+                maxR: 50
+            },
         });
 
         var chart2 = bb.generate({
             bindto: "#chart2",
             data: {
-                type: "line",
+                type: "bubble",
+                labels:true,
                 x: "x",
                 columns: [
                     ejeX,
                     lifeData
                 ]
-            }
+            },
+            bubble: {
+                maxR: 50
+            },
         });
     }
     
@@ -108,7 +116,7 @@
             </Button>
         </div>
         <br>
-        <div id="chart" align="center"></div>
+        <div id="bubbleChart" align="center"></div>
         <br>
         <div id="chart2"></div>
         <Button outline color="dark" on:click="{()=>{
