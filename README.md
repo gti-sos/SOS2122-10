@@ -39,7 +39,13 @@
       
      
 
-    - [https://sos2122-10.herokuapp.com/api/v1/internet-population/docs](https://sos2122-10.herokuapp.com/api/v1/internet-population/docs),
-    [https://sos2122-10.herokuapp.com/#/internet-population](https://sos2122-10.herokuapp.com/#/internet-population)
-    [https://sos2122-10.herokuapp.com/api/v1/internet-population](https://sos2122-10.herokuapp.com/api/v1/internet-population)
+    - - DOCS:
+        - API_v1: [https://sos2122-10.herokuapp.com/api/v1/internet-population/docs](https://sos2122-10.herokuapp.com/api/v1/internet-population/docs)
+        - API_v2: [https://sos2122-10.herokuapp.com/api/v2/internet-population/docs](https://sos2122-10.herokuapp.com/api/v2/internet-population/docs)
+      - API: 
+        - API_v1: [https://sos2122-10.herokuapp.com/api/v1/internet-population](https://sos2122-10.herokuapp.com/api/v1/internet-population)
+        - API_v2: [https://sos2122-10.herokuapp.com/api/v2/internet-population](https://sos2122-10.herokuapp.com/api/v2/internet-population)
+      - Front end:
+        - API_v2: [https://sos2122-10.herokuapp.com/#/internet-population](https://sos2122-10.herokuapp.com/#/internet-population)
+        
     (developed by [Germán Blanco Pérez Victoria](https://github.com/germanblanco12))

@@ -23,20 +23,12 @@
         if (res.ok) {
             const json = await res.json();
             for(let i = 0; i<json.length; i++){
-                let aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].population_growth);
-                populationData.push(aux);
 
-                aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].internet_users);
-                internetData.push(aux);
-                
-                aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].urban_population);
-                urbanData.push(aux);
+                populationData.push({y: json[i].population_growth, label: json[i].year});
+
+                internetData.push({y: json[i].internet_users, label: json[i].year});
+
+                urbanData.push({y: json[i].urban_population, label: json[i].year});
             }
             console.log(json);
             if(country==null){
@@ -58,58 +50,76 @@
 }
 
 async function loadGraph(){
-    Highcharts.chart('container', {
+    var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title:{
+		text: "Relación entre usuarios de internet y población urbana"
+	},
+	axisY: {
+		title: "years",
+		includeZero: true
+	},
+	legend: {
+		cursor:"pointer",
+		itemclick : toggleDataSeries
+	},
+	toolTip: {
+		shared: true,
+		content: toolTipFormatter
+	},
+	data: [{
+		type: "bar",
+		showInLegend: true,
+		name: "internet users",
+		color: "red",
+		dataPoints: [
+			internetData
+		]
+	},
+	{
+		type: "bar",
+		showInLegend: true,
+		name: "urban population",
+		color: "blue",
+		dataPoints: [
+			urbanData
+		]
+	}]
+});
+chart.render();
 
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: `Usuarios de internet y población urbana en ${params.country}`
-    },
-    xAxis: {
-        categories: ['internet users', 'urban population']
-    },
-    credits: {
-        enabled: false
-    },
-    series: [{
-        name: 'Usuarios de internet',
-        data: internetData
-    }, {
-        name: 'Población urbana',
-        data: urbanData
-    }]
-    });
+function toolTipFormatter(e) {
+	var str = "";
+	var total = 0 ;
+	var str3;
+	var str2 ;
+	for (var i = 0; i < e.entries.length; i++){
+		var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "</strong> <br/>" ;
+		total = e.entries[i].dataPoint.y + total;
+		str = str.concat(str1);
+	}
+	str2 = "<strong>" + e.entries[0].dataPoint.label + "</strong> <br/>";
+	str3 = "<span style = \"color:Tomato\">Total: </span><strong>" + total + "</strong><br/>";
+	return (str2.concat(str)).concat(str3);
+}
 
-    Highcharts.chart('container2', {
+function toggleDataSeries(e) {
+	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
 
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: `Crecimiento de población en ${params.country}`
-    },
-    xAxis: {
-        categories: ['Population growth']
-    },
-    credits: {
-        enabled: false
-    },
-    series: [{
-        name: 'Crecimiento de población',
-        data: populationData
-    }]
-    });
 }
 
 onMount(getData);
 
 </script>
 <svelte:head>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </svelte:head>
 
 <main>
@@ -125,13 +135,9 @@ onMount(getData);
             </Button>
         </div>
         <br>
-        <figure class="highcharts-figure">
-            <div id="container"></div>
-        </figure>
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         <br><br>
-        <figure class="highcharts-figure">
-            <div id="container2"></div>
-        </figure>
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         <br>
         <Button outline color="dark" on:click="{()=>{
             pop();
