@@ -153,6 +153,13 @@ var energy_consumptions = [
         non_renewable_energy_consumptions: 84.68,
         renewable_energy_consumptions: 15.32
     }
+    , {
+        country: "spain",
+        year: 2012,
+        percentages_access_elecetricity: 100,
+        non_renewable_energy_consumptions: 84.20,
+        renewable_energy_consumptions: 15.80
+    }
 ]
 
 /*

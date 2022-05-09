@@ -24,10 +24,20 @@
 
      (developed by [Alejandro Molinos Eligio](https://github.com/AlejandroMolinosEligio))
 
-    - [https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs](https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs),
-      [https://sos2122-10.herokuapp.com/#/energy-consumptions](https://sos2122-10.herokuapp.com/#/energy-consumptions),
-      [https://sos2122-10.herokuapp.com/api/v1/energy-consumptions](https://sos2122-10.herokuapp.com/api/v1/energy-consumptions)
+    
+    - - DOCS:
+        - API_v1: [https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs](https://sos2122-10.herokuapp.com/api/v1/energy-consumptions/docs)
+        - API_v2: [https://sos2122-10.herokuapp.com/api/v2/energy-consumptions/docs](https://sos2122-10.herokuapp.com/api/v2/energy-consumptions/docs)
+      - API: 
+        - API_v1: [https://sos2122-10.herokuapp.com/api/v1/energy-consumptions](https://sos2122-10.herokuapp.com/api/v1/energy-consumptions)
+        - API_v2: [https://sos2122-10.herokuapp.com/api/v2/energy-consumptions](https://sos2122-10.herokuapp.com/api/v2/energy-consumptions)
+      - Front end:
+        - API_v2: [https://sos2122-10.herokuapp.com/#/energy-consumptions](https://sos2122-10.herokuapp.com/#/energy-consumptions)
+
      (developed by [Gabriel López Bellido](https://github.com/gabriellb99))
+      ,
+      
+     
 
     - [https://sos2122-10.herokuapp.com/api/v1/internet-population/docs](https://sos2122-10.herokuapp.com/api/v1/internet-population/docs),
     [https://sos2122-10.herokuapp.com/#/internet-population](https://sos2122-10.herokuapp.com/#/internet-population)
