@@ -111,9 +111,9 @@
                 <tr>
                     <td>{updatedCountry}</td>
                     <td>{updatedYear}</td>
-                    <td><input bind:value="{updatedDeathRate}"></td>
-                    <td><input bind:value="{updatedLifeExp}"></td>
-                    <td><input bind:value="{updatedBirthRate}"></td>
+                    <td><input type="number" bind:value="{updatedDeathRate}"></td>
+                    <td><input type="number" bind:value="{updatedLifeExp}"></td>
+                    <td><input type="number" bind:value="{updatedBirthRate}"></td>
                     <td><Button outline color="success" on:click="{EditEntry}">
                         Editar
                         </Button>
