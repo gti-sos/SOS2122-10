@@ -77,7 +77,7 @@
         Highcharts.chart('container', {
         
             chart: {
-                type:'column'
+                type:'area'
             },
             title: {
                 text: `Gráfica conjunta `
@@ -105,9 +105,17 @@
             },
         
             plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
+                area: {
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
                 }
             },
         
