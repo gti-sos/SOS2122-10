@@ -5,6 +5,7 @@
     import Button from 'sveltestrap/src/Button.svelte';
     import {pop} from "svelte-spa-router";
     import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
+
     const delay = ms => new Promise(res => setTimeout(res, ms));
     
     let errorC = 0;
@@ -16,6 +17,7 @@
 
     async function getData(){
 
+        await delay(2000)
         let res;
 
         if(country==null){
@@ -74,8 +76,6 @@
                 maxR: 50
             },
         });
-
-        chart.load();
 
         var chart2 = bb.generate({
             bindto: "#chart2",
