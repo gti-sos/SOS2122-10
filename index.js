@@ -1,6 +1,7 @@
 const cool = require("cool-ascii-faces");
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 8081;
@@ -21,7 +22,7 @@ db_energy_consumptions = new Datastore();
 db_energy_consumptions_v1 = new Datastore();
 
 app.use(bodyParser.json());
-
+app.use(cors());
 
 // SERVER APIs
 
