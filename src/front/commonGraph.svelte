@@ -36,6 +36,9 @@
         let res_population;
         let res_energy;
         let res_internet;
+        await fetch(`/api/v2/population-levels/loadInitialData`);
+        await fetch(`/api/v2/energy-consumptions/loadInitialData`);
+        await fetch(`/api/v2/internet-population/loadInitialData`);
 
         if(country==null){
             res_population = await fetch(`/api/v2/population-levels`);
