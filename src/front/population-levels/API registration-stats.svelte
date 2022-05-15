@@ -24,7 +24,7 @@
         let res_population;
         let res_registrations;
         res_population = await fetch(`/api/v2/population-levels`);
-        res_registrations = await fetch(`https://sos2122-31.herokuapp.com/api/v2/registration-stats`);
+        res_registrations = await fetch(`/remoteApiRegistration`);
 
         if (res_population.ok && res_registrations.ok) {
             const json = await res_population.json();
