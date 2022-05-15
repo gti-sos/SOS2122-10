@@ -1,6 +1,5 @@
 <script>
     import { onMount } from "svelte";
-    export let params = {};
     import Button from "sveltestrap/src/Button.svelte";
     import { pop } from "svelte-spa-router";
     import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
@@ -11,38 +10,46 @@
     let total = [];
     let nrenewable = [];
     let renewable = [];
+    let co2_tot = [];
+    let co2_kg = [];
+    let co2_tpc = [];
     let errorC = null;
-    let country = params.country;
 
     async function getData() {
-        let res;
+        let resE;
+        let resC;
 
-        if (country == null) {
-            res = await fetch(`/api/v2/energy-consumptions`);
-        } else {
-            res = await fetch(`/api/v2/energy-consumptions/${country}`);
-        }
-        if (res.ok) {
-            const json = await res.json();
-            for (let i = 0; i < json.length; i++) {
-                categorias.push(json[i].year.toString());
-                total.push(json[i].percentages_access_elecetricity);
-                nrenewable.push(json[i].non_renewable_energy_consumptions);
-                renewable.push(json[i].renewable_energy_consumptions);
+        resE =  await fetch(`/api/v2/energy-consumptions`);
+        resC = await fetch(`/remoteApiCo2`);
+
+        if (resE.ok && resC.ok) {
+            const jsonE = await resE.json();
+            const jsonC = await resC.json();
+            let maxData = 5;
+            for (let i = 0; i < maxData; i++) {
+                categorias.push(jsonE[i].year.toString() + `-` + jsonE[i].country);
+                total.push(jsonE[i].percentages_access_elecetricity);
+                nrenewable.push(jsonE[i].non_renewable_energy_consumptions);
+                renewable.push(jsonE[i].renewable_energy_consumptions);
+                co2_tot.push(0);
+                co2_kg.push(0);
+                co2_tpc.push(0);
             }
-            if (country == null) {
-                categorias = [];
-                total = [];
-                nrenewable = [];
-                renewable = [];
+
+            for (let i = 0; i < maxData; i++) {
+                categorias.push(jsonC[i].year.toString() + `-` + jsonC[i].country);
+                total.push(0);
+                nrenewable.push(0);
+                renewable.push(0);
+                co2_tot.push(jsonC[i].co2_tot);
+                co2_kg.push(jsonC[i].co2_kg);
+                co2_tpc.push(jsonC[i].co2_tpc);
             }
+
             await delay(1000);
             loadGraph();
-        } else {
+        }else{
             errorC = 404;
-            total = [];
-            nrenewable = [];
-            renewable = [];
             await delay(1000);
             loadGraph();
         }
@@ -51,22 +58,22 @@
     async function loadGraph() {
         Highcharts.chart("container", {
             chart: {
-                type: "column",
+                type: "areaspline",
             },
             title: {
-                text: "Gráfica sobre el consumo de la electricidad",
+                text: "Gráficas Conjunta con API Co2",
             },
             xAxis: {
                 categories: categorias,
                 crosshair: true,
                 title: {
-                    text: "Año",
+                    text: "Año-País",
                 },
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: "Porcentage",
+                    text: "Porcentage y total",
                 },
             },
             tooltip: {
@@ -74,7 +81,7 @@
                     '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat:
                     '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
+                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
                 footerFormat: "</table>",
                 shared: true,
                 useHTML: true,
@@ -98,6 +105,21 @@
                     name: "Energía Renovable Consumida",
                     data: renewable,
                 },
+
+                {
+                    name: "Co2 por tpc",
+                    data: co2_tpc,
+                },
+
+                {
+                    name: "Co2 por kg",
+                    data: co2_kg,
+                },
+
+                {
+                    name: "Total Co2",
+                    data: co2_tot,
+                },
             ],
         });
     }
@@ -115,23 +137,11 @@
 <main>
     {#if errorC === 404}
         <UncontrolledAlert color="danger">
-            El país introducido no tiene registros.
+            Algunos datos no se obtuvieron correctamente.
         </UncontrolledAlert>
     {/if}
     <br />
-    <h1 align="center">Gráficas de {params.country}</h1>
-    <div align="center">
-        <input type="text" bind:value={country} />
-        <Button
-            outline
-            color="info"
-            on:click={() => {
-                window.location.href = `/#/energy-consumptions/higraph/${country}`;
-                location.reload();
-            }}
-        >
-            Buscar
-        </Button>
+    <div align="left">
         <Button outline color="warning" on:click="{()=>{
             pop();
         }}">

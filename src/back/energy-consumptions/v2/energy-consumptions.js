@@ -371,7 +371,7 @@ module.exports.register = (app, db) => {
         var country = req.params.country
         var year = req.params.year
 
-        db.find({}, function (err, filteredList) {
+        db.find({}).sort({year: 1}).exec(function(err, filteredList) {
 
             if (err) {
                 res.sendStatus(500, "ERROR EN CLIENTE");

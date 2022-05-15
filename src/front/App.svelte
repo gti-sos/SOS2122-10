@@ -21,6 +21,7 @@
 	import EditEntryEnergyConsumptions from "./energy-consumptions/EditEntryEnergyConsumptions.svelte";
 	import GraphFusion from "./energy-consumptions/GraphFusionChart.svelte";
 	import GraphHighcharts from "./energy-consumptions/GraphHighcharts.svelte";
+	import GraphCo2 from "./energy-consumptions/GraphApiCo2.svelte";
 
 
 	const routes = {
@@ -46,6 +47,7 @@
 		"/energy-consumptions/graph/:country" : GraphFusion,
 		"/energy-consumptions/higraph/:country" : GraphHighcharts,
 		"/energy-consumptions/:country/:year" : EditEntryEnergyConsumptions,
+		"/energy-consumptions/graphCo2" : GraphCo2,
 		
 
 	};
@@ -106,7 +108,11 @@
 			<Dropdown >
 				<DropdownToggle nav caret> Gráficas Consumo de energía</DropdownToggle>
 				<DropdownMenu end>
-				  <DropdownItem href="./#/energy-consumptions/higraph/spain">Consumo de Energía de España</DropdownItem>
+				  <DropdownItem href="./#/energy-consumptions/higraph/spain">Highcharts de España</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/energy-consumptions/graph/spain">FusionChart de España</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/energy-consumptions/graphCo2">Integración API CO2</DropdownItem>
                   <DropdownItem divider/>
 				</DropdownMenu>
 			</Dropdown>

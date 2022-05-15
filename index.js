@@ -25,8 +25,9 @@ db_energy_consumptions_v1 = new Datastore();
 app.use(bodyParser.json());
 app.use(cors());
 
-//PROXY
+//PROXYs
 
+//Para Alejandro Molinos Eligio
 var paths='/remoteApiRegistration';
 var apiServerHost = 'https://sos2122-31.herokuapp.com/api/v2/registration-stats';
 
@@ -34,6 +35,16 @@ app.use(paths, function(req, res) {
   var url = apiServerHost + req.url;
   req.pipe(request(url)).pipe(res);
 });
+
+var paths2='/remoteApiCo2';
+var apiServerHost2 = 'https://sos2122-22.herokuapp.com/api/v2/co2-stats';
+
+app.use(paths2, function(req, res) {
+  var url = apiServerHost2 + req.url;
+  req.pipe(request(url)).pipe(res);
+});
+
+
 
 
 // SERVER APIs
