@@ -2,12 +2,15 @@
 	import Router from "svelte-spa-router";
 	import Info from "./Home.svelte";
 	import commonGraph from "./commonGraph.svelte";
+	import {Navbar, Nav, NavItem, NavLink, NavbarBrand, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,Button} from 'sveltestrap';
 	
 
 	import ListPopulationLevels from "./population-levels/ListPopulationLevels.svelte";
 	import EditPopulationEntry from "./population-levels/EditEntryPopulation.svelte";
 	import GraphPopulationLevels from "./population-levels/myGraph.svelte";
 	import GraphPopulationLevelsBillboard from "./population-levels/myGraphBillboard.svelte";
+	import GraphRegis from "./population-levels/API registration-stats.svelte";
+	import GraphPneumonia from "./population-levels/API pneumonia-stats.svelte";
 
 	import ListInternetPopulation from "./internet-population/ListInternetPopulation.svelte";
 	import EditInternetPopulationEntry from "./internet-population/EditEntryInternetPopulation.svelte";
@@ -28,6 +31,8 @@
 		"/population-levels" : ListPopulationLevels,
 		"/population-levels/:country/:year" : EditPopulationEntry,
 		"/population-levels_graph/:country": GraphPopulationLevels,
+		"/population-levels_graph_registrations": GraphRegis,
+		"/population-levels_graph_pneumonia": GraphPneumonia,
 		"/population-levels_graph_billboard/:country": GraphPopulationLevelsBillboard,
 
 		"/internet-population" : ListInternetPopulation,
@@ -48,5 +53,65 @@
 </script>
 
 <main>
+	<Navbar style="background-color: #6A8EF6; color:white;" light expand="lg" >
+		<NavbarBrand href="#/info"><b>INICIO</b></NavbarBrand>
+		<Nav navbar>
+			<Dropdown >
+				<DropdownToggle nav caret> API </DropdownToggle>
+				<DropdownMenu end>
+				  <DropdownItem href="./api/v2/population-levels">Niveles de población v2</DropdownItem>
+				  <DropdownItem divider/>
+				  <DropdownItem href="./api/v2/internet-population">Usuarios de internet v2</DropdownItem>
+				  <DropdownItem divider/>
+				  <DropdownItem href="./api/v2/energy-consumptions">Consumo de Energía v2</DropdownItem>
+				  <DropdownItem divider/>
+				  <DropdownItem href="./api/v1/population-levels">Niveles de población v1</DropdownItem>
+				  <DropdownItem divider/>
+				  <DropdownItem href="./api/v1/internet-population">Usuarios de internet v1</DropdownItem>
+				  <DropdownItem divider/>
+				  <DropdownItem href="./api/v1/energy-consumptions">Consumo de Energía v1</DropdownItem>
+				</DropdownMenu>
+            </Dropdown>
+              
+            <Dropdown>
+				<DropdownToggle nav caret> FRONT-END </DropdownToggle>
+				<DropdownMenu end>
+				  <DropdownItem href="./#/population-levels">Niveles de población</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/internet-population">Usuarios de internet</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/energy-consumptions">Consumo de Energía</DropdownItem>
+				</DropdownMenu>
+			</Dropdown>
+			  
+			<Dropdown >
+				<DropdownToggle nav caret> Gráficas Niveles de población</DropdownToggle>
+				<DropdownMenu end>
+				  <DropdownItem href="./#/population-levels_graph/spain">Highcharts de España</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/population-levels_graph_billboard/spain">Billboard de España</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/population-levels_graph_registrations">Integración estadísitcas de registros</DropdownItem>
+                  <DropdownItem divider/>
+                  <DropdownItem href="./#/population-levels_graph_pneumonia">Integración estadísitcas de neumonia</DropdownItem>
+				</DropdownMenu>
+			</Dropdown>
+			<Dropdown >
+				<DropdownToggle nav caret> Gráficas Usuarios de internet</DropdownToggle>
+				<DropdownMenu end>
+				  <DropdownItem href="./#/internet-population/graph/spain">Usuarios de internet de España</DropdownItem>
+                  <DropdownItem divider/>
+				</DropdownMenu>
+			</Dropdown>
+			<Dropdown >
+				<DropdownToggle nav caret> Gráficas Consumo de energía</DropdownToggle>
+				<DropdownMenu end>
+				  <DropdownItem href="./#/energy-consumptions/higraph/spain">Consumo de Energía de España</DropdownItem>
+                  <DropdownItem divider/>
+				</DropdownMenu>
+			</Dropdown>
+			<NavbarBrand href="#/commonGraph/spain"><b>GRAFICA COMÚN</b></NavbarBrand>
+		</Nav>
+	</Navbar>
 	<Router {routes} />
 </main>

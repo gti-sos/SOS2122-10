@@ -1,5 +1,34 @@
+<script>
+    import Button from 'sveltestrap/src/Button.svelte';
+    import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
+    let errorC = 0;
+
+    async function LoadEntries(){
+        const res_pop = await fetch("/api/v2/population-levels/loadInitialData",
+			{
+				method: "GET"
+			}).then(function (res_pop){
+				//Código de Entradas cargadas con éxito
+				errorC = 200.4;
+			});
+        const res_int = await fetch("/api/v2/internet-population/loadInitialData",
+			{
+				method: "GET"
+			}).then(function (res_int){
+				errorC=200.4;
+			});
+        const res_enr = await fetch("/api/v2/energy-consumptions/loadInitialData", {
+                method: "GET",
+            }).then(function (res_enr) {
+                errorC = 200.4;
+            });
+    }
+
+</script>
 <main>
-    <h1 style="font-weight: bold;">SOS2122-10</h1>
+    <div style="text-align: center;">
+        <h1 style="font-weight: bold;">SOS2122-10</h1>
+    </div>
     
     <h2 style="font-weight: bold;">Team</h2>
     <ul>
@@ -118,4 +147,16 @@
             (developed by <a href="https://github.com/germanblanco12">
             [Germán Blanco Pérez Victoria]</a>)</li>
     </ul>
+    {#if errorC === 200.4}
+        <UncontrolledAlert  color="success" >
+			Datos cargados con éxito.
+        </UncontrolledAlert>
+    {/if}
+    <div style="text-align: center;">
+        <Button outline color="success" on:click="{LoadEntries}">
+        CARGAR TODOS LOS DATOS
+        </Button>
+    </div>
+    <br>
+
 </main>

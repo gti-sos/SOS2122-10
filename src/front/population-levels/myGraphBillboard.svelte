@@ -4,9 +4,10 @@
     export let params = {};
     import Button from 'sveltestrap/src/Button.svelte';
     import {pop} from "svelte-spa-router";
-    
+    import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
     const delay = ms => new Promise(res => setTimeout(res, ms));
     
+    let errorC = 0;
     let birthData = ["Tasa de natalidad"];
     let deathData = ["Tasa de mortalidad"];
     let lifeData = ["Esperanza de vida"];
@@ -44,14 +45,14 @@
                 lifeData = [];
             }
             country = null;
-            await delay(3000);
+            await delay(1000);
             loadGraph();
         }else{
-            window.alert('El país introducido no tiene registros');
+            errorC = 200.4;
             birthData = [];
             deathData = [];
             lifeData = [];
-            await delay(3000);
+            await delay(1000);
             loadGraph();
         }
     }
@@ -74,6 +75,8 @@
             },
         });
 
+        chart.load();
+
         var chart2 = bb.generate({
             bindto: "#chart2",
             data: {
@@ -82,6 +85,24 @@
                 x: "x",
                 columns: [
                     ejeX,
+                    lifeData
+                ]
+            },
+            bubble: {
+                maxR: 50
+            },
+        });
+
+        var chart_colectivo = bb.generate({
+            bindto: "#chart_colectivo",
+            data: {
+                type: "bubble",
+                labels:true,
+                x: "x",
+                columns: [
+                    ejeX,
+                    birthData,
+                    deathData,
                     lifeData
                 ]
             },
@@ -103,6 +124,11 @@
     </svelte:head>
     
     <main>
+        {#if errorC === 200.4}
+        <UncontrolledAlert  color="danger" >
+			ERROR: NO EXISTEN DATOS PARA EL PAÍS INTRODUCIDO
+        </UncontrolledAlert>
+    {/if}
         <br>
         <h1 align="center">Gráficas de {params.country}</h1>
         <div align="center">
@@ -119,6 +145,8 @@
         <div id="bubbleChart" align="center"></div>
         <br>
         <div id="chart2"></div>
+        <br>
+        <div id="chart_colectivo"></div>
         <Button outline color="dark" on:click="{()=>{
             pop();
         }}">

@@ -4,9 +4,12 @@
     export let params = {};
     import Button from 'sveltestrap/src/Button.svelte';
     import {pop} from "svelte-spa-router";
+    import Highcharts from "highcharts";
+    import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
     
     const delay = ms => new Promise(res => setTimeout(res, ms));
     
+    let errorC= 0;
     let birthData = [];
     let deathData = [];
     let lifeData = [];
@@ -49,7 +52,7 @@
             await delay(1000);
             loadGraph();
         }else{
-            window.alert('El país introducido no tiene registros');
+            errorC = 200.4;
             birthData = [];
             deathData = [];
             lifeData = [];
@@ -63,7 +66,7 @@
         Highcharts.chart('container', {
         
             chart: {
-                zoomType: 'x'
+                type:'area'
             },
             title: {
                 text: `Tasa de natalidad y mortalidad en ${params.country} por cada 1000 personas`
@@ -92,48 +95,36 @@
         
             plotOptions: {
                 area: {
-                    fillColor: {
-                        linearGradient: {
-                            x1: 0,
-                            y1: 0,
-                            x2: 0,
-                            y2: 1
-                        },
-                        stops: [
-                            [0, Highcharts.getOptions().colors[0]],
-                            [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                        ]
-                    },
                     marker: {
-                        radius: 2
-                    },
-                    lineWidth: 1,
-                    states: {
-                        hover: {
-                            lineWidth: 1
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
                         }
-                    },
-                    threshold: null
+                    }
                 }
             },
         
             series: [{
-                type: 'area',
-                name: 'Tasa de mortalidad',
-                data: deathData
-            },
-            {
-                type: 'area',
-                name: 'Tasa de natalidad',
-                data: birthData
-            }]
+                    type: 'area',
+                    name: 'Tasa de mortalidad',
+                    data: deathData
+                },
+                {
+                    type: 'area',
+                    name: 'Tasa de natalidad',
+                    data: birthData
+                }]
         
         });
 
         Highcharts.chart('container2', {
         
             chart: {
-                zoomType: 'x'
+                type:'area'
             },
             title: {
                 text: `Esperanza de vida media al nacer en  ${params.country}`
@@ -161,9 +152,16 @@
             },
         
             plotOptions: {
-                series: {
-                    label: {
-                        connectorAllowed: false
+                area: {
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
                     }
                 }
             },
@@ -171,24 +169,71 @@
             series: [
             {
                 type: 'area',
-                name: 'Life expectancy',
+                name: 'Esperanza de vida',
                 data: lifeData
-            }],
+            }]       
+        });
+
+        Highcharts.chart('container_colectivo', {
         
-            responsive: {
-                rules: [{
-                    condition: {
-                        maxWidth: 500
-                    },
-                    chartOptions: {
-                        legend: {
-                            layout: 'horizontal',
-                            align: 'center',
-                            verticalAlign: 'bottom'
+            chart: {
+                type:'area'
+            },
+            title: {
+                text: `Conjuto de los tres datos`
+            },
+        
+            yAxis: {
+                title: {
+                    text: 'Valor'
+                }
+            },
+        
+            xAxis: {
+                type: 'linear',
+                accessibility: {
+                    title: {
+                    text: 'Año'
+                }
+                }
+            },
+        
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+        
+            plotOptions: {
+                area: {
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
                         }
                     }
+                }
+            },
+        
+            series: [{
+                    type: 'area',
+                    name: 'Tasa de mortalidad',
+                    data: deathData
+                },
+                {
+                    type: 'area',
+                    name: 'Tasa de natalidad',
+                    data: birthData
+                },
+                {
+                    type: 'area',
+                    name: 'Esperanza de vida',
+                    data: lifeData
                 }]
-            }
         
         });
     }
@@ -206,6 +251,12 @@
     </svelte:head>
     
     <main>
+        {#if errorC === 200.4}
+        <br>
+        <UncontrolledAlert  color="danger" >
+			ERROR: NO HAY DATOS PARA EL PAÍS INTRODUCIDO
+        </UncontrolledAlert>
+        {/if}
         <br>
         <h1 align="center">Gráficas de {params.country}</h1>
         <div align="center">
@@ -227,6 +278,10 @@
             <div id="container2"></div>
         </figure>
         <br>
+        <figure class="highcharts-figure">
+            <div id="container_colectivo"></div>
+        </figure>
+        <br><br>
         <Button outline color="dark" on:click="{()=>{
             pop();
         }}">
