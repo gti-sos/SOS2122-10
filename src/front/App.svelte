@@ -23,6 +23,7 @@
 	import GraphHighcharts from "./energy-consumptions/GraphHighcharts.svelte";
 	import GraphCo2 from "./energy-consumptions/GraphApiCo2.svelte";
 	import GraphAlphabetization from "./energy-consumptions/GraphAlphabetization.svelte";
+	import GraphExterna1 from "./energy-consumptions/GraphExterna1.svelte";
 
 
 	const routes = {
@@ -50,6 +51,7 @@
 		"/energy-consumptions/:country/:year" : EditEntryEnergyConsumptions,
 		"/energy-consumptions/graphCo2" : GraphCo2,
 		"/energy-consumptions/graphAlphaAlphabetization" : GraphAlphabetization,
+		"/energy-consumptions/graphExterna1" : GraphExterna1,
 		
 
 	};
@@ -117,6 +119,8 @@
 				  <DropdownItem href="./#/energy-consumptions/graphCo2">Integración API CO2</DropdownItem>
                   <DropdownItem divider/>
 				  <DropdownItem href="./#/energy-consumptions/graphAlphaAlphabetization">Integración API Alphabetization</DropdownItem>
+				  <DropdownItem divider/>
+				  <DropdownItem href="./#/energy-consumptions/graphExterna1">Integración API Externa</DropdownItem>
 				</DropdownMenu>
 			</Dropdown>
 			<NavbarBrand href="#/commonGraph/spain"><b>GRAFICA COMÚN</b></NavbarBrand>

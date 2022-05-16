@@ -36,6 +36,7 @@ app.use(paths, function(req, res) {
   req.pipe(request(url)).pipe(res);
 });
 
+//Para Gabriel López Bellido
 var paths2='/remoteApiCo2';
 var apiServerHost2 = 'https://sos2122-22.herokuapp.com/api/v2/co2-stats';
 
