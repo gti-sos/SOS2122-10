@@ -142,7 +142,7 @@
     {/if}
     <br />
     <div align="left">
-        <Button outline color="warning" on:click="{()=>{
+        <Button outline color="success" on:click="{()=>{
             pop();
         }}">
         Volver

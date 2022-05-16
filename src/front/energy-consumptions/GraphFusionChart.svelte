@@ -99,7 +99,8 @@
     async function loadGraph() {
         chartConfigs = {
             type: "stackedcolumn2d",
-            height: 500,
+            width: 1000,
+            height: 600,
             dataFormat: "json",
             dataSource,
         };
@@ -133,6 +134,8 @@
             }}">
             Volver
             </Button>
+    </div>
+    <div align="left">
         <SvelteFC {...chartConfigs}/>
     </div>
        

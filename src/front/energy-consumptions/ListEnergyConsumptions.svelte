@@ -264,7 +264,7 @@
 									window.location.href = `/#/energy-consumptions/graph/${entry.country}`;
 								}}
 							>
-								Gráfica 1
+								Gráfica FusionChart
 							</Button>
 							<Button
 								outline
@@ -273,7 +273,7 @@
 									window.location.href = `/#/energy-consumptions/higraph/${entry.country}`;
 								}}
 							>
-								Gráfica 2
+								Gráfica Highcharts
 							</Button>
 						</td><td
 							><Button
