@@ -86,17 +86,17 @@
                 var pr = parseInt(p.replace(/,/gi, ''))/1000000;
                 cases.push({ value:  pr.toString()});
 
-                 //Casos activos de Covid los datos lo ponemos en porcentaje teniendo en cuenta que el 100% es 100.000.000
+                 //Casos activos de Covid los datos lo ponemos en porcentaje teniendo en cuenta que el 100% es 10.000.000
                 var p2 = jsonp.countries_stat[i].active_cases
-                var pr2 = parseInt(p2.replace(/,/gi, ''))/1000000;
+                var pr2 = parseInt(p2.replace(/,/gi, ''))/100000;
                 console.log(pr2);
                 active_cases.push({
                     value: pr2.toString()
                 });
 
-                //Casos criticos de Covid los datos lo ponemos en porcentaje teniendo en cuenta que el 100% es 100.000.000
+                //Casos criticos de Covid los datos lo ponemos en porcentaje teniendo en cuenta que el 100% es 1.000.000
                 var p3 = jsonp.countries_stat[i].serious_critical
-                var pr3 = parseInt(p3.replace(/,/gi, ''))/1000000;
+                var pr3 = parseInt(p3.replace(/,/gi, ''))/10000;
                 serious_critical.push({
                     value: pr3.toString()
                 });
