@@ -5,7 +5,7 @@
     import SvelteFC, { fcRoot } from "svelte-fusioncharts";
     import Button from "sveltestrap/src/Button.svelte";
     import { pop } from "svelte-spa-router";
-    import {onMount} from 'svelte';
+    import { onMount } from "svelte";
     import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
 
     // Always set FusionCharts as the first parameter
@@ -18,11 +18,10 @@
     let total = [];
     let nrenewable = [];
     let renewable = [];
-    let cases = [];
-    let active_cases = [];
-    let serious_critical = [];
+    let height_feet = [];
+    let height_inches = [];
+    let fga = [];
     let errorC = null;
-
 
     async function getData() {
         await fetch(`/api/v2/energy-consumptions/loadInitialData`);
@@ -36,19 +35,20 @@
             const options = {
                 method: "GET",
                 headers: {
-                    "X-RapidAPI-Host":
-                        "corona-virus-world-and-india-data.p.rapidapi.com",
+                    "X-RapidAPI-Host": "free-nba.p.rapidapi.com",
                     "X-RapidAPI-Key":
                         "b2f2a8944dmsh61c32662d0a13a0p19c219jsn1c59d67d0308",
                 },
             };
 
             let response = await fetch(
-                "https://corona-virus-world-and-india-data.p.rapidapi.com/api",
+                "https://free-nba.p.rapidapi.com/stats?page=0&per_page=25",
                 options
             );
             const jsonp = await response.json();
-           
+
+            console.log(jsonp.data);
+
             for (let i = 0; i < maxData; i++) {
                 //Dato del año
                 categorias.push({
@@ -68,34 +68,28 @@
                     value: json[i].renewable_energy_consumptions,
                 });
 
-                cases.push({ value: 0 });
-                active_cases.push({ value: 0 });
-                serious_critical.push({ value: 0 });
+                height_feet.push({ value: 0 });
+                height_inches.push({ value: 0 });
+                fga.push({ value: 0 });
             }
 
             for (let i = 0; i < maxData; i++) {
+                //Los datos de esta API tienen similitudes entre los primeros datos por eso vamos a coger datos aleatorios entre ellos
+
+                
                 //Dato del año
                 categorias.push({
-                    label: "2020-" + jsonp.countries_stat[i].country_name,
+                    label: jsonp.data[i].game.season + "-" + jsonp.data[i].team.city + "(" + jsonp.data[i].player.first_name + ")",
                 });
 
-                //Casos Covid los datos lo ponemos en porcentaje teniendo en cuenta que el 100% es 100.000.000
-                var p = jsonp.countries_stat[i].cases
-                var pr = parseInt(p.replace(/,/gi, ''))/1000000;
-                cases.push({ value:  pr.toString()});
+                height_feet.push({ value: jsonp.data[i].player.height_feet });
 
-                 //Casos activos de Covid los datos lo ponemos en porcentaje teniendo en cuenta que el 100% es 10.000.000
-                var p2 = jsonp.countries_stat[i].active_cases
-                var pr2 = parseInt(p2.replace(/,/gi, ''))/100000;
-                active_cases.push({
-                    value: pr2.toString()
+                height_inches.push({
+                    value: jsonp.data[i].player.height_inches,
                 });
 
-                //Casos criticos de Covid los datos lo ponemos en porcentaje teniendo en cuenta que el 100% es 1.000.000
-                var p3 = jsonp.countries_stat[i].serious_critical
-                var pr3 = parseInt(p3.replace(/,/gi, ''))/10000;
-                serious_critical.push({
-                    value: pr3.toString()
+                fga.push({
+                    value: jsonp.data[i].fga,
                 });
 
                 total.push({ value: 0 });
@@ -106,14 +100,14 @@
 
             dataSource = {
                 chart: {
-                    caption: "Integración API Externa Covid",
+                    caption: "Integración API Externa NBA",
                     numbersuffix: "",
                     showsum: "1",
                     xAxisname: "Year-Country",
                     yAxisName: "% and numbers",
                     plottooltext: "$label <b>$dataValue</b> $seriesName",
-                    theme: "gammel",
-                    "showvalues": "0"
+                    theme: "fusion",
+                    showvalues: "0",
                 },
                 categories: [
                     {
@@ -134,16 +128,16 @@
                         data: renewable,
                     },
                     {
-                        seriesname: "Casos Covid",
-                        data: cases,
+                        seriesname: "Pies de altura",
+                        data: height_feet,
                     },
                     {
-                        seriesname: "Activos",
-                        data: active_cases,
+                        seriesname: "Pulgadas de altura",
+                        data: height_inches,
                     },
                     {
-                        seriesname: "Casos Críticos",
-                        data: serious_critical,
+                        seriesname: "Tarjetas",
+                        data: fga,
                     },
                 ],
             };
@@ -160,7 +154,7 @@
 
     async function loadGraph() {
         chartConfigs = {
-            type: "mscombi2d",
+            type: "msbar3d",
             width: 1000,
             height: 600,
             renderAt: "chart-container",

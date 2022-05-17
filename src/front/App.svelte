@@ -24,6 +24,8 @@
 	import GraphCo2 from "./energy-consumptions/GraphApiCo2.svelte";
 	import GraphAlphabetization from "./energy-consumptions/GraphAlphabetization.svelte";
 	import GraphExterna1 from "./energy-consumptions/GraphExterna1.svelte";
+	import GraphExterna2 from "./energy-consumptions/GraphExterna2.svelte";
+	import GraphExterna3 from "./energy-consumptions/GraphExterna3.svelte";
 
 
 	const routes = {
@@ -52,6 +54,8 @@
 		"/energy-consumptions/graphCo2" : GraphCo2,
 		"/energy-consumptions/graphAlphaAlphabetization" : GraphAlphabetization,
 		"/energy-consumptions/graphExterna1" : GraphExterna1,
+		"/energy-consumptions/graphExterna2" : GraphExterna2,
+		"/energy-consumptions/graphExterna3" : GraphExterna3,
 		
 
 	};
@@ -120,7 +124,11 @@
                   <DropdownItem divider/>
 				  <DropdownItem href="./#/energy-consumptions/graphAlphaAlphabetization">Integración API Alphabetization</DropdownItem>
 				  <DropdownItem divider/>
-				  <DropdownItem href="./#/energy-consumptions/graphExterna1">Integración API Externa</DropdownItem>
+				  <DropdownItem href="./#/energy-consumptions/graphExterna1">Integración API Externa 1</DropdownItem>
+				  <DropdownItem divider/>
+				  <DropdownItem href="./#/energy-consumptions/graphExterna2">Integración API Externa 2</DropdownItem>
+				  <DropdownItem divider/>
+				  <DropdownItem href="./#/energy-consumptions/graphExterna3">Gráfica API Externa 3</DropdownItem>
 				</DropdownMenu>
 			</Dropdown>
 			<NavbarBrand href="#/commonGraph/spain"><b>GRAFICA COMÚN</b></NavbarBrand>
