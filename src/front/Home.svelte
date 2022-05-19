@@ -26,6 +26,7 @@
 
 </script>
 <main>
+    <br>
     <div style="text-align: center;">
         <h1 style="font-weight: bold;">SOS2122-10</h1>
     </div>

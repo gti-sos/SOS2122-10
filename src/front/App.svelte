@@ -11,6 +11,9 @@
 	import GraphPopulationLevelsBillboard from "./population-levels/myGraphBillboard.svelte";
 	import GraphRegis from "./population-levels/API registration-stats.svelte";
 	import GraphPneumonia from "./population-levels/API pneumonia-stats.svelte";
+	import GraphBilldoardExterna1 from "./population-levels/Graph Externa 1 Billboard.svelte";
+	import GraphBilldoardExterna2 from "./population-levels/Graph Externa 2 Billboard.svelte";
+	import GraphBilldoardExterna3 from "./population-levels/Graph Externa 3 Billboard.svelte";
 
 	import ListInternetPopulation from "./internet-population/ListInternetPopulation.svelte";
 	import EditInternetPopulationEntry from "./internet-population/EditEntryInternetPopulation.svelte";
@@ -39,6 +42,9 @@
 		"/population-levels_graph_registrations": GraphRegis,
 		"/population-levels_graph_pneumonia": GraphPneumonia,
 		"/population-levels_graph_billboard/:country": GraphPopulationLevelsBillboard,
+		"/population-levels/Externa1" : GraphBilldoardExterna1,
+		"/population-levels/Externa2" : GraphBilldoardExterna2,
+		"/population-levels/Externa3" : GraphBilldoardExterna3,
 
 		"/internet-population" : ListInternetPopulation,
 		"/internet-population/:codAct/:country/:year" : ListInternetPopulation,
@@ -104,6 +110,12 @@
 				  <DropdownItem href="./#/population-levels_graph_registrations">Integración estadísitcas de registros</DropdownItem>
                   <DropdownItem divider/>
                   <DropdownItem href="./#/population-levels_graph_pneumonia">Integración estadísitcas de neumonia</DropdownItem>
+				  <DropdownItem divider/>
+                  <DropdownItem href="./#/population-levels/Externa1">Externa 1</DropdownItem>
+				  <DropdownItem divider/>
+                  <DropdownItem href="./#/population-levels/Externa2">Externa 2</DropdownItem>
+				  <DropdownItem divider/>
+                  <DropdownItem href="./#/population-levels/Externa3">Externa 3</DropdownItem>
 				</DropdownMenu>
 			</Dropdown>
 			<Dropdown >

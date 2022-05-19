@@ -17,14 +17,14 @@
 
     async function getData(){
 
-        await delay(2000)
         let res;
-
+        
         if(country==null){
             res = await fetch(`/api/v2/population-levels`);
         }else{
             res = await fetch(`/api/v2/population-levels/${country}`);
         }
+        await delay(2000);
         if (res.ok) {
             const json = await res.json();
             for(let i = 0; i<json.length; i++){
