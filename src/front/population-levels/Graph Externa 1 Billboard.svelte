@@ -6,39 +6,32 @@
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
     
-    let errorC = 0;
-    let episodes = ["Número de episodios"];
+    let duration = ["Duración"];
     let score = ["Puntuación"];
-    let members = ["Seguidores"];
     let ejeX = [];
 
     async function getData(){
 
-        let res = await fetch(`https://api.jikan.moe/v3/top/anime`);
+        let res = await fetch(`https://ghibliapi.herokuapp.com/films`);
         await delay(2000);
         if (res.ok) {
             let json = await res.json();
-            json = json.top;
             
             for(let i = 0; i<10; i++){
                 
                 //Nombre
                 ejeX.push(json[i].title);
 
-                //Dato de episodes
-                episodes.push(json[i].episodes);
+                //Dato de duration
+                duration.push(parseInt(json[i].running_time));
                 //Dato de score
-                score.push(json[i].score);
-                //Dato de members
-                members.push(json[i].members);
+                score.push(parseInt(json[i].rt_score));
             }
             await delay(1000);
             loadGraph();
         }else{
-            errorC = 200.4;
-            episodes = ["Número de episodios"];
+            duration = ["Duración"];
             score = ["Puntuación"];
-            members = ["Miembros"];
             ejeX = [];
             await delay(1000);
             loadGraph();
@@ -58,8 +51,7 @@
                 type: "bar",
                 labels:true,
                 columns: [
-                    episodes,
-                    members,
+                    duration,
                     score
                 ]
             },
@@ -69,28 +61,7 @@
                 }
             }
         });
-        var chart = bb.generate({
-            bindto: "#barChart2",
-            axis: {
-                x: {
-                type: "category",
-                categories: ejeX
-                }
-            },
-            data: {
-                type: "bar",
-                labels:true,
-                columns: [
-                    episodes,
-                    score
-                ]
-            },
-            bar: {
-                width: {
-                ratio: 0.5
-                }
-            }
-        });
+
     }
     
     onMount(getData);
@@ -106,13 +77,9 @@
     
     <main>
         <br>
-        <h1 align="center">Gráfica de animes favoritos de la última semana</h1>
+        <h1 align="center">Gráfica de peliculas estudio Ghibli</h1>
         <br>
         <div id="barChart" align="center"></div>
-        <br>
-        <h1 align="center">Gráfica sin número de seguidores</h1>
-        <br>
-        <div id="barChart2" align="center"></div>
         <br>
         <Button outline color="dark" on:click="{()=>{
             pop();

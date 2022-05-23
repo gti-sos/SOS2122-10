@@ -12,8 +12,9 @@
 	import GraphRegis from "./population-levels/API registration-stats.svelte";
 	import GraphPneumonia from "./population-levels/API pneumonia-stats.svelte";
 	import GraphBilldoardExterna1 from "./population-levels/Graph Externa 1 Billboard.svelte";
-	import GraphBilldoardExterna2 from "./population-levels/Graph Externa 2 Billboard.svelte";
-	import GraphBilldoardExterna3 from "./population-levels/Graph Externa 3 Billboard.svelte";
+	import GraphChartExterna2 from "./population-levels/Graph Externa 2 Chart.svelte";
+	import GraphChartExterna3 from "./population-levels/Graph Externa 3 Chart.svelte";
+	import GraphChartExterna4 from "./population-levels/Graph Externa 4 Chart.svelte";
 
 	import ListInternetPopulation from "./internet-population/ListInternetPopulation.svelte";
 	import EditInternetPopulationEntry from "./internet-population/EditEntryInternetPopulation.svelte";
@@ -43,8 +44,9 @@
 		"/population-levels_graph_pneumonia": GraphPneumonia,
 		"/population-levels_graph_billboard/:country": GraphPopulationLevelsBillboard,
 		"/population-levels/Externa1" : GraphBilldoardExterna1,
-		"/population-levels/Externa2" : GraphBilldoardExterna2,
-		"/population-levels/Externa3" : GraphBilldoardExterna3,
+		"/population-levels/Externa2" : GraphChartExterna2,
+		"/population-levels/Externa3" : GraphChartExterna3,
+		"/population-levels/Externa4" : GraphChartExterna4,
 
 		"/internet-population" : ListInternetPopulation,
 		"/internet-population/:codAct/:country/:year" : ListInternetPopulation,
@@ -111,11 +113,13 @@
                   <DropdownItem divider/>
                   <DropdownItem href="./#/population-levels_graph_pneumonia">Integración estadísitcas de neumonia</DropdownItem>
 				  <DropdownItem divider/>
-                  <DropdownItem href="./#/population-levels/Externa1">Externa 1</DropdownItem>
+                  <DropdownItem href="./#/population-levels/Externa1">Gráfica externa 1</DropdownItem>
 				  <DropdownItem divider/>
-                  <DropdownItem href="./#/population-levels/Externa2">Externa 2</DropdownItem>
+                  <DropdownItem href="./#/population-levels/Externa2">Gráfica externa 2</DropdownItem>
 				  <DropdownItem divider/>
-                  <DropdownItem href="./#/population-levels/Externa3">Externa 3</DropdownItem>
+                  <DropdownItem href="./#/population-levels/Externa3">Gráfica externa 3</DropdownItem>
+				  <DropdownItem divider/>
+                  <DropdownItem href="./#/population-levels/Externa4">Gráfica externa 4</DropdownItem>
 				</DropdownMenu>
 			</Dropdown>
 			<Dropdown >
