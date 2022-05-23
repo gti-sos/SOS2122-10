@@ -21,6 +21,13 @@
 
     async function getData(){
 
+        //Petición cargar datos
+
+        let cargar1 = await fetch(`/api/v2/population-levels/loadInitialData`);
+        let cargar2 = await fetch(`https://sos2122-24.herokuapp.com/api/v2/pneumonia-stats/loadInitialData`);
+
+        await delay(1000);
+
         let res_population;
         let res_registrations;
         res_population = await fetch(`/api/v2/population-levels`);
@@ -61,8 +68,6 @@
                 lifeData.push(0);
                 birthData.push(0);
             }
-            console.log(fechas);
-            console.log(json_reg);
             await delay(1000);
             loadGraph();
         }else{

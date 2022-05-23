@@ -21,6 +21,13 @@
 
     async function getData(){
 
+        //Petición cargar datos
+
+        let cargar1 = await fetch(`/api/v2/population-levels/loadInitialData`);
+        let cargar2 = await fetch(`/remoteApiRegistration/loadInitialData`);
+
+        await delay(1000);
+
         let res_population;
         let res_registrations;
         res_population = await fetch(`/api/v2/population-levels`);
@@ -35,6 +42,7 @@
                 country_years.push(json_reg[i].country+"/"+json_reg[i].year);
             }
             for(let i = 0; i<rangoMax; i++){
+
                 let fecha = json[i].country+"/"+json[i].year;
                 fechas.push(fecha);
                 if(country_years.includes(fecha)){
@@ -61,8 +69,6 @@
                 lifeData.push(0);
                 birthData.push(0);
             }
-            console.log(fechas);
-            console.log(json_reg);
             await delay(1000);
             loadGraph();
         }else{
