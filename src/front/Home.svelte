@@ -65,7 +65,7 @@
         - URL:
     </p>
     <a href="http://sos2122-10.herokuapp.com/#/info">[http://sos2122-10.herokuapp.com]</a>
-    <a href="http://sos2122-10.herokuapp.com/#/commonGraph/null">[http://sos2122-10.herokuapp.com/#/commonGraph]</a>
+    <a href="http://sos2122-10.herokuapp.com/#/analytics">[http://sos2122-10.herokuapp.com/#/analytics]</a>
     <br>
     <p style="font-weight: bold;">
         -  Enlaces a API's:
