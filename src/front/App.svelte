@@ -2,6 +2,8 @@
 	import Router from "svelte-spa-router";
 	import Info from "./Home.svelte";
 	import commonGraph from "./commonGraph.svelte";
+	import videos from "./Videos.svelte";
+	import integrations from "./Integrations.svelte";
 	import {Navbar, Nav, NavItem, NavLink, NavbarBrand, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,Button} from 'sveltestrap';
 	
 
@@ -35,7 +37,9 @@
 	const routes = {
 
 		"/info": Info,
-		"/commonGraph/:country": commonGraph,
+		"/analytics": commonGraph,
+		"/about": videos,
+		"/integrations": integrations,
 
 		"/population-levels" : ListPopulationLevels,
 		"/population-levels/:country/:year" : EditPopulationEntry,
@@ -73,6 +77,8 @@
 <main>
 	<Navbar style="background-color: #6A8EF6; color:white;" light expand="lg" >
 		<NavbarBrand href="#/info"><b>INICIO</b></NavbarBrand>
+		<NavbarBrand href="#/about">Videos</NavbarBrand>
+		<NavbarBrand href="#/integrations">Integraciones</NavbarBrand>
 		<Nav navbar>
 			<Dropdown >
 				<DropdownToggle nav caret> API </DropdownToggle>
@@ -147,7 +153,7 @@
 				  <DropdownItem href="./#/energy-consumptions/graphExterna3">Gráfica API Externa 3</DropdownItem>
 				</DropdownMenu>
 			</Dropdown>
-			<NavbarBrand href="#/commonGraph/spain"><b>GRAFICA COMÚN</b></NavbarBrand>
+			<NavbarBrand href="#/analytics"><b>GRAFICA COMÚN</b></NavbarBrand>
 		</Nav>
 	</Navbar>
 	<Router {routes} />

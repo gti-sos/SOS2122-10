@@ -1,7 +1,6 @@
 <script>
 
     import {onMount} from 'svelte';
-    export let params = {};
     import Button from 'sveltestrap/src/Button.svelte';
     import {pop} from "svelte-spa-router";
     import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
@@ -11,7 +10,7 @@
     let errorC = null;
     
     //Pais
-    let country = params.country;
+    let country = "spain";
 
     //Datos population levels
 
@@ -40,15 +39,11 @@
         await fetch(`/api/v2/energy-consumptions/loadInitialData`);
         await fetch(`/api/v2/internet-population/loadInitialData`);
 
-        if(country==null){
-            res_population = await fetch(`/api/v2/population-levels`);
-            res_energy = await fetch(`/api/v2/energy-consumptions`);
-            res_internet = await fetch(`/api/v2/internet-population`);
-        }else{
-            res_population = await fetch(`/api/v2/population-levels/${country}`);
-            res_energy = await fetch(`/api/v2/energy-consumptions/${country}`);
-            res_internet = await fetch(`/api/v2/internet-population/${country}`);
-        }
+
+        res_population = await fetch(`/api/v2/population-levels/${country}`);
+        res_energy = await fetch(`/api/v2/energy-consumptions/${country}`);
+        res_internet = await fetch(`/api/v2/internet-population/${country}`);
+        
         if (res_population.ok && res_energy.ok && res_internet.ok) {
             const json_population = await res_population.json();
             const json_energy = await res_energy.json();
@@ -57,22 +52,10 @@
             guardaDatosEnergy(json_energy);
             guardaDatosInternet(json_internet);
 
-            if(country==null){
-                birthData = [];
-                deathData = [];
-                lifeData = [];
-                growthData = [];
-                usersData = [];
-                urbanData = [];
-                percentData = [];
-                nonRenewableData = [];
-                renewableData = [];
-            }
             console.log(json_population);
             console.log(json_energy);
             console.log(json_internet);
 
-            country = null;
             await delay(1000);
             loadGraph();
         }else{
@@ -108,9 +91,6 @@
                 aux.push(json[i].birth_rate);
                 birthData.push(aux);
             }
-            console.log(deathData);
-            console.log(lifeData);
-            console.log(birthData);
     }
 
     async function guardaDatosEnergy(json){
@@ -130,9 +110,6 @@
                 aux.push(json[i].renewable_energy_consumptions);
                 renewableData.push(aux);
             }
-            console.log(percentData);
-            console.log(nonRenewableData);
-            console.log(renewableData);
     }
 
     async function guardaDatosInternet(json){
@@ -158,6 +135,9 @@
         
         Highcharts.chart('container', {
         
+            chart: {
+                type: 'column'
+            },
             title: {
                 text: `Gráfico común a todo el grupo`
             },
@@ -183,10 +163,9 @@
             },
         
             plotOptions: {
-                series: {
-                    label: {
-                        connectorAllowed: false
-                    }
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
                 }
             },
             series: [
@@ -254,18 +233,7 @@
             El país introducido no tiene registros para alguna de las APIS.
         </UncontrolledAlert>
         {/if}
-        <br>
-        
-        <div align="center">
-            <input type="text" bind:value="{country}">
-            <Button outline color="info" on:click="{()=>{
-                window.location.href = `/#/commonGraph/${country}`;
-                location.reload();
-                
-            }}">
-            Buscar
-            </Button>
-        </div>
+
         <br>
         <figure class="highcharts-figure">
             <div id="container"></div>
