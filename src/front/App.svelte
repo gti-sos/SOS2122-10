@@ -10,6 +10,7 @@
 	import ListPopulationLevels from "./population-levels/ListPopulationLevels.svelte";
 	import EditPopulationEntry from "./population-levels/EditEntryPopulation.svelte";
 	import GraphPopulationLevels from "./population-levels/myGraph.svelte";
+	import GraphPopulationLevelsALL from "./population-levels/myGraphBillboardAll.svelte";
 	import GraphPopulationLevelsBillboard from "./population-levels/myGraphBillboard.svelte";
 	import GraphRegis from "./population-levels/API registration-stats.svelte";
 	import GraphPneumonia from "./population-levels/API pneumonia-stats.svelte";
@@ -44,6 +45,7 @@
 		"/population-levels" : ListPopulationLevels,
 		"/population-levels/:country/:year" : EditPopulationEntry,
 		"/population-levels_graph/:country": GraphPopulationLevels,
+		"/population-levels_graph_all": GraphPopulationLevelsALL,
 		"/population-levels_graph_registrations": GraphRegis,
 		"/population-levels_graph_pneumonia": GraphPneumonia,
 		"/population-levels_graph_billboard/:country": GraphPopulationLevelsBillboard,
@@ -114,6 +116,8 @@
 				  <DropdownItem href="./#/population-levels_graph/spain">Highcharts de España</DropdownItem>
                   <DropdownItem divider/>
 				  <DropdownItem href="./#/population-levels_graph_billboard/spain">Billboard de España</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/population-levels_graph_all">Billboard completo</DropdownItem>
                   <DropdownItem divider/>
 				  <DropdownItem href="./#/population-levels_graph_registrations">Integración estadísitcas de registros</DropdownItem>
                   <DropdownItem divider/>

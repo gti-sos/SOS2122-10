@@ -15,7 +15,7 @@
     let ejeX = ["x"];
     let country = params.country;
 
-    async function getData(){
+async function getData(){
 
         let res;
         
@@ -40,7 +40,6 @@
                 //Dato de tasa de natalidad
                 birthData.push(json[i].birth_rate);
             }
-            console.log(json);
             if(country==null){
                 birthData = [];
                 deathData = [];
