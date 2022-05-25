@@ -18,7 +18,7 @@
     let fechas_energy = [];
     let fechas_internet = [];
 
-    //Datos population levels
+    //Datos population levels 
 
     let birthData = [];
     let deathData = [];
