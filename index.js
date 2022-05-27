@@ -12,6 +12,7 @@ const population_levels_API_v1 = require("./src/back/population-levels/v1/API po
 const energy_consumptions_API = require("./src/back/energy-consumptions/v2/energy-consumptions.js");
 const energy_consumptions_API_v1 = require("./src/back/energy-consumptions/v1/energy-consumptions.js");
 const internet_population_API = require("./src/back/internet-population/v2/internet-population.js");
+const internet_population_API_v1 = require("./src/back/internet-population/v1/internet-population.js");
 const Datastore = require('nedb');
 
 //BASE DE DATOS
@@ -19,6 +20,7 @@ const Datastore = require('nedb');
 db_population_levels = new Datastore();
 db_population_levels_v1 = new Datastore();
 db_internet_population = new Datastore();
+db_internet_population_v1 = new Datastore();
 db_energy_consumptions = new Datastore();
 db_energy_consumptions_v1 = new Datastore();
 
@@ -45,6 +47,15 @@ app.use(paths2, function(req, res) {
   req.pipe(request(url)).pipe(res);
 });
 
+//Para Germán Blanco Pérez-Victoria
+var paths3='/remoteExt2';
+var apiServerHost3 = 'https://tenders.guru/api/es/tenders';
+
+app.use(paths3, function(req, res) {
+  var url = apiServerHost3 + req.url;
+  req.pipe(request(url)).pipe(res);
+});
+
 
 
 
@@ -55,6 +66,7 @@ population_levels_API_v1.register(app,db_population_levels_v1);
 energy_consumptions_API.register(app, db_energy_consumptions);
 energy_consumptions_API_v1.register(app, db_energy_consumptions_v1);
 internet_population_API.register(app, db_internet_population);
+internet_population_API_v1.register(app, db_internet_population_v1);
 
 app.use("/", express.static('public'));
 

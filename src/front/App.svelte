@@ -23,6 +23,8 @@
 	import EditInternetPopulationEntry from "./internet-population/EditEntryInternetPopulation.svelte";
 	import GraphNegatives from "./internet-population/GraphNegatives.svelte";
 	import GraphCombined from "./internet-population/GraphCombined.svelte";
+	import GraphExterna from "./internet-population/GraphExterna.svelte";
+	import GraphExternaDos from "./internet-population/GraphExternaDos.svelte";
 
 	import ListEnergyConsumptions from "./energy-consumptions/ListEnergyConsumptions.svelte";
 	import EditEntryEnergyConsumptions from "./energy-consumptions/EditEntryEnergyConsumptions.svelte";
@@ -58,6 +60,8 @@
 		"/internet-population/:codAct/:country/:year" : ListInternetPopulation,
 		"/internet-population/graph/:country" : GraphNegatives,
 		"/internet-population/graphC/:country" : GraphCombined,
+		"/internet-population/graphExt" : GraphExterna,
+		"/internet-population/graphExt2" : GraphExternaDos,
 		"/internet-population/:country/:year" : EditInternetPopulationEntry,
 
 		"/energy-consumptions" : ListEnergyConsumptions,
@@ -135,7 +139,13 @@
 			<Dropdown >
 				<DropdownToggle nav caret> Gráficas Usuarios de internet</DropdownToggle>
 				<DropdownMenu end>
-				  <DropdownItem href="./#/internet-population/graph/spain">Usuarios de internet de España</DropdownItem>
+				  <DropdownItem href="./#/internet-population/graph/spain">Usuarios de internet de España Barras</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/internet-population/graphC/spain">Usuarios de internet de España Barras y lineas</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/internet-population/graphExt">Gráfica externa 1</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/internet-population/graphExt2">Gráfica externa 2</DropdownItem>
                   <DropdownItem divider/>
 				</DropdownMenu>
 			</Dropdown>
