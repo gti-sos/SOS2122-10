@@ -39,10 +39,10 @@
 				method: "PUT",
 				body: JSON.stringify({
                     country: updatedCountry,
-                    year: updatedYear,
-                    population_growth: updatedPopulationGrowth,
-                    internet_users: updatedInternetUsers,
-                    urban_population: updatedUrbanPopulation
+                    year: parseInt(updatedYear),
+                    population_growth: parseFloat(updatedPopulationGrowth),
+                    internet_users: parseFloat(updatedInternetUsers),
+                    urban_population: parseFloat(updatedUrbanPopulation)
                 }),
 				headers: {
 					"Content-Type": "application/json"
@@ -126,9 +126,9 @@
                 <tr>
                     <td>{updatedCountry}</td>
                     <td>{updatedYear}</td>
-                    <td><input bind:value="{updatedPopulationGrowth}"></td>
-                    <td><input bind:value="{updatedInternetUsers}"></td>
-                    <td><input bind:value="{updatedUrbanPopulation}"></td>
+                    <td><input type="number" bind:value="{updatedPopulationGrowth}"></td>
+                    <td><input type="number" bind:value="{updatedInternetUsers}"></td>
+                    <td><input type="number" bind:value="{updatedUrbanPopulation}"></td>
                     <td><Button outline color="primary" on:click="{
                         function(){
                             errorC=null;

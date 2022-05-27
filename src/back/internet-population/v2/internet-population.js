@@ -505,6 +505,7 @@ module.exports.register = (app,db) =>{
     app.put(BASE_API_URL_INTERNET_POPULATION+"/:country/:year",(req, res)=>{
         
         //COMPROBAMOS FORMATO JSON
+        console.log(req.body);
 
         if(comprobar_body(req)){
             res.sendStatus(400,"BAD REQUEST - Parametros incorrectos");
@@ -541,7 +542,7 @@ module.exports.register = (app,db) =>{
 
             //ACTUALIZAMOS VALOR
                 
-            db.update({country: countryR, year: yearR }, {$set: body}, {},function(err, updatedDb) {
+            db.update({country: String(countryR), year: parseInt(yearR) }, {$set: body}, {},function(err, updatedDb) {
                 if (err) {
                     res.sendStatus(500, "ERROR EN CLIENTE");
                 }else{
