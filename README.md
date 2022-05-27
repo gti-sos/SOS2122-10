@@ -11,7 +11,7 @@
 - **Repository**: [gti-sos/SOS2122-10](https://github.com/gti-sos/SOS2122-10)
 - **URL**: 
     - [http://sos2122-10.herokuapp.com](http://sos2122-10.herokuapp.com/#/info)
-    - [http://sos2122-10.herokuapp.com/#/commonGraph](http://sos2122-10.herokuapp.com/#/commonGraph/spain)
+    - [http://sos2122-10.herokuapp.com/#/analytics](http://sos2122-10.herokuapp.com/#/analytics)
 -  **Enlaces a API's**:
     - - DOCS:
         - API_v1: [https://sos2122-10.herokuapp.com/api/v1/population-levels/docs](https://sos2122-10.herokuapp.com/api/v1/population-levels/docs)

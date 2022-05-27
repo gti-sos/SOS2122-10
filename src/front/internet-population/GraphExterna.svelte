@@ -5,48 +5,49 @@
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
-    let populationData = [];
-    let internetData = [];
-    let urbanData = [];
+    let casesData = [];
+    let deathsData = [];
 
     async function getData(){
 
-        let res;
-        res = await fetch(`/api/v2/internet-population`);
-        if (res.ok) {
-            const json = await res.json();
-            for(let i = 0; i<json.length; i++){
-
-                populationData.push({ y: json[i].population_growth, label: json[i].country+" "+json[i].year });
-
-                internetData.push({ y: json[i].internet_users, label: json[i].country+" "+json[i].year });
-
-                urbanData.push({ y: json[i].urban_population, label: json[i].country+" "+json[i].year });
+        const options = {
+            method: "GET",
+            headers: {
+                'X-RapidAPI-Host': 'covid-193.p.rapidapi.com',
+                'X-RapidAPI-Key': 'dca83059acmsh3cda1ca95eec1c0p1c71abjsn4e3f476633f5'
             }
-            await delay(1000);
+        }
+
+        let res = await fetch("https://covid-193.p.rapidapi.com/statistics", options);
+        await delay(2000);
+        if(res.ok){
+            let json = await res.json();
+            for (let i=30; i<40;i++){
+                casesData.push({  y: json.response[i].cases.total, label: json.response[i].country });
+
+                var p =  json.response[i].deaths.total;
+                if(p == null){
+                    p=0;
+                }
+                deathsData.push({  y: p, label: json.response[i].country });
+                
+            }
             loadGraph();
-        }else{
-            window.alert('no hay registros');
-            populationData = [];
-            internetData = [];
-            urbanData = [];
-            await delay(1000);
+        } else {
+            casesData = [];
+            deathsData = [];
             loadGraph();
         }
-}
+    }
 
 async function loadGraph(){
     var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	title:{
-		text: "Relación entre usuarios de internet y población urbana"
-	},
-    axisX: {
-		title: "country + year",
-		includeZero: true
+		text: "Casos de covid en distintos paises"
 	},
 	axisY: {
-		title: "porcentage",
+		title: "casos totales",
 		includeZero: true
 	},
 	legend: {
@@ -58,27 +59,18 @@ async function loadGraph(){
 		content: toolTipFormatter
 	},
 	data: [{
-		type: "bar",
+		type: "column",
 		showInLegend: true,
-		name: "internet users",
+		name: "cases",
 		color: "red",
-		dataPoints: internetData
-	
+		dataPoints: casesData
 	},
-	{
-		type: "bar",
+    {
+		type: "column",
 		showInLegend: true,
-		name: "urban population",
+		name: "deaths",
 		color: "blue",
-		dataPoints: 
-			urbanData
-	},{
-		type: "bar",
-		showInLegend: true,
-		name: "population growth",
-		color: "green",
-		dataPoints: 
-			populationData
+		dataPoints: deathsData
 	}]
 });
 chart.render();
@@ -117,7 +109,7 @@ onMount(getData);
 
 <main>
     <br>
-        <h1 align="center">Gráficas de todos los datos de internet population</h1>
+        <h1 align="center">Gráfica de covid</h1>
         <br>
         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         <br><br>

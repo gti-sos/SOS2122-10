@@ -1,7 +1,6 @@
 <script>
 
     import {onMount} from 'svelte';
-    export let params = {};
     import Button from 'sveltestrap/src/Button.svelte';
     import {pop} from "svelte-spa-router";
     import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
@@ -11,9 +10,15 @@
     let errorC = null;
     
     //Pais
-    let country = params.country;
+    let country = "spain";
 
-    //Datos population levels
+    //Fechas
+    let fechas = [];
+    let fechas_population = [];
+    let fechas_energy = [];
+    let fechas_internet = [];
+
+    //Datos population levels 
 
     let birthData = [];
     let deathData = [];
@@ -40,40 +45,30 @@
         await fetch(`/api/v2/energy-consumptions/loadInitialData`);
         await fetch(`/api/v2/internet-population/loadInitialData`);
 
-        if(country==null){
-            res_population = await fetch(`/api/v2/population-levels`);
-            res_energy = await fetch(`/api/v2/energy-consumptions`);
-            res_internet = await fetch(`/api/v2/internet-population`);
-        }else{
-            res_population = await fetch(`/api/v2/population-levels/${country}`);
-            res_energy = await fetch(`/api/v2/energy-consumptions/${country}`);
-            res_internet = await fetch(`/api/v2/internet-population/${country}`);
-        }
+
+        res_population = await fetch(`/api/v2/population-levels`);
+        res_energy = await fetch(`/api/v2/energy-consumptions`);
+        res_internet = await fetch(`/api/v2/internet-population`);
+        
         if (res_population.ok && res_energy.ok && res_internet.ok) {
             const json_population = await res_population.json();
             const json_energy = await res_energy.json();
             const json_internet = await res_internet.json();
-            guardaDatosPopulation(json_population);
-            guardaDatosEnergy(json_energy);
-            guardaDatosInternet(json_internet);
-
-            if(country==null){
-                birthData = [];
-                deathData = [];
-                lifeData = [];
-                growthData = [];
-                usersData = [];
-                urbanData = [];
-                percentData = [];
-                nonRenewableData = [];
-                renewableData = [];
+            for(let i=0;i<json_population.length;i++){
+                fechas_population.push(json_population[i].country+"/"+json_population[i].year);
             }
-            console.log(json_population);
-            console.log(json_energy);
-            console.log(json_internet);
+            for(let i=0;i<json_energy.length;i++){
+                fechas_energy.push(json_energy[i].country+"/"+json_energy[i].year);
+            }
+            for(let i=0;i<json_internet.length;i++){
+                fechas_internet.push(json_internet[i].country+"/"+json_internet[i].year);
+            }
+            guardaDatosPopulation(json_population,json_energy,json_internet);
+            guardaDatosInternet(json_population,json_energy,json_internet);
+            guardaDatosEnergy(json_population,json_energy,json_internet);
 
-            country = null;
-            await delay(1000);
+            console.log(fechas);
+            await delay(3000);
             loadGraph();
         }else{
             errorC = 404;
@@ -91,73 +86,116 @@
         }
     }
     
-    async function guardaDatosPopulation(json){
-        for(let i = 0; i<json.length; i++){
-                let aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].death_rate);
-                deathData.push(aux);
-
-                aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].life_expectancy_birth);
-                lifeData.push(aux);
-                
-                aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].birth_rate);
-                birthData.push(aux);
+    async function guardaDatosPopulation(json_population,json_energy,json_internet){
+        for(let i = 0; i<json_population.length; i++){
+                let fecha = json_population[i].country+"/"+json_population[i].year;
+                fechas.push(fecha);
+                if(fechas_energy.includes(fecha)){
+                    let index = fechas_energy.indexOf(fecha);
+                    percentData.push(json_energy[index].percentages_access_elecetricity);
+                    nonRenewableData.push(json_energy[index].non_renewable_energy_consumptions);
+                    renewableData.push(json_energy[index].renewable_energy_consumptions);
+                    json_energy.splice(index, 1);
+                }else{
+                    percentData.push(0);
+                    nonRenewableData.push(0);
+                    renewableData.push(0);
+                }
+                if(fechas_internet.includes(fecha)){
+                    let index = fechas_internet.indexOf(fecha);
+                    growthData.push(json_internet[index].population_growth);
+                    usersData.push(json_internet[index].internet_users);
+                    urbanData.push(json_internet[index].urban_population);
+                    json_internet.splice(index, 1);
+                }else{
+                    growthData.push(0);
+                    usersData.push(0);
+                    urbanData.push(0);
+                }
+                deathData.push(json_population[i].death_rate);
+                lifeData.push(json_population[i].life_expectancy_birth);
+                birthData.push(json_population[i].birth_rate);
+            
             }
-            console.log(deathData);
-            console.log(lifeData);
-            console.log(birthData);
+
     }
 
-    async function guardaDatosEnergy(json){
-        for(let i = 0; i<json.length; i++){
-                let aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].percentages_access_elecetricity);
-                percentData.push(aux);
-
-                aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].non_renewable_energy_consumptions);
-                nonRenewableData.push(aux);
+    async function guardaDatosEnergy(json_population,json_energy,json_internet){
+        for(let i = 0; i<json_energy.length; i++){
+                let fecha = json_energy[i].country+"/"+json_energy[i].year;
+                fechas.push(fecha);
+                if(fechas_population.includes(fecha)){
+                    let index = fechas_population.indexOf(fecha);
+                    deathData.push(json_population[i].death_rate);
+                    lifeData.push(json_population[i].life_expectancy_birth);
+                    birthData.push(json_population[i].birth_rate);
+                    json_population.splice(index, 1);
+                }else{
+                    deathData.push(0);
+                    lifeData.push(0);
+                    birthData.push(0);
+                }
+                if(fechas_internet.includes(fecha)){
+                    let index = country_years.indexOf(fecha);
+                    growthData.push(json_internet[index].population_growth);
+                    usersData.push(json_internet[index].internet_users);
+                    urbanData.push(json_internet[index].urban_population);
+                    json_internet.splice(index, 1);
+                }else{
+                    growthData.push(0);
+                    usersData.push(0);
+                    urbanData.push(0);
+                }
+                percentData.push(json_energy[i].percentages_access_elecetricity);
+                nonRenewableData.push(json_energy[i].non_renewable_energy_consumptions);
+                renewableData.push(json_energy[i].renewable_energy_consumptions);
                 
-                aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].renewable_energy_consumptions);
-                renewableData.push(aux);
+            
             }
-            console.log(percentData);
-            console.log(nonRenewableData);
-            console.log(renewableData);
     }
 
-    async function guardaDatosInternet(json){
-        for(let i = 0; i<json.length; i++){
-                let aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].population_growth);
-                growthData.push(aux);
-
-                aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].internet_users);
-                usersData.push(aux);
+    async function guardaDatosInternet(json_population,json_energy,json_internet){
+        for(let i = 0; i<json_internet.length; i++){
+                let fecha = json_internet[i].country+"/"+json_internet[i].year;
+                fechas.push(fecha);
+                if(fechas_population.includes(fecha)){
+                    let index = fechas_population.indexOf(fecha);
+                    deathData.push(json_population[i].death_rate);
+                    lifeData.push(json_population[i].life_expectancy_birth);
+                    birthData.push(json_population[i].birth_rate);
+                    json_population.splice(index, 1);
+                }else{
+                    deathData.push(0);
+                    lifeData.push(0);
+                    birthData.push(0);
+                }
+                if(fechas_energy.includes(fecha)){
+                    let index = fechas_energy.indexOf(fecha);
+                    percentData.push(json_energy[index].percentages_access_elecetricity);
+                    nonRenewableData.push(json_energy[index].non_renewable_energy_consumptions);
+                    renewableData.push(json_energy[index].renewable_energy_consumptions);
+                    json_energy.splice(index, 1);
+                }else{
+                    percentData.push(0);
+                    nonRenewableData.push(0);
+                    renewableData.push(0);
+                }
+                growthData.push(json_internet[i].population_growth);
+                usersData.push(json_internet[i].internet_users);
+                urbanData.push(json_internet[i].urban_population);
                 
-                aux = [];
-                aux.push(json[i].year);
-                aux.push(json[i].urban_population);
-                urbanData.push(aux);
+            
             }
+            
     }
 
     async function loadGraph(){
         
         Highcharts.chart('container', {
         
+            chart: {
+                type: 'column'
+            },
             title: {
                 text: `Gráfico común a todo el grupo`
             },
@@ -169,6 +207,7 @@
             },
         
             xAxis: {
+                categories: fechas,
                 accessibility: {
                     title: {
                     text: 'Año'
@@ -183,10 +222,9 @@
             },
         
             plotOptions: {
-                series: {
-                    label: {
-                        connectorAllowed: false
-                    }
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
                 }
             },
             series: [
@@ -254,18 +292,7 @@
             El país introducido no tiene registros para alguna de las APIS.
         </UncontrolledAlert>
         {/if}
-        <br>
-        
-        <div align="center">
-            <input type="text" bind:value="{country}">
-            <Button outline color="info" on:click="{()=>{
-                window.location.href = `/#/commonGraph/${country}`;
-                location.reload();
-                
-            }}">
-            Buscar
-            </Button>
-        </div>
+
         <br>
         <figure class="highcharts-figure">
             <div id="container"></div>

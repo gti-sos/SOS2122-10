@@ -26,6 +26,7 @@
 
 </script>
 <main>
+    <br>
     <div style="text-align: center;">
         <h1 style="font-weight: bold;">SOS2122-10</h1>
     </div>
@@ -64,7 +65,7 @@
         - URL:
     </p>
     <a href="http://sos2122-10.herokuapp.com/#/info">[http://sos2122-10.herokuapp.com]</a>
-    <a href="http://sos2122-10.herokuapp.com/#/commonGraph/null">[http://sos2122-10.herokuapp.com/#/commonGraph]</a>
+    <a href="http://sos2122-10.herokuapp.com/#/analytics">[http://sos2122-10.herokuapp.com/#/analytics]</a>
     <br>
     <p style="font-weight: bold;">
         -  Enlaces a API's:
@@ -88,6 +89,9 @@
                     <ul>
                         <li>API_v2:<a href="https://sos2122-10.herokuapp.com/#/population-levels">[https://sos2122-10.herokuapp.com/#/population-levels]</a></li>
                     </ul>
+                </li>
+                <li>
+                    <ul>Vídeo: <a href="https://youtu.be/X-sYYDI3dHc">ENLACE</a></ul>
                 </li>
             </ul>
             <br>
