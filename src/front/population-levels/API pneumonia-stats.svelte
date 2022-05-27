@@ -3,19 +3,18 @@
     import {onMount} from 'svelte';
     import Button from 'sveltestrap/src/Button.svelte';
     import {pop} from "svelte-spa-router";
-    import Highcharts from "highcharts";
     import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
     
     let errorC= 0;
     let fechas = [];
-    let birthData = [];
-    let deathData = [];
-    let lifeData = [];
-    let ages_zero_fifty = [];
-    let ages_fifty_seventy = [];
-    let ages_seventy = [];
+    let birthData = ["Tasa de natalidad"];
+    let deathData = ["Tasa de mortalidad"];
+    let lifeData = ["Esperanza de vida"];
+    let ages_zero_fifty = ["Muertes 0-50 años"];
+    let ages_fifty_seventy = ["Muertes 50-70 años"];
+    let ages_seventy = ["Muertes 70 años"];
 
 
 
@@ -36,12 +35,11 @@
         if (res_population.ok && res_registrations.ok) {
             const json = await res_population.json();
             const json_reg = await res_registrations.json();
-            let rangoMax = 5;
             const country_years = [];
             for(let i = 0; i<json_reg.length;i++){
                 country_years.push(json_reg[i].country+"/"+json_reg[i].year);
             }
-            for(let i = 0; i<rangoMax; i++){
+            for(let i = 0; i<json.length; i++){
                 let fecha = json[i].country+"/"+json[i].year;
                 fechas.push(fecha);
                 if(country_years.includes(fecha)){
@@ -59,7 +57,7 @@
                 lifeData.push(json[i].life_expectancy_birth);
                 birthData.push(json[i].birth_rate);
             }
-            for(let i = 0; i<rangoMax; i++){
+            for(let i = 0; i<json_reg.length; i++){
                 fechas.push(json_reg[i].country+"/"+json_reg[i].year);
                 ages_zero_fifty.push(json_reg[i].ages_zero_fifty);
                 ages_fifty_seventy.push(json_reg[i].ages_fifty_seventy);
@@ -68,7 +66,7 @@
                 lifeData.push(0);
                 birthData.push(0);
             }
-            await delay(1000);
+            await delay(2000);
             loadGraph();
         }else{
             errorC = 200.4;
@@ -78,76 +76,31 @@
     }
     
     async function loadGraph(){
-        
-        Highcharts.chart('container', {
-        
-            chart: {
-                type:'area'
-            },
-            title: {
-                text: `Gráfica conjunta `
-            },
-        
-            yAxis: {
-                min:0,
-                title: {
-                    text: 'Valor'
+
+        await delay(2000);
+        var chart = bb.generate({
+            bindto: "#myChart",
+            axis: {
+                x: {
+                type: "category",
+                categories: fechas
                 }
             },
-        
-            xAxis: {
-                categories: fechas,
-                title: {
-                    text: 'Ciudad/Año'
-                },
-                crosshair: true
+            data: {
+                type: "spline",
+                labels:true,
+                columns: [
+                    birthData,
+                    deathData,
+                    lifeData,
+                    ages_zero_fifty,
+                    ages_fifty_seventy,
+                    ages_seventy
+                ]
             },
-        
             legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle'
-            },
-        
-            plotOptions: {
-                area: {
-                    marker: {
-                        enabled: false,
-                        symbol: 'circle',
-                        radius: 2,
-                        states: {
-                            hover: {
-                                enabled: true
-                            }
-                        }
-                    }
-                }
-            },
-        
-            series: [{
-                    name: 'Tasa de mortalidad',
-                    data: deathData
-                },
-                {
-                    name: 'Tasa de natalidad',
-                    data: birthData
-                },
-                {
-                    name: 'Esperanza de vida',
-                    data: lifeData
-                },
-                {
-                    name: 'Muertes 0-50 años',
-                    data: ages_zero_fifty,
-                },{
-                    name: '	Muertes 50-70 años',
-                    data: ages_fifty_seventy,
-                },{
-                    name: '	Muertes 70 años',
-                    data: ages_seventy,
-                }
-            ]
-        
+                position: "right"
+            }
         });
     }
     
@@ -155,11 +108,9 @@
     
     </script>
     <svelte:head>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/series-label.js"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
-        <script src="https://code.highcharts.com/modules/export-data.js"></script>
-        <script src="https://code.highcharts.com/modules/accessibility.js" on:load="{loadGraph}"></script>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/billboard.js/3.4.1/billboard.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/billboard.js/3.4.1/billboard.min.js" on:load="{loadGraph}"></script>
     
     </svelte:head>
     
@@ -173,9 +124,7 @@
         <br>
         <h1 align="center">Gráficas integrada de niveles de población y tasa de muertes por neumonia</h1>
         <br>
-        <figure class="highcharts-figure">
-            <div id="container"></div>
-        </figure>
+        <div id="myChart" align="center"></div>
         <br><br>
         <Button outline color="dark" on:click="{()=>{
             pop();
