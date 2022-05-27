@@ -51,7 +51,8 @@
                     birthData,
                     deathData,
                     lifeData
-                ]
+                ],
+                type: "line"
             },
             axis: {
                 x: {
