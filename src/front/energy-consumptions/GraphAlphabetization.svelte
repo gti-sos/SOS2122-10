@@ -32,10 +32,9 @@
         );
 
         if (res.ok && res2.ok) {
-            let maxData = 5;
             const json = await res.json();
             const json2 = await res2.json();
-            for (let i = 0; i < maxData; i++) {
+            for (let i = 0; i < json.length; i++) {
                 //Dato del año
                 categorias.push({
                     label: json[i].year.toString() + "-" + json[i].country,
@@ -59,10 +58,10 @@
                 ar_ty.push({ value: 0 });
             }
 
-            for (let i = 0; i < maxData; i++) {
+            for (let i = 0; i < json2.length; i++) {
                 //Dato del año
                 categorias.push({
-                    label: json2[i].year.toString() + "-" + json[i].country,
+                    label: json2[i].year.toString() + "-" + json2[i].country,
                 });
 
                 //Dato de acceso a la electricidad

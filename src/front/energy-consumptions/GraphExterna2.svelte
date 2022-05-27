@@ -28,7 +28,6 @@
         let res = await fetch(`/api/v2/energy-consumptions`);
 
         if (res.ok) {
-            let maxData = 5;
             const json = await res.json();
 
             //Llamada a la API externa.
@@ -49,7 +48,7 @@
 
             console.log(jsonp.data);
 
-            for (let i = 0; i < maxData; i++) {
+            for (let i = 0; i < 20; i++) {
                 //Dato del año
                 categorias.push({
                     label: json[i].year.toString() + "-" + json[i].country,
@@ -73,7 +72,7 @@
                 fga.push({ value: 0 });
             }
 
-            for (let i = 0; i < maxData; i++) {
+            for (let i = 0; i < 20; i++) {
                 //Los datos de esta API tienen similitudes entre los primeros datos por eso vamos a coger datos aleatorios entre ellos
 
                 

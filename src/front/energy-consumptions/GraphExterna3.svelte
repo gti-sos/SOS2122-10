@@ -32,9 +32,8 @@
             );
 
         if (res.ok) {
-            let maxData = 5;
             const json = await res.json();
-            for (let i = 0; i < maxData; i++) {
+            for (let i = 0; i < 20; i++) {
                 //Dato del año
                 base_attack.push({ name:  json[i].pokemon_name, y: json[i].base_attack});
                 base_defense.push({ name:  json[i].pokemon_name, y: json[i].base_defense});

@@ -20,13 +20,13 @@
         let resC;
 
         resE =  await fetch(`/api/v2/energy-consumptions`);
+        await fetch(`/remoteApiCo2/loadInitialData`);
         resC = await fetch(`/remoteApiCo2`);
 
         if (resE.ok && resC.ok) {
             const jsonE = await resE.json();
             const jsonC = await resC.json();
-            let maxData = 5;
-            for (let i = 0; i < maxData; i++) {
+            for (let i = 0; i < jsonE.length; i++) {
                 categorias.push(jsonE[i].year.toString() + `-` + jsonE[i].country);
                 total.push(jsonE[i].percentages_access_elecetricity);
                 nrenewable.push(jsonE[i].non_renewable_energy_consumptions);
@@ -36,7 +36,7 @@
                 co2_tpc.push(0);
             }
 
-            for (let i = 0; i < maxData; i++) {
+            for (let i = 0; i < jsonC.length; i++) {
                 categorias.push(jsonC[i].year.toString() + `-` + jsonC[i].country);
                 total.push(0);
                 nrenewable.push(0);
@@ -56,42 +56,9 @@
     }
 
     async function loadGraph() {
-        Highcharts.chart("container", {
-            chart: {
-                type: "areaspline",
-            },
-            title: {
-                text: "Gráficas Conjunta con API Co2",
-            },
-            xAxis: {
-                categories: categorias,
-                crosshair: true,
-                title: {
-                    text: "Año-País",
-                },
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: "Porcentage y total",
-                },
-            },
-            tooltip: {
-                headerFormat:
-                    '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat:
-                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
-                footerFormat: "</table>",
-                shared: true,
-                useHTML: true,
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0,
-                },
-            },
+
+        
+        var options = {
             series: [
                 {
                     name: "Acceso a la electricidad",
@@ -121,17 +88,38 @@
                     data: co2_tot,
                 },
             ],
-        });
+          chart: {
+          height: 350,
+          type: 'area'
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        xaxis: {
+          type: 'string',
+          categories: categorias
+        },
+        tooltip: {
+          x: {
+            format: 'Porcentage y total'
+          },
+        },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
     }
 
     onMount(getData);
 </script>
 
 <svelte:head>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 </svelte:head>
 
 <main>
@@ -149,7 +137,6 @@
         </Button>
     </div>
     <br />
-    <figure class="highcharts-figure">
-        <div id="container" />
-    </figure>
+    <h3 style="text-align:center">Gráfica integrando datos CO2</h3>
+    <div id="chart" />
 </main>

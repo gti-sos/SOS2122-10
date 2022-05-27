@@ -270,10 +270,10 @@
 								outline
 								color="success"
 								on:click={function () {
-									window.location.href = `/#/energy-consumptions/higraph/${entry.country}`;
+									window.location.href = `/#/energy-consumptions/jscgraph/${entry.country}`;
 								}}
 							>
-								Gráfica Highcharts
+								Gráfica JSC
 							</Button>
 						</td><td
 							><Button

@@ -20,7 +20,7 @@
 	import ListEnergyConsumptions from "./energy-consumptions/ListEnergyConsumptions.svelte";
 	import EditEntryEnergyConsumptions from "./energy-consumptions/EditEntryEnergyConsumptions.svelte";
 	import GraphFusion from "./energy-consumptions/GraphFusionChart.svelte";
-	import GraphHighcharts from "./energy-consumptions/GraphHighcharts.svelte";
+	import GraphJSC from "./energy-consumptions/GraphJSC.svelte";
 	import GraphCo2 from "./energy-consumptions/GraphApiCo2.svelte";
 	import GraphAlphabetization from "./energy-consumptions/GraphAlphabetization.svelte";
 	import GraphExterna1 from "./energy-consumptions/GraphExterna1.svelte";
@@ -48,8 +48,8 @@
 
 		"/energy-consumptions" : ListEnergyConsumptions,
 		"/energy-consumptions/:codAct/:country/:year" : ListEnergyConsumptions,
-		"/energy-consumptions/graph/:country" : GraphFusion,
-		"/energy-consumptions/higraph/:country" : GraphHighcharts,
+		"/energy-consumptions/graph/" : GraphFusion,
+		"/energy-consumptions/jscgraph/" : GraphJSC,
 		"/energy-consumptions/:country/:year" : EditEntryEnergyConsumptions,
 		"/energy-consumptions/graphCo2" : GraphCo2,
 		"/energy-consumptions/graphAlphaAlphabetization" : GraphAlphabetization,
@@ -116,9 +116,9 @@
 			<Dropdown >
 				<DropdownToggle nav caret> Gráficas Consumo de energía</DropdownToggle>
 				<DropdownMenu end>
-				  <DropdownItem href="./#/energy-consumptions/higraph/spain">Highcharts de España</DropdownItem>
+				  <DropdownItem href="./#/energy-consumptions/jscgraph">Api Propia JSC </DropdownItem>
                   <DropdownItem divider/>
-				  <DropdownItem href="./#/energy-consumptions/graph/spain">FusionChart de España</DropdownItem>
+				  <DropdownItem href="./#/energy-consumptions/graph">Api Propia FusionChart</DropdownItem>
                   <DropdownItem divider/>
 				  <DropdownItem href="./#/energy-consumptions/graphCo2">Integración API CO2</DropdownItem>
                   <DropdownItem divider/>

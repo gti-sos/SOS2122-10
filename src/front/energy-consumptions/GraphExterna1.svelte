@@ -29,7 +29,6 @@
         let res = await fetch(`/api/v2/energy-consumptions`);
 
         if (res.ok) {
-            let maxData = 5;
             const json = await res.json();
 
             //Llamada a la API externa.
@@ -49,7 +48,7 @@
             );
             const jsonp = await response.json();
            
-            for (let i = 0; i < maxData; i++) {
+            for (let i = 0; i < 20; i++) {
                 //Dato del año
                 categorias.push({
                     label: json[i].year.toString() + "-" + json[i].country,
@@ -73,7 +72,7 @@
                 serious_critical.push({ value: 0 });
             }
 
-            for (let i = 0; i < maxData; i++) {
+            for (let i = 0; i < 20; i++) {
                 //Dato del año
                 categorias.push({
                     label: "2020-" + jsonp.countries_stat[i].country_name,
