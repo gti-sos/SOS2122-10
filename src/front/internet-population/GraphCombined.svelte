@@ -135,7 +135,7 @@ onMount(getData);
         <div align="center">
             <input type="text" bind:value="{country}">
             <Button outline color="info" on:click="{()=>{
-                window.location.href = `/#/internet-population/higraph/${country}`;
+                window.location.href = `/#/internet-population/graphC/${country}`;
                 location.reload();
             }}">
             Buscar

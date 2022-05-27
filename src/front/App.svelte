@@ -25,6 +25,8 @@
 	import GraphCombined from "./internet-population/GraphCombined.svelte";
 	import GraphExterna from "./internet-population/GraphExterna.svelte";
 	import GraphExternaDos from "./internet-population/GraphExternaDos.svelte";
+	import GraphCompañero1 from "./internet-population/GraphCompañero1.svelte";
+	import GraphCompañero2 from "./internet-population/GraphCompañero2.svelte";
 
 	import ListEnergyConsumptions from "./energy-consumptions/ListEnergyConsumptions.svelte";
 	import EditEntryEnergyConsumptions from "./energy-consumptions/EditEntryEnergyConsumptions.svelte";
@@ -62,6 +64,8 @@
 		"/internet-population/graphC/:country" : GraphCombined,
 		"/internet-population/graphExt" : GraphExterna,
 		"/internet-population/graphExt2" : GraphExternaDos,
+		"/internet-population/graphCom1" : GraphCompañero1,
+		"/internet-population/graphCom2" : GraphCompañero2,
 		"/internet-population/:country/:year" : EditInternetPopulationEntry,
 
 		"/energy-consumptions" : ListEnergyConsumptions,
@@ -147,6 +151,9 @@
                   <DropdownItem divider/>
 				  <DropdownItem href="./#/internet-population/graphExt2">Gráfica externa 2</DropdownItem>
                   <DropdownItem divider/>
+				  <DropdownItem href="./#/internet-population/graphCom1">Gráfica Compañero 1</DropdownItem>
+                  <DropdownItem divider/>
+				  <DropdownItem href="./#/internet-population/graphCom2">Gráfica Compañero 2</DropdownItem>
 				</DropdownMenu>
 			</Dropdown>
 			<Dropdown >

@@ -1,6 +1,5 @@
 <script>
     import {onMount} from 'svelte';
-    export let params = {};
     import Button from 'sveltestrap/src/Button.svelte';
     import {pop} from "svelte-spa-router";
 
@@ -9,39 +8,25 @@
     let populationData = [];
     let internetData = [];
     let urbanData = [];
-    let country = params.country
 
     async function getData(){
 
         let res;
-
-        if(country==null){
-            res = await fetch(`/api/v2/internet-population`);
-        }else{
-            res = await fetch(`/api/v2/internet-population/${country}`);
-        }
+        res = await fetch(`/api/v2/internet-population`);
         if (res.ok) {
             const json = await res.json();
             for(let i = 0; i<json.length; i++){
 
-                populationData.push({ y: json[i].population_growth, label: json[i].year });
+                populationData.push({ y: json[i].population_growth, label: json[i].country+" "+json[i].year });
 
-                internetData.push({ y: json[i].internet_users, label: json[i].year });
+                internetData.push({ y: json[i].internet_users, label: json[i].country+" "+json[i].year });
 
-                urbanData.push({ y: json[i].urban_population, label: json[i].year });
+                urbanData.push({ y: json[i].urban_population, label: json[i].country+" "+json[i].year });
             }
-            console.log(internetData);
-            console.log(json);
-            if(country==null){
-                populationData = [];
-                internetData = [];
-                urbanData = [];
-            }
-            country = null;
             await delay(1000);
             loadGraph();
         }else{
-            window.alert('El país introducido no tiene registros');
+            window.alert('no hay registros');
             populationData = [];
             internetData = [];
             urbanData = [];
@@ -56,8 +41,12 @@ async function loadGraph(){
 	title:{
 		text: "Relación entre usuarios de internet y población urbana"
 	},
+    axisX: {
+		title: "country + year",
+		includeZero: true
+	},
 	axisY: {
-		title: "years",
+		title: "porcentage",
 		includeZero: true
 	},
 	legend: {
@@ -83,6 +72,13 @@ async function loadGraph(){
 		color: "blue",
 		dataPoints: 
 			urbanData
+	},{
+		type: "bar",
+		showInLegend: true,
+		name: "population growth",
+		color: "green",
+		dataPoints: 
+			populationData
 	}]
 });
 chart.render();
@@ -121,16 +117,7 @@ onMount(getData);
 
 <main>
     <br>
-        <h1 align="center">Gráficas de {params.country}</h1>
-        <div align="center">
-            <input type="text" bind:value="{country}">
-            <Button outline color="info" on:click="{()=>{
-                window.location.href = `/#/internet-population/graph/${country}`;
-                location.reload();
-            }}">
-            Buscar
-            </Button>
-        </div>
+        <h1 align="center">Gráficas de todos los datos de internet population</h1>
         <br>
         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         <br><br>
