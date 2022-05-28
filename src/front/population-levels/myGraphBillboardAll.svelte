@@ -68,9 +68,8 @@
     </script>
     <svelte:head>
 
-        <script src="https://d3js.org/d3.v6.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/billboard.js/3.4.1/billboard.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/billboard.js/3.4.1/billboard.min.js" on:load="{loadGraph}"></script>
+        <link rel="stylesheet" href="./circular-dependencies/billboard.js/dist/billboard.css">
+        <script src="./circular-dependencies/billboard.js/dist/billboard.pkgd.js"></script>
     
     </svelte:head>
     
