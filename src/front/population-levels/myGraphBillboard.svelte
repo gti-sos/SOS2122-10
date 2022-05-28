@@ -116,8 +116,8 @@ async function getData(){
     </script>
     <svelte:head>
 
-        <link rel="stylesheet" href="./circular-dependencies/billboard.js/dist/billboard.css">
-        <script src="./circular-dependencies/billboard.js/dist/billboard.pkgd.js"></script>
+        <link rel="stylesheet" href="https://pagecdn.io/lib/billboardjs/3.4.1/billboard.min.css">
+        <script src="https://pagecdn.io/lib/billboardjs/3.4.1/billboard.pkgd.min.js" on:load={loadGraph}></script>
     
     </svelte:head>
     

@@ -66,11 +66,9 @@
                 lifeData.push(0);
                 birthData.push(0);
             }
-            await delay(2000);
             loadGraph();
         }else{
             errorC = 200.4;
-            await delay(1000);
             loadGraph();
         }
     }
@@ -108,8 +106,8 @@
     
     </script>
     <svelte:head>
-        <link rel="stylesheet" href="./circular-dependencies/billboard.js/dist/billboard.css">
-        <script src="./circular-dependencies/billboard.js/dist/billboard.pkgd.js"></script>
+        <link rel="stylesheet" href="https://pagecdn.io/lib/billboardjs/3.4.1/billboard.min.css">
+        <script src="https://pagecdn.io/lib/billboardjs/3.4.1/billboard.pkgd.min.js" on:load={loadGraph}></script>
     
     </svelte:head>
     

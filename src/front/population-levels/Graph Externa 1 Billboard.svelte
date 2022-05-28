@@ -13,7 +13,7 @@
     async function getData(){
 
         let res = await fetch(`https://ghibliapi.herokuapp.com/films`);
-        await delay(2000);
+        await delay(1000);
         if (res.ok) {
             let json = await res.json();
             
@@ -27,13 +27,11 @@
                 //Dato de score
                 score.push(parseInt(json[i].rt_score));
             }
-            await delay(1000);
             loadGraph();
         }else{
             duration = ["Duración"];
             score = ["Puntuación"];
             ejeX = [];
-            await delay(1000);
             loadGraph();
         }
     }
@@ -69,8 +67,8 @@
     </script>
     <svelte:head>
 
-        <link rel="stylesheet" href="./circular-dependencies/billboard.js/dist/billboard.css">
-        <script src="./circular-dependencies/billboard.js/dist/billboard.pkgd.js"></script>
+        <link rel="stylesheet" href="https://pagecdn.io/lib/billboardjs/3.4.1/billboard.min.css">
+        <script src="https://pagecdn.io/lib/billboardjs/3.4.1/billboard.pkgd.min.js" on:load={loadGraph}></script>
     
     </svelte:head>
     
