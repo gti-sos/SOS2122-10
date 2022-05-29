@@ -24,8 +24,6 @@
 		renewable_energy_consumptions: "",
 	};
 
-	onMount(getEntries);
-
 	async function getEntries() {
 		console.log("Fetching entries....");
 		let cadena = `/api/v2/energy-consumptions?`;
@@ -112,6 +110,8 @@
         }
 	}
 
+	onMount(getEntries);
+
 </script>
 
 <main>
@@ -168,7 +168,14 @@
 					<td><input type="number" bind:value={from} /></td>
 					<td><input type="number" bind:value={to} /></td>
 					<td align="center"
-						><Button outline color="primary" on:click={getEntries}
+						><Button outline color="primary" on:click=
+						{() => {
+							if(from == null){
+								from = 0;
+							}else if(to == null){
+								to = 2022;
+							}
+							getEntries();}}
 							>Buscar</Button
 						></td
 					>
@@ -177,6 +184,8 @@
 							outline
 							color="info"
 							on:click={() => {
+								from = null;
+								to = null;
 								getEntries();
 							}}
 						>
