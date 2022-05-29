@@ -17,7 +17,7 @@
         if (res.ok) {
             let json = await res.json();
             
-            for(let i = 0; i<10; i++){
+            for(let i = 0; i<20; i++){
                 
                 //Nombre
                 ejeX.push(json[i].title);

@@ -7,6 +7,8 @@
     import Table from 'sveltestrap/src/Table.svelte';
     import UncontrolledAlert from "sveltestrap/src/UncontrolledAlert.svelte";
 
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
     //Aquí se almacena la entrada correspondiente
 
     let entry = {};
@@ -57,7 +59,9 @@
 				headers: {
 					"Content-Type": "application/json"
 				}
-			}).then(function(){
+			}).then(async function(){
+                errorC = 200;
+                await delay(1500);
                 pop();
             }); 
     }
@@ -76,6 +80,11 @@
             La petición no está correctamente formulada
         </UncontrolledAlert>
     {/if}
+    {#if errorC === 200}
+			<UncontrolledAlert color="success">
+				Entrada  <b>{params.country}/{params.year}</b> editada con éxito.
+			</UncontrolledAlert>
+		{/if}
 	{#if errorC === 401}
         <UncontrolledAlert  color="danger" >
 			No autorizado   
