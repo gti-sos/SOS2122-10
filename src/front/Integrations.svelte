@@ -2,7 +2,7 @@
 <main>
 <br>
 
-    <h1 style="text-align: center;">LIISTA DE INTEGRACIONES</h1>
+    <h1 style="text-align: center;">LISTA DE INTEGRACIONES</h1>
 <br>
     <ul>
         <li> Alejandro Molinos Eligio(Niveles de población):
@@ -13,6 +13,18 @@
                 <li><a href="/#/population-levels/Externa2">Gráfica externa 2</a></li>
                 <li><a href="/#/population-levels/Externa3">Gráfica externa 3</a></li>
                 <li><a href="/#/population-levels/Externa4">Gráfica externa 4</a></li>
+            </ul>
+        </li>
+    </ul>
+    <br>
+    <br>
+    <ul>
+        <li> Germán Blanco Pérez-Victoria(Internet Population):
+            <ul>
+                <li><a href="/#/internet-population/graphExt">Gráfica externa 1 (covid)</a></li>
+                <li><a href="/#/internet-population/graphExt2">Gráfica externa 2 (Compras)</a></li>
+                <li><a href="/#/internet-population/graphCom1">Integración compañero 1 (sos2122-24.herokuapp.com/api/v1/cancerdeaths-stats)</a></li>
+                <li><a href="/#/internet-population/graphCom2">Integración compañero 2 (sos2122-26.herokuapp.com/api/v2/defense-spent-stats)</a></li>
             </ul>
         </li>
     </ul>

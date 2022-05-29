@@ -11,13 +11,33 @@
 
         let res = await fetch("/remoteExt2");
         await delay(2000);
+        var services = 0;
+        var supplies = 0;
+        var constructions = 0;
+        var other = 0;
         if(res.ok){
             let json = await res.json();
             for (let i=0; i<20;i++){
                 var p = parseInt(json.data[i].awarded[0].value);
-                Data.push({  y: p, label: json.data[i].category });
                 
+                if(json.data[i].category == "services"){
+                    services += p;
+                }
+                else if(json.data[i].category == "supplies"){
+                    supplies += p;
+                }
+                else if(json.data[i].category == "constructions"){
+                    constructions += p;
+                }
+                else {
+                    other += p;
+                }   
             }
+            var total= services + supplies + constructions + other;
+            Data.push({  y: (services/total)*100, label: "servicios" });
+            Data.push({  y: (supplies/total)*100, label: "suministros" });
+            Data.push({  y: (constructions/total)*100, label: "construcciones" });
+            Data.push({  y: (other/total)*100, label: "otros" });
             console.log(Data);
             loadGraph();
         } else {

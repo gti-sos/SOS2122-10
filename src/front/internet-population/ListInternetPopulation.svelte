@@ -257,11 +257,8 @@ loading
                     <td>{entry.urban_population}</td>
 					<td align="center">
 						<Button outline color="success" on:click={function(){
-							window.location.href = `/#/internet-population/graph/${entry.country}`;
-						}}>Gráfica neg</Button>
-						<Button outline color="success" on:click={function(){
 							window.location.href = `/#/internet-population/graphC/${entry.country}`;
-						}}>Gráfica comb</Button>
+						}}>Gráfica</Button>
 					</td>
 					<td><Button outline color="warning" on:click={function (){
 						window.location.href = `/#/internet-population/${entry.country}/${entry.year}`
