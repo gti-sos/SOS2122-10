@@ -32,7 +32,7 @@
             const json2 = await res2.json();
             console.log(json);
             console.log(json2);
-            let rangoMax = 5;
+            let rangoMax = 10;
             const country_years = [];
             for(let i = 0; i<json2.length; i++){
                 country_years.push(json2[i].country+"/"+json2[i].year);

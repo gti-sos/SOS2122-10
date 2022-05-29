@@ -22,7 +22,7 @@
         await delay(2000);
         if(res.ok){
             let json = await res.json();
-            for (let i=30; i<40;i++){
+            for (let i=0; i<40;i++){
                 casesData.push({  y: json.response[i].cases.total, label: json.response[i].country });
 
                 var p =  json.response[i].deaths.total;
