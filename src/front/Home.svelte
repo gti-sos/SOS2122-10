@@ -120,7 +120,9 @@
                         <li>API_v2:<a href="https://sos2122-10.herokuapp.com/#/energy-consumptions">[https://sos2122-10.herokuapp.com/#/energy-consumptions]</a></li>
                     </ul>
                 </li>
-                
+                <li>
+                    <ul>Vídeo: <a href="https://youtu.be/ecizfrV1toc">ENLACE</a></ul>
+                </li>
             </ul>
             <br>
             (developed by <a href="https://github.com/gabriellb99">
