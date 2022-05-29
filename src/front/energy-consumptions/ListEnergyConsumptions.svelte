@@ -7,12 +7,11 @@
 
 	let entries = [];
 
-	let from = 0;
-	let to = 2022;
+	let from = null;
+	let to = null;
 	let offset = 0;
 	let limit = 10;
 	let maxPages = 0;
-	let max = 0;
 	let codAct = null;
 	codAct = parseFloat(params.codAct);
 	let errorC = null;
@@ -25,36 +24,28 @@
 		renewable_energy_consumptions: "",
 	};
 
+	onMount(getEntries);
+
 	async function getEntries() {
 		console.log("Fetching entries....");
 		let cadena = `/api/v2/energy-consumptions?`;
 		if (from != null) {
-			cadena = cadena + `from=${from}&&`;
+			cadena = cadena + `from=${from}&&`
 		}
 		if (to != null) {
-			cadena = cadena + `to=${to}&&`;
+			cadena = cadena + `to=${to}&&`
 		}
+		cadena = cadena + `limit=${limit}&&offset=${offset*10}`;
 		console.log(cadena);
-		const res = await fetch(cadena);
-		if (res.ok) {
-			let cadena2 = cadena + `limit=${limit}&&offset=${offset * 10}`;
-			const data = await res.json();
-			entries = data;
-			maxPagesFunction(entries.length);
-			console.log("Received entries: " + entries.length);
-
-			//Comprobar datos con paginacion
-			const res2 = await fetch(cadena2);
-			const data2 = await res2.json();
-			entries = data2;
-			if (entries.length < 2) {
-				let cadena3 = cadena + `limit=${limit}&&offset=${0}`;
-				const res3 = await fetch(cadena3);
-				const data3 = await res3.json();
-				entries = data3;
-			}
-		} else {
-			Errores(res.status);
+        const res = await fetch(cadena); 
+        if(res.ok){
+			let cadenaPag = cadena.split(`limit=${limit}&&offset=${offset*10}`);
+			maxPagesFunction(cadenaPag[0]+cadenaPag[1]);
+            const data = await res.json();
+            entries = data;
+            console.log("Received entries: "+entries.length);
+        }else{
+			errorC = res.status;
 		}
 	}
 
@@ -79,7 +70,7 @@
 			{
 				method: "DELETE",
 			}
-		).then(function () {
+		).then(function (res) {
 			getEntries();
 			errorC = 200.2;
 		});
@@ -89,22 +80,13 @@
 		console.log("Deleting entries....");
 		const res = await fetch("/api/v2/energy-consumptions/", {
 			method: "DELETE",
-		}).then(function () {
-			getEntriesD();
+		}).then(function (res) {
+			console.log("prueba");
+			getEntries();
 			errorC = 200.3;
 		});
 	}
 
-	async function getEntriesD() {
-		console.log("Fetching entries....");
-		const res = await fetch("/api/v2/energy-consumptions");
-		if (res.ok) {
-			const data = await res.json();
-			entries = data;
-			maxPagesFunction(entries.length);
-			console.log("Received entries: " + entries.length);
-		}
-	}
 
 	async function LoadEntries() {
 		console.log("Loading entries....");
@@ -116,24 +98,20 @@
 		});
 	}
 
-	async function Errores(code) {
-		if (code == 400) {
-			errorC = 400;
-		}
-		if ((code = 404)) {
-			errorC = 404;
-		}
-		return;
+	async function maxPagesFunction(cadena) {
+		const res = await fetch(cadena,
+			{
+				method: "GET"
+			});
+			if(res.ok){
+				const data = await res.json();
+				maxPages = Math.floor(data.length/10);
+				if(maxPages === data.length/10){
+					maxPages = maxPages-1;
+				}
+        }
 	}
 
-	async function maxPagesFunction(total) {
-		maxPages = Math.floor(total / 10);
-		if (maxPages === total / 10) {
-			maxPages = maxPages - 1;
-		}
-	}
-
-	onMount(getEntries);
 </script>
 
 <main>
@@ -199,8 +177,6 @@
 							outline
 							color="info"
 							on:click={() => {
-								from = 0;
-								to = 2022;
 								getEntries();
 							}}
 						>
@@ -270,11 +246,7 @@
 							><Button
 								outline
 								color="danger"
-								on:click={function () {
-									errorC = null;
-									BorrarEntry(entry.country, entry.year);
-								}}
-							>
+								on:click={function () {BorrarEntry(entry.country, entry.year);}}>
 								Borrar
 							</Button>
 						</td>
