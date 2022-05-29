@@ -28,8 +28,17 @@
             </ul>
         </li>
     </ul>
-
     <br>
     <br>
-
+    <ul>
+        <li> Gabriel López Bellido(energy Consumptions):
+            <ul>
+                <li><a href="/#/energy-consumptions/graphCo2">Integración API CO2</a></li>
+                <li><a href="/#/internet-population/graphAlphaAlphabetization">Integración API Alphabetization</a></li>
+                <li><a href="/#energy-consumptions/graphExterna1">Integración API Externa 1</a></li>
+                <li><a href="/#energy-consumptions/graphExterna2">Integración API Externa 2</a></li>
+                <li><a href="/#energy-consumptions/graphExterna3">Gráfica API Externa 3</a></li>
+            </ul>
+        </li>
+    </ul>
 </main>

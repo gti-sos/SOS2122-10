@@ -160,7 +160,7 @@
     async function loadGraph() {
         chartConfigs = {
             type: "mscombi2d",
-            width: 1000,
+            width: 1500,
             height: 600,
             renderAt: "chart-container",
             dataSource,

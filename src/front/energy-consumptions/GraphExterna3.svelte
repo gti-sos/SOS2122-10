@@ -59,7 +59,7 @@
         type: 'pie'
     },
     title: {
-        text: 'Datos Pokemon Defensa'
+        text: 'Datos Sobre Defensa'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f} points</b>'
@@ -93,7 +93,7 @@ Highcharts.chart('div2', {
         type: 'pie'
     },
     title: {
-        text: 'Datos Pokemon Ataque'
+        text: 'Datos Sobre Ataque'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f} points</b>'
@@ -151,6 +151,8 @@ Highcharts.chart('div2', {
         Volver
     </Button>
     </div>
+    <h3 align="center">API de Pokemon</h3>
+    <br />
     <div>
         <figure class="highcharts-figure">
             <div id="div1"/>

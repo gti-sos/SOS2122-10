@@ -256,26 +256,7 @@
 						<td>{entry.percentages_access_elecetricity}</td>
 						<td>{entry.non_renewable_energy_consumptions}</td>
 						<td>{entry.renewable_energy_consumptions}</td>
-						<td align="center"
-							><Button
-								outline
-								color="success"
-								on:click={function () {
-									window.location.href = `/#/energy-consumptions/graph/${entry.country}`;
-								}}
-							>
-								Gráfica FusionChart
-							</Button>
-							<Button
-								outline
-								color="success"
-								on:click={function () {
-									window.location.href = `/#/energy-consumptions/jscgraph/${entry.country}`;
-								}}
-							>
-								Gráfica JSC
-							</Button>
-						</td><td
+						<td
 							><Button
 								outline
 								color="warning"

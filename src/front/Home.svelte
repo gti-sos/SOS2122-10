@@ -52,7 +52,7 @@
     <p style="font-weight: bold;">
         - Project description: </p>
         <p>Alejandro Molinos Eligio: Estudio de la población en la actualidad(population-levels),<br>
-        Gabriel López Bellido: Estudios sobre el consumo de electricidad(energy-consumptions),<br>
+        Gabriel López Bellido: Estudios sobre el consumo de energía(energy-consumptions),<br>
         Germán Blanco Pérez Victoria: La relación entre usuarios en internet y la población urbana(internet-population).<br></p>
     
     <p style="font-weight: bold;">
