@@ -215,6 +215,7 @@ loading
 					if (from == null || to == null) {
 						errorC=1;
 					}else{
+						offset=0;
 						getEntries();
 					}
 				}}">
