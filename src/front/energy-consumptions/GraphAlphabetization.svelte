@@ -85,7 +85,7 @@
 
             dataSource = {
                 chart: {
-                    caption: "Consumo de Energía Renovable y no Renovable",
+                    caption: "Gráfica integrando datos de API Alphabetizacion",
                     numbersuffix: " %",
                     showsum: "1",
                     xAxisname: "Año-País",
