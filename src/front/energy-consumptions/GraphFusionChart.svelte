@@ -28,49 +28,17 @@
             const json = await res.json();
             for (let i = 0; i < json.length; i++) {
 
-                //Dato del año
-                categorias.push({ label: json[i].country.toString()+ " " +json[i].year.toString()});
-
                 //Dato de acceso a la electricidad
-                total.push({value: json[i].percentages_access_elecetricity});
+                total.push({name: json[i].country.toString()+ " " +json[i].year.toString(), value: json[i].percentages_access_elecetricity});
 
                 //Dato de energia no renovable consumida
-                nrenewable.push({value: json[i].non_renewable_energy_consumptions});
+                nrenewable.push({name: json[i].country.toString()+ " " +json[i].year.toString(), value: json[i].non_renewable_energy_consumptions});
                 
                 //Dato de energia renovable consumida
-                renewable.push({value: json[i].renewable_energy_consumptions});
+                renewable.push({name: json[i].country.toString()+ " " +json[i].year.toString(), value: json[i].renewable_energy_consumptions});
             }
             await delay(1000);
-            dataSource = {
-                chart: {
-                    caption: "Consumo de Energía Renovable y no Renovable",
-                    numbersuffix: " %",
-                    showsum: "1",
-                    plottooltext:
-                        "$label <b>$dataValue</b> $seriesName",
-                    theme: "fusion",
-                    drawcrossline: "1",
-                },
-                categories: [
-                    {
-                        category: categorias,
-                    },
-                ],
-                dataset: [
-                    {
-                        seriesname: "Acceso a la electricidad",
-                        data: total,
-                    },
-                    {
-                        seriesname: "Energía No Renovable Consumida",
-                        data: nrenewable,
-                    },
-                    {
-                        seriesname: "Energía Renovable Consumida",
-                        data: renewable,
-                    },
-                ]
-            };
+            
             loadGraph();
         } else {
             errorC = 404;
@@ -83,17 +51,66 @@
     }
 
     async function loadGraph() {
-        chartConfigs = {
-            type: "stackedcolumn2d",
-            width: 1000,
-            height: 600,
-            dataFormat: "json",
-            dataSource,
-        };
+        Highcharts.chart('container', {
+    chart: {
+        type: 'packedbubble',
+        height: '100%'
+    },
+    title: {
+        text: 'Consumo de energia'
+    },
+    tooltip: {
+        useHTML: true,
+        pointFormat: '<b>{point.name}:</b> {point.value}%'
+    },
+    plotOptions: {
+        packedbubble: {
+            minSize: '30%',
+            maxSize: '120%',
+            zMin: 0,
+            zMax: 1000,
+            layoutAlgorithm: {
+                splitSeries: false,
+                gravitationalConstant: 0.02
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}',
+                filter: {
+                    property: 'y',
+                    operator: '>',
+                    value: 250
+                },
+                style: {
+                    color: 'black',
+                    textOutline: 'none',
+                    fontWeight: 'normal'
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Total',
+        data: total
+    }, {
+        name: 'No renovable',
+        data: nrenewable
+    }, {
+        name: 'Renovable',
+        data: renewable
+    }]
+});
     }
     onMount(getData);
 </script>
 
+
+<svelte:head>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</svelte:head>
 {#if errorC === 404}
 <UncontrolledAlert  color="danger" >
     Error al cargar los datos.
@@ -110,6 +127,9 @@
     >
         Volver
     </Button>
-    <SvelteFC {...chartConfigs} />
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+    </figure>
+    
 </div>
        

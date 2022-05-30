@@ -30,7 +30,7 @@
 
 	import ListEnergyConsumptions from "./energy-consumptions/ListEnergyConsumptions.svelte";
 	import EditEntryEnergyConsumptions from "./energy-consumptions/EditEntryEnergyConsumptions.svelte";
-	import GraphFusion from "./energy-consumptions/GraphFusionChart.svelte";
+	import GraphHighChart from "./energy-consumptions/GraphFusionChart.svelte";
 	import GraphJSC from "./energy-consumptions/GraphJSC.svelte";
 	import GraphCo2 from "./energy-consumptions/GraphApiCo2.svelte";
 	import GraphAlphabetization from "./energy-consumptions/GraphAlphabetization.svelte";
@@ -70,7 +70,7 @@
 
 		"/energy-consumptions" : ListEnergyConsumptions,
 		"/energy-consumptions/:codAct/:country/:year" : ListEnergyConsumptions,
-		"/energy-consumptions/graph/" : GraphFusion,
+		"/energy-consumptions/graph/" : GraphHighChart,
 		"/energy-consumptions/jscgraph/" : GraphJSC,
 		"/energy-consumptions/:country/:year" : EditEntryEnergyConsumptions,
 		"/energy-consumptions/graphCo2" : GraphCo2,
@@ -161,7 +161,7 @@
 				<DropdownMenu end>
 				  <DropdownItem href="./#/energy-consumptions/jscgraph">Api Propia JSC </DropdownItem>
                   <DropdownItem divider/>
-				  <DropdownItem href="./#/energy-consumptions/graph">Api Propia FusionChart</DropdownItem>
+				  <DropdownItem href="./#/energy-consumptions/graph">Api Propia Highcharts</DropdownItem>
                   <DropdownItem divider/>
 				  <DropdownItem href="./#/energy-consumptions/graphCo2">Integración API CO2</DropdownItem>
                   <DropdownItem divider/>
