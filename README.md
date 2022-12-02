@@ -8,7 +8,6 @@
         Alejandro Molinos Eligio: Estudio de la población en la actualidad(population-levels),
         Gabriel López Bellido: Estudios sobre el consumo de electricidad(energy-consumptions),
         Germán Blanco Pérez Victoria: La relación entre usuarios en internet y la población urbana(internet-population).
-- **Repository**: [gti-sos/SOS2122-10](https://github.com/gti-sos/SOS2122-10)
 - **URL**: 
     - [http://sos2122-10.herokuapp.com](http://sos2122-10.herokuapp.com/#/info)
     - [http://sos2122-10.herokuapp.com/#/analytics](http://sos2122-10.herokuapp.com/#/analytics)
